@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800;900&family=SF+Pro+Text:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Apple-inspired neutral palette */
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(240 5% 9%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(240 5% 9%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(240 5% 9%);
+  --primary: hsl(212 90% 52%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(240 5% 96%);
+  --secondary-foreground: hsl(240 5% 26%);
+  --muted: hsl(240 5% 96%);
+  --muted-foreground: hsl(240 4% 46%);
+  --accent: hsl(240 5% 96%);
+  --accent-foreground: hsl(240 6% 10%);
+  --destructive: hsl(0 75% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(240 6% 90%);
+  --input: hsl(240 6% 97%);
+  --ring: hsl(212 90% 52%);
+  
+  /* Refined Bitcoin palette */
+  --bitcoin-50: hsl(45 100% 98%);
+  --bitcoin-100: hsl(45 92% 95%);
+  --bitcoin-200: hsl(45 77% 88%);
+  --bitcoin-300: hsl(43 72% 79%);
+  --bitcoin-400: hsl(42 87% 65%);
+  --bitcoin-500: hsl(38 92% 50%);
+  --bitcoin-600: hsl(32 95% 44%);
+  --bitcoin-700: hsl(26 90% 37%);
+  --bitcoin-800: hsl(22 83% 29%);
+  --bitcoin-900: hsl(20 79% 17%);
+  
+  /* Apple typography */
+  --font-sans: 'SF Pro Display', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-text: 'SF Pro Text', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+  
+  /* Refined shadows */
+  --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.03);
+  --shadow-moderate: 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 1px 3px -1px rgba(0, 0, 0, 0.04);
+  --shadow-prominent: 0 4px 8px -2px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-elevated: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+  
+  --radius: 0.75rem;
+  --radius-sm: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+}
+
+.dark {
+  --background: hsl(0 0% 0%);
+  --foreground: hsl(200 6.6667% 91.1765%);
+  --card: hsl(228 9.8039% 10%);
+  --card-foreground: hsl(0 0% 85.0980%);
+  --popover: hsl(0 0% 0%);
+  --popover-foreground: hsl(200 6.6667% 91.1765%);
+  --primary: hsl(203.7736 87.6033% 52.5490%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(195.0000 15.3846% 94.9020%);
+  --secondary-foreground: hsl(210 25% 7.8431%);
+  --muted: hsl(0 0% 9.4118%);
+  --muted-foreground: hsl(210 3.3898% 46.2745%);
+  --accent: hsl(205.7143 70% 7.8431%);
+  --accent-foreground: hsl(203.7736 87.6033% 52.5490%);
+  --destructive: hsl(356.3033 90.5579% 54.3137%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(210 5.2632% 14.9020%);
+  --input: hsl(207.6923 27.6596% 18.4314%);
+  --ring: hsl(202.8169 89.1213% 53.1373%);
+  --chart-1: hsl(203.8863 88.2845% 53.1373%);
+  --chart-2: hsl(159.7826 100% 36.0784%);
+  --chart-3: hsl(42.0290 92.8251% 56.2745%);
+  --chart-4: hsl(147.1429 78.5047% 41.9608%);
+  --chart-5: hsl(341.4894 75.2000% 50.9804%);
+  --sidebar: hsl(228 9.8039% 10%);
+  --sidebar-foreground: hsl(0 0% 85.0980%);
+  --sidebar-primary: hsl(202.8169 89.1213% 53.1373%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(205.7143 70% 7.8431%);
+  --sidebar-accent-foreground: hsl(203.7736 87.6033% 52.5490%);
+  --sidebar-border: hsl(205.7143 15.7895% 26.0784%);
+  --sidebar-ring: hsl(202.8169 89.1213% 53.1373%);
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: 1.3rem;
+  --shadow-2xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00);
+  --shadow-xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00);
+  --shadow-sm: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00), 0px 1px 2px -1px hsl(202.8169 89.1213% 53.1373% / 0.00);
+  --shadow: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00), 0px 1px 2px -1px hsl(202.8169 89.1213% 53.1373% / 0.00);
+  --shadow-md: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00), 0px 2px 4px -1px hsl(202.8169 89.1213% 53.1373% / 0.00);
+  --shadow-lg: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00), 0px 4px 6px -1px hsl(202.8169 89.1213% 53.1373% / 0.00);
+  --shadow-xl: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00), 0px 8px 10px -1px hsl(202.8169 89.1213% 53.1373% / 0.00);
+  --shadow-2xl: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply antialiased bg-background text-foreground;
+    font-family: var(--font-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+  }
+  
+  h1 {
+    font-size: 3.5rem;
+    font-weight: 200;
+    line-height: 1.1;
+    letter-spacing: -0.05em;
+  }
+  
+  h2 {
+    font-size: 2.25rem;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.04em;
+  }
+  
+  h3 {
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  
+  .bitcoin-gradient {
+    background: linear-gradient(135deg, var(--bitcoin-500), var(--bitcoin-600));
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, var(--bitcoin-600), var(--bitcoin-700));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer utilities {
+  /* Bitcoin colors */
+  .text-bitcoin-50 { color: var(--bitcoin-50); }
+  .text-bitcoin-100 { color: var(--bitcoin-100); }
+  .text-bitcoin-200 { color: var(--bitcoin-200); }
+  .text-bitcoin-300 { color: var(--bitcoin-300); }
+  .text-bitcoin-400 { color: var(--bitcoin-400); }
+  .text-bitcoin-500 { color: var(--bitcoin-500); }
+  .text-bitcoin-600 { color: var(--bitcoin-600); }
+  .text-bitcoin-700 { color: var(--bitcoin-700); }
+  .text-bitcoin-800 { color: var(--bitcoin-800); }
+  .text-bitcoin-900 { color: var(--bitcoin-900); }
+
+  .bg-bitcoin-50 { background-color: var(--bitcoin-50); }
+  .bg-bitcoin-100 { background-color: var(--bitcoin-100); }
+  .bg-bitcoin-200 { background-color: var(--bitcoin-200); }
+  .bg-bitcoin-300 { background-color: var(--bitcoin-300); }
+  .bg-bitcoin-400 { background-color: var(--bitcoin-400); }
+  .bg-bitcoin-500 { background-color: var(--bitcoin-500); }
+  .bg-bitcoin-600 { background-color: var(--bitcoin-600); }
+  .bg-bitcoin-700 { background-color: var(--bitcoin-700); }
+  .bg-bitcoin-800 { background-color: var(--bitcoin-800); }
+  .bg-bitcoin-900 { background-color: var(--bitcoin-900); }
+
+  .border-bitcoin-500 { border-color: var(--bitcoin-500); }
+  .border-bitcoin-600 { border-color: var(--bitcoin-600); }
+
+  .hover\:text-bitcoin-600:hover { color: var(--bitcoin-600); }
+  .hover\:text-bitcoin-700:hover { color: var(--bitcoin-700); }
+  .hover\:bg-bitcoin-50:hover { background-color: var(--bitcoin-50); }
+
+  .focus\:ring-bitcoin-300:focus { --tw-ring-color: var(--bitcoin-300); }
+  .focus\:ring-bitcoin-500:focus { --tw-ring-color: var(--bitcoin-500); }
+  
+  /* Apple-style shadows */
+  .shadow-subtle { box-shadow: var(--shadow-subtle); }
+  .shadow-moderate { box-shadow: var(--shadow-moderate); }
+  .shadow-prominent { box-shadow: var(--shadow-prominent); }
+  .shadow-elevated { box-shadow: var(--shadow-elevated); }
+  
+  /* Refined interactions */
+  .transition-apple {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-1px);
+  }
+  
+  .active-scale:active {
+    transform: scale(0.99);
+  }
+  
+  /* Text truncation utilities */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
