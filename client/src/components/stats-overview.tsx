@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Card, CardContent } from "../../components/ui/card";
-import { Button } from "../../components/ui/button";
-import { Skeleton } from "../../components/ui/skeleton";
+import { Card, CardContent } from "./ui/card";
+import { Button } from "./ui/button";
+import { Skeleton } from "./ui/skeleton";
 import { RefreshCw } from "lucide-react";
 import { useToast } from "../../hooks/use-toast";
 import type { Stats } from "@shared/schema";

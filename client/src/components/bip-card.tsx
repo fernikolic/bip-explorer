@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Badge } from "../../components/ui/badge";
+import { Badge } from "./ui/badge";
 import { ExternalLink, User, Calendar } from "lucide-react";
 import type { Bip } from "@shared/schema";
 
