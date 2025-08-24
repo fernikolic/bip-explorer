@@ -113,7 +113,7 @@ export default function About() {
 
         {/* What are BIPs Section */}
         <section className="mb-20">
-          <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-8 lg:p-12">
+          <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-3xl p-8 lg:p-12">
             <h2 className="text-4xl font-light text-foreground mb-6 text-center tracking-tight">
               What are Bitcoin Improvement Proposals?
             </h2>
