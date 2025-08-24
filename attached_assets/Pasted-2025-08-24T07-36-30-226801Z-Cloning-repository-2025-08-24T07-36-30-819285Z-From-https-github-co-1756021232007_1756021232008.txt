@@ -1,0 +1,45 @@
+2025-08-24T07:36:30.226801Z	Cloning repository...
+2025-08-24T07:36:30.819285Z	From https://github.com/fernikolic/bip-explorer
+2025-08-24T07:36:30.819743Z	 * branch            a6659c0f7fa818da56f921095ca876b123803d5c -> FETCH_HEAD
+2025-08-24T07:36:30.819843Z	
+2025-08-24T07:36:30.847877Z	HEAD is now at a6659c0 Add script to build frontend and backend for deployment
+2025-08-24T07:36:30.848255Z	
+2025-08-24T07:36:30.92124Z	
+2025-08-24T07:36:30.921633Z	Using v2 root directory strategy
+2025-08-24T07:36:30.943118Z	Success: Finished cloning repository files
+2025-08-24T07:36:32.657128Z	Checking for configuration in a Wrangler configuration file (BETA)
+2025-08-24T07:36:32.658075Z	
+2025-08-24T07:36:32.659072Z	Found wrangler.toml file. Reading build configuration...
+2025-08-24T07:36:33.765849Z	A wrangler.toml file was found but it does not appear to be valid. Did you mean to use wrangler.toml to configure Pages? If so, then make sure the file is valid and contains the `pages_build_output_dir` property. Skipping file and continuing.
+2025-08-24T07:36:33.83177Z	Detected the following tools from environment: npm@10.9.2, nodejs@22.16.0
+2025-08-24T07:36:33.832283Z	Installing project dependencies: npm clean-install --progress=false
+2025-08-24T07:36:40.541633Z	
+2025-08-24T07:36:40.541898Z	added 375 packages, and audited 376 packages in 6s
+2025-08-24T07:36:40.542044Z	
+2025-08-24T07:36:40.54234Z	53 packages are looking for funding
+2025-08-24T07:36:40.542447Z	  run `npm fund` for details
+2025-08-24T07:36:40.544219Z	
+2025-08-24T07:36:40.544363Z	3 low severity vulnerabilities
+2025-08-24T07:36:40.544493Z	
+2025-08-24T07:36:40.544605Z	To address all issues, run:
+2025-08-24T07:36:40.544713Z	  npm audit fix
+2025-08-24T07:36:40.54486Z	
+2025-08-24T07:36:40.544941Z	Run `npm audit` for details.
+2025-08-24T07:36:40.571397Z	Executing user command: ./build.sh
+2025-08-24T07:36:40.577487Z	Building frontend with Vite...
+2025-08-24T07:36:41.643216Z	npm warn exec The following package was not found and will be installed: vite@7.1.3
+2025-08-24T07:36:45.352059Z	[31mfailed to load config from /opt/buildhome/repo/vite.config.ts[39m
+2025-08-24T07:36:45.352768Z	[31merror during build:
+2025-08-24T07:36:45.352908Z	Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'vite' imported from /opt/buildhome/repo/node_modules/.vite-temp/vite.config.ts.timestamp-1756021005348-25d3a697fb88e.mjs
+2025-08-24T07:36:45.353318Z	    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:256:9)
+2025-08-24T07:36:45.35354Z	    at packageResolve (node:internal/modules/esm/resolve:768:81)
+2025-08-24T07:36:45.353671Z	    at moduleResolve (node:internal/modules/esm/resolve:854:18)
+2025-08-24T07:36:45.35378Z	    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+2025-08-24T07:36:45.353877Z	    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+2025-08-24T07:36:45.354003Z	    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+2025-08-24T07:36:45.354108Z	    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+2025-08-24T07:36:45.354215Z	    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+2025-08-24T07:36:45.354328Z	    at ModuleJob._link (node:internal/modules/esm/module_job:137:49)[39m
+2025-08-24T07:36:45.379837Z	Failed: Error while executing user command. Exited with error code: 1
+2025-08-24T07:36:45.390339Z	Failed: build command exited with code: 1
+2025-08-24T07:36:46.677153Z	Failed: error occurred while running build command
