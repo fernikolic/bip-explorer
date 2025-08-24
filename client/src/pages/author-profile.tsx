@@ -1,15 +1,15 @@
 import { useParams, Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
-import BipCard from "@/components/bip-card";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import Navigation from "../../components/navigation";
+import Footer from "../../components/footer";
+import BipCard from "../../components/bip-card";
+import { Button } from "../../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
+import { Skeleton } from "../../components/ui/skeleton";
+import { Alert, AlertDescription } from "../../components/ui/alert";
 import { ArrowLeft, User, FileText, AlertCircle } from "lucide-react";
 import type { Bip } from "@shared/schema";
-import { useSEO } from "@/hooks/use-seo";
+import { useSEO } from "../../hooks/use-seo";
 
 export default function AuthorProfile() {
   const { author } = useParams<{ author: string }>();

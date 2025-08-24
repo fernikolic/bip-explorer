@@ -1,7 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { useState } from "react";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 import { Menu, X, Sun, Moon } from "lucide-react";
 
 export default function Navigation() {

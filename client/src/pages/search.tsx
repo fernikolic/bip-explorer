@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { useLocation, useSearch as useSearchParams } from "wouter";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
-import SearchFilters from "@/components/search-filters";
-import BipCard from "@/components/bip-card";
-import AdSpace from "@/components/ad-space";
-import { useBips } from "@/hooks/use-bips";
-import { useSearch } from "@/hooks/use-search";
-import { useSEO } from "@/hooks/use-seo";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import Navigation from "../../components/navigation";
+import Footer from "../../components/footer";
+import SearchFilters from "../../components/search-filters";
+import BipCard from "../../components/bip-card";
+import AdSpace from "../../components/ad-space";
+import { useBips } from "../../hooks/use-bips";
+import { useSearch } from "../../hooks/use-search";
+import { useSEO } from "../../hooks/use-seo";
+import { Input } from "../../components/ui/input";
+import { Button } from "../../components/ui/button";
 import { Search as SearchIcon } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "../../components/ui/skeleton";
 
 export default function Search() {
   const { data: bips, isLoading } = useBips();

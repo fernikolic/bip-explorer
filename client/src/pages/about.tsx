@@ -1,8 +1,8 @@
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
-import { useSEO } from "@/hooks/use-seo";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import Navigation from "../../components/navigation";
+import Footer from "../../components/footer";
+import { useSEO } from "../../hooks/use-seo";
+import { Card, CardContent } from "../../components/ui/card";
+import { Button } from "../../components/ui/button";
 import { ExternalLink, Github, Book, Search, Users, Zap, Shield, Globe } from "lucide-react";
 
 export default function About() {

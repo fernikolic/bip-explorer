@@ -1,14 +1,14 @@
 import { useParams, Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
-import AdSpace from "@/components/ad-space";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useSEO } from "@/hooks/use-seo";
+import Navigation from "../../components/navigation";
+import Footer from "../../components/footer";
+import AdSpace from "../../components/ad-space";
+import { Badge } from "../../components/ui/badge";
+import { Button } from "../../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
+import { Skeleton } from "../../components/ui/skeleton";
+import { Alert, AlertDescription } from "../../components/ui/alert";
+import { useSEO } from "../../hooks/use-seo";
 import { AlertCircle, ArrowLeft, ExternalLink, User, Calendar, Tag } from "lucide-react";
 import type { Bip } from "@shared/schema";
 
