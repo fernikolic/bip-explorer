@@ -1,0 +1,44 @@
+2025-08-24T09:04:22.936177Z	Cloning repository...
+2025-08-24T09:04:23.576038Z	From https://github.com/fernikolic/bip-explorer
+2025-08-24T09:04:23.576459Z	 * branch            c9e345d3f782bbcc0ad00987611077b9ff89efe5 -> FETCH_HEAD
+2025-08-24T09:04:23.576557Z	
+2025-08-24T09:04:23.605518Z	HEAD is now at c9e345d Streamline build process by simplifying configuration and using a dedicated script
+2025-08-24T09:04:23.606102Z	
+2025-08-24T09:04:23.683747Z	
+2025-08-24T09:04:23.684204Z	Using v2 root directory strategy
+2025-08-24T09:04:23.704442Z	Success: Finished cloning repository files
+2025-08-24T09:04:25.597975Z	Checking for configuration in a Wrangler configuration file (BETA)
+2025-08-24T09:04:25.59867Z	
+2025-08-24T09:04:25.600116Z	Found wrangler.toml file. Reading build configuration...
+2025-08-24T09:04:26.714067Z	A wrangler.toml file was found but it does not appear to be valid. Did you mean to use wrangler.toml to configure Pages? If so, then make sure the file is valid and contains the `pages_build_output_dir` property. Skipping file and continuing.
+2025-08-24T09:04:26.777118Z	Detected the following tools from environment: npm@10.9.2, nodejs@22.16.0
+2025-08-24T09:04:26.777779Z	Installing project dependencies: npm clean-install --progress=false
+2025-08-24T09:04:33.579048Z	
+2025-08-24T09:04:33.579294Z	added 375 packages, and audited 376 packages in 6s
+2025-08-24T09:04:33.57944Z	
+2025-08-24T09:04:33.579569Z	53 packages are looking for funding
+2025-08-24T09:04:33.579673Z	  run `npm fund` for details
+2025-08-24T09:04:33.58105Z	
+2025-08-24T09:04:33.581165Z	3 low severity vulnerabilities
+2025-08-24T09:04:33.581277Z	
+2025-08-24T09:04:33.581376Z	To address all issues, run:
+2025-08-24T09:04:33.581475Z	  npm audit fix
+2025-08-24T09:04:33.581637Z	
+2025-08-24T09:04:33.581786Z	Run `npm audit` for details.
+2025-08-24T09:04:33.609319Z	Executing user command: bash build.sh
+2025-08-24T09:04:33.616038Z	Running Node.js build script...
+2025-08-24T09:04:33.860483Z	file:///opt/buildhome/repo/deploy-build.js:1
+2025-08-24T09:04:33.860787Z	const { execSync } = require('child_process');
+2025-08-24T09:04:33.86091Z	                     ^
+2025-08-24T09:04:33.861002Z	
+2025-08-24T09:04:33.861084Z	ReferenceError: require is not defined in ES module scope, you can use import instead
+2025-08-24T09:04:33.861174Z	This file is being treated as an ES module because it has a '.js' file extension and '/opt/buildhome/repo/package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+2025-08-24T09:04:33.861321Z	    at file:///opt/buildhome/repo/deploy-build.js:1:22
+2025-08-24T09:04:33.861434Z	    at ModuleJob.run (node:internal/modules/esm/module_job:274:25)
+2025-08-24T09:04:33.861527Z	    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:644:26)
+2025-08-24T09:04:33.861637Z	    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+2025-08-24T09:04:33.861746Z	
+2025-08-24T09:04:33.862076Z	Node.js v22.16.0
+2025-08-24T09:04:33.865458Z	Failed: Error while executing user command. Exited with error code: 1
+2025-08-24T09:04:33.874649Z	Failed: build command exited with code: 1
+2025-08-24T09:04:35.013354Z	Failed: error occurred while running build command

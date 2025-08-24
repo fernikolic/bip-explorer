@@ -3,7 +3,7 @@
 set -e
 
 echo "Running Node.js build script..."
-node deploy-build.js
+node deploy-build.cjs
 
 echo "Verifying build output..."
 if [ ! -d "client/dist" ]; then
