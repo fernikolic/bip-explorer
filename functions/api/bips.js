@@ -16,7 +16,7 @@ export async function onRequest(context) {
 
     const files = await response.json();
     
-    // Filter for .mediawiki files and parse BIP data
+    // Filter for .mediawiki files and create proper BIP objects
     const bips = files
       .filter(file => file.name.endsWith('.mediawiki'))
       .map(file => {
@@ -24,11 +24,22 @@ export async function onRequest(context) {
         if (!match) return null;
         
         const number = parseInt(match[1]);
+        
+        // Create a proper BIP object with all required fields
+        // These are placeholder values - in production you'd parse the actual file content
         return {
           number,
           title: `BIP ${number}`,
-          file: file.name,
-          url: file.html_url
+          authors: ['Bitcoin Core Developers'], // Placeholder
+          status: 'Final', // Default status - would need to parse from file
+          type: 'Standards Track', // Default type - would need to parse from file
+          created: '2009-01-01', // Placeholder date
+          abstract: `Bitcoin Improvement Proposal ${number}`, // Placeholder
+          content: '', // Would need to fetch and parse the actual content
+          filename: file.name,
+          githubUrl: file.html_url,
+          layer: 'Consensus',
+          comments: ''
         };
       })
       .filter(Boolean)
