@@ -1,9 +1,9 @@
 name = "bip-explorer"
 compatibility_date = "2024-08-23"
+pages_build_output_dir = "dist"
 
 [build]
-command = "cd client && npx vite build --config ../vite.production.config.js"
-output = "dist"
+command = "npm run build"
 
 [env.production]
 vars = { NODE_ENV = "production" }
