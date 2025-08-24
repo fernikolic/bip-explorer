@@ -4,16 +4,16 @@ import { resolve } from "path";
 
 export default defineConfig({
   plugins: [react()],
+  root: resolve("client"),
   resolve: {
     alias: {
-      "@": resolve("src"),
-      "@shared": resolve("../shared"),
-      "@assets": resolve("../attached_assets"),
+      "@": resolve("client/src"),
+      "@shared": resolve("shared"),
+      "@assets": resolve("attached_assets"),
     },
   },
-  root: ".",
   build: {
-    outDir: "../dist",
+    outDir: resolve("dist"),
     emptyOutDir: true,
   },
 });
