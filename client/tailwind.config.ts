@@ -75,9 +75,10 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["var(--font-sans)"],
-        serif: ["var(--font-serif)"],
-        mono: ["var(--font-mono)"],
+        sans: ["Nunito Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+        serif: ["Instrument Serif", "ui-serif", "Georgia", "serif"],
+        mono: ["ui-monospace", "SFMono-Regular", "Consolas", "monospace"],
+        heading: ["Instrument Serif", "ui-serif", "Georgia", "serif"],
       },
       keyframes: {
         "accordion-down": {

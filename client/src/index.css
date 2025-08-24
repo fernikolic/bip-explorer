@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800;900&family=SF+Pro+Text:wght@300;400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+/* Google Fonts are loaded in index.html */
 
 @tailwind base;
 @tailwind components;
@@ -39,10 +38,10 @@
   --bitcoin-800: hsl(22 83% 29%);
   --bitcoin-900: hsl(20 79% 17%);
   
-  /* Apple typography */
-  --font-sans: 'SF Pro Display', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-text: 'SF Pro Text', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-mono: 'SF Mono', 'Menlo', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+  /* Typography */
+  --font-sans: 'Nunito Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
   
   /* Refined shadows */
   --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.03);
@@ -89,9 +88,9 @@
   --sidebar-accent-foreground: hsl(203.7736 87.6033% 52.5490%);
   --sidebar-border: hsl(205.7143 15.7895% 26.0784%);
   --sidebar-ring: hsl(202.8169 89.1213% 53.1373%);
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-serif: Georgia, serif;
-  --font-mono: Menlo, monospace;
+  --font-sans: 'Nunito Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
   --radius: 1.3rem;
   --shadow-2xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00);
   --shadow-xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00);
@@ -110,15 +109,15 @@
 
   body {
     @apply antialiased bg-background text-foreground;
-    font-family: var(--font-text);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-sans);
-    font-weight: 300;
-    letter-spacing: -0.03em;
+    font-family: var(--font-heading);
+    font-weight: 400;
+    letter-spacing: -0.02em;
   }
   
   h1 {
