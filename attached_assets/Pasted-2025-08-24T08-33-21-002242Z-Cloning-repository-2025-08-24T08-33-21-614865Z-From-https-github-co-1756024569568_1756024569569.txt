@@ -1,0 +1,56 @@
+2025-08-24T08:33:21.002242Z	Cloning repository...
+2025-08-24T08:33:21.614865Z	From https://github.com/fernikolic/bip-explorer
+2025-08-24T08:33:21.615279Z	 * branch            76426037857ad58ee951bdaaf7f9c105232b6066 -> FETCH_HEAD
+2025-08-24T08:33:21.61539Z	
+2025-08-24T08:33:21.643379Z	HEAD is now at 7642603 Update build script to bypass problematic Vite configuration
+2025-08-24T08:33:21.643725Z	
+2025-08-24T08:33:21.720471Z	
+2025-08-24T08:33:21.720889Z	Using v2 root directory strategy
+2025-08-24T08:33:21.742149Z	Success: Finished cloning repository files
+2025-08-24T08:33:23.632118Z	Checking for configuration in a Wrangler configuration file (BETA)
+2025-08-24T08:33:23.632735Z	
+2025-08-24T08:33:23.634173Z	Found wrangler.toml file. Reading build configuration...
+2025-08-24T08:33:24.733765Z	A wrangler.toml file was found but it does not appear to be valid. Did you mean to use wrangler.toml to configure Pages? If so, then make sure the file is valid and contains the `pages_build_output_dir` property. Skipping file and continuing.
+2025-08-24T08:33:24.798253Z	Detected the following tools from environment: npm@10.9.2, nodejs@22.16.0
+2025-08-24T08:33:24.798724Z	Installing project dependencies: npm clean-install --progress=false
+2025-08-24T08:33:31.6809Z	
+2025-08-24T08:33:31.68112Z	added 375 packages, and audited 376 packages in 7s
+2025-08-24T08:33:31.681396Z	
+2025-08-24T08:33:31.681778Z	53 packages are looking for funding
+2025-08-24T08:33:31.681905Z	  run `npm fund` for details
+2025-08-24T08:33:31.684114Z	
+2025-08-24T08:33:31.684302Z	3 low severity vulnerabilities
+2025-08-24T08:33:31.684444Z	
+2025-08-24T08:33:31.684559Z	To address all issues, run:
+2025-08-24T08:33:31.68466Z	  npm audit fix
+2025-08-24T08:33:31.68476Z	
+2025-08-24T08:33:31.684824Z	Run `npm audit` for details.
+2025-08-24T08:33:31.712268Z	Executing user command: bash build.sh
+2025-08-24T08:33:31.718911Z	Setting environment for production...
+2025-08-24T08:33:31.719105Z	Temporarily renaming problematic vite config...
+2025-08-24T08:33:31.724136Z	Building frontend with minimal configuration...
+2025-08-24T08:33:32.789396Z	npm warn exec The following package was not found and will be installed: vite@7.1.3
+2025-08-24T08:33:36.671499Z	[36mvite v7.1.3 [32mbuilding for production...[36m[39m
+2025-08-24T08:33:36.750638Z	transforming...
+2025-08-24T08:33:36.93062Z	[32m✓[39m 3 modules transformed.
+2025-08-24T08:33:36.931487Z	[31m✗[39m Build failed in 231ms
+2025-08-24T08:33:36.931867Z	[31merror during build:
+2025-08-24T08:33:36.932168Z	[31m[vite:css] Failed to load PostCSS config (searchPath: /opt/buildhome/repo/client): [Error] Loading PostCSS Plugin failed: Cannot find module 'autoprefixer'
+2025-08-24T08:33:36.932394Z	Require stack:
+2025-08-24T08:33:36.932494Z	- /opt/buildhome/repo/postcss.config.js
+2025-08-24T08:33:36.932612Z	
+2025-08-24T08:33:36.932774Z	(@/opt/buildhome/repo/postcss.config.js)
+2025-08-24T08:33:36.932881Z	Error: Loading PostCSS Plugin failed: Cannot find module 'autoprefixer'
+2025-08-24T08:33:36.93298Z	Require stack:
+2025-08-24T08:33:36.933097Z	- /opt/buildhome/repo/postcss.config.js
+2025-08-24T08:33:36.933226Z	
+2025-08-24T08:33:36.933345Z	(@/opt/buildhome/repo/postcss.config.js)
+2025-08-24T08:33:36.933438Z	    at load$1 (file:///opt/buildhome/.npm/_npx/9ed06546b0653f96/node_modules/vite/dist/node/chunks/dep-Bj7gA1-0.js:8592:10)
+2025-08-24T08:33:36.933564Z	    at async Promise.all (index 1)
+2025-08-24T08:33:36.933676Z	    at async plugins (file:///opt/buildhome/.npm/_npx/9ed06546b0653f96/node_modules/vite/dist/node/chunks/dep-Bj7gA1-0.js:8614:11)
+2025-08-24T08:33:36.93391Z	    at async processResult (file:///opt/buildhome/.npm/_npx/9ed06546b0653f96/node_modules/vite/dist/node/chunks/dep-Bj7gA1-0.js:8653:13)[31m
+2025-08-24T08:33:36.934023Z	file: [36m/opt/buildhome/repo/client/src/index.css[31m
+2025-08-24T08:33:36.934312Z	[39m
+2025-08-24T08:33:36.96496Z	Failed: Error while executing user command. Exited with error code: 1
+2025-08-24T08:33:36.9754Z	Failed: build command exited with code: 1
+2025-08-24T08:33:38.13814Z	Failed: error occurred while running build command
