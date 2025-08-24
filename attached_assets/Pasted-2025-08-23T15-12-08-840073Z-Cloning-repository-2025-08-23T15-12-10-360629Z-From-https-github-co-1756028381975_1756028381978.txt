@@ -1,0 +1,124 @@
+2025-08-23T15:12:08.840073Z	Cloning repository...
+2025-08-23T15:12:10.360629Z	From https://github.com/fernikolic/perception-app
+2025-08-23T15:12:10.361344Z	 * branch            845bc8dd1f5114372a90bd6b296e3236206e2a03 -> FETCH_HEAD
+2025-08-23T15:12:10.361469Z	
+2025-08-23T15:12:10.91566Z	HEAD is now at 845bc8d fix: Fix report generation auth error and handle missing Firebase Functions
+2025-08-23T15:12:10.916361Z	
+2025-08-23T15:12:10.995965Z	
+2025-08-23T15:12:10.996521Z	Using v2 root directory strategy
+2025-08-23T15:12:11.029405Z	Success: Finished cloning repository files
+2025-08-23T15:12:12.800354Z	Checking for configuration in a Wrangler configuration file (BETA)
+2025-08-23T15:12:12.801099Z	
+2025-08-23T15:12:13.919534Z	No wrangler.toml file found. Continuing.
+2025-08-23T15:12:14.966225Z	Preparing yarn@3.6.3 for immediate activation...
+2025-08-23T15:12:15.248723Z	Preparing pnpm@8.7.1 for immediate activation...
+2025-08-23T15:12:15.490516Z	Detected the following tools from environment: nodejs@20.19.2, npm@9.6.7
+2025-08-23T15:12:15.490776Z	Installing nodejs 20.19.2
+2025-08-23T15:12:16.495244Z	Trying to update node-build... ok
+2025-08-23T15:12:16.598891Z	To follow progress, use 'tail -f /tmp/node-build.20250823151216.1102.log' or pass --verbose
+2025-08-23T15:12:16.696929Z	Downloading node-v20.19.2-linux-x64.tar.gz...
+2025-08-23T15:12:16.956938Z	-> https://nodejs.org/dist/v20.19.2/node-v20.19.2-linux-x64.tar.gz
+2025-08-23T15:12:18.76386Z	
+2025-08-23T15:12:18.764084Z	WARNING: node-v20.19.2-linux-x64 is in LTS Maintenance mode and nearing its end of life.
+2025-08-23T15:12:18.764263Z	It only receives *critical* security updates, *critical* bug fixes and documentation updates.
+2025-08-23T15:12:18.764355Z	
+2025-08-23T15:12:18.764537Z	Installing node-v20.19.2-linux-x64...
+2025-08-23T15:12:19.143236Z	Installed node-v20.19.2-linux-x64 to /opt/buildhome/.asdf/installs/nodejs/20.19.2
+2025-08-23T15:12:19.143465Z	
+2025-08-23T15:12:20.112007Z	Installing project dependencies: npm install --progress=false
+2025-08-23T15:12:56.463763Z	npm warn ERESOLVE overriding peer dependency
+2025-08-23T15:12:56.467366Z	npm warn ERESOLVE overriding peer dependency
+2025-08-23T15:12:56.475753Z	npm warn ERESOLVE overriding peer dependency
+2025-08-23T15:12:56.479315Z	npm warn ERESOLVE overriding peer dependency
+2025-08-23T15:13:14.065697Z	npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2025-08-23T15:13:14.081776Z	npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2025-08-23T15:13:15.614923Z	npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+2025-08-23T15:13:16.435872Z	npm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+2025-08-23T15:13:16.597481Z	npm warn deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+2025-08-23T15:13:18.59591Z	npm warn deprecated @types/html2canvas@1.0.0: This is a stub types definition. html2canvas provides its own type definitions, so you do not need this installed.
+2025-08-23T15:13:18.596866Z	npm warn deprecated @types/react-joyride@2.0.5: This is a stub types definition. react-joyride provides its own type definitions, so you do not need this installed.
+2025-08-23T15:13:18.628159Z	npm warn deprecated @types/dompurify@3.2.0: This is a stub types definition. dompurify provides its own type definitions, so you do not need this installed.
+2025-08-23T15:13:19.26072Z	npm warn deprecated popper.js@1.16.1: You can find the new Popper v2 at @popperjs/core, this package is dedicated to the legacy v1
+2025-08-23T15:13:20.228113Z	npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+2025-08-23T15:13:24.658743Z	npm warn deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+2025-08-23T15:14:51.214962Z	
+2025-08-23T15:14:51.220241Z	added 1215 packages, and audited 1216 packages in 3m
+2025-08-23T15:14:51.225091Z	
+2025-08-23T15:14:51.227268Z	226 packages are looking for funding
+2025-08-23T15:14:51.227914Z	  run `npm fund` for details
+2025-08-23T15:14:52.067409Z	
+2025-08-23T15:14:52.068244Z	15 vulnerabilities (11 moderate, 3 high, 1 critical)
+2025-08-23T15:14:52.06895Z	
+2025-08-23T15:14:52.069119Z	To address all issues possible, run:
+2025-08-23T15:14:52.069279Z	  npm audit fix --force
+2025-08-23T15:14:52.069403Z	
+2025-08-23T15:14:52.069507Z	Some issues need review, and may require choosing
+2025-08-23T15:14:52.069656Z	a different dependency.
+2025-08-23T15:14:52.069764Z	
+2025-08-23T15:14:52.069859Z	Run `npm audit` for details.
+2025-08-23T15:14:52.115688Z	Executing user command: npm run build
+2025-08-23T15:14:52.484606Z	
+2025-08-23T15:14:52.484857Z	> bitcoin-perception-dashboard@0.0.0 build
+2025-08-23T15:14:52.485062Z	> vite build && cp public/_headers dist/ && cp -r functions dist/
+2025-08-23T15:14:52.485256Z	
+2025-08-23T15:14:52.740631Z	[36mvite v6.3.5 [32mbuilding for production...[36m[39m
+2025-08-23T15:14:53.047873Z	transforming...
+2025-08-23T15:15:05.327931Z	[32m✓[39m 4232 modules transformed.
+2025-08-23T15:15:06.77406Z	rendering chunks...
+2025-08-23T15:15:25.453611Z	[33m[plugin vite:reporter] 
+2025-08-23T15:15:25.453947Z	(!) /opt/buildhome/repo/node_modules/firebase/functions/dist/esm/index.esm.js is dynamically imported by /opt/buildhome/repo/src/lib/services/openai-analysis.ts, /opt/buildhome/repo/src/lib/services/report-generator.ts, /opt/buildhome/repo/src/lib/services/report-generator.ts, /opt/buildhome/repo/src/lib/services/report-generator.ts, /opt/buildhome/repo/src/lib/services/report-generator.ts but also statically imported by /opt/buildhome/repo/src/lib/firebase/index.ts, /opt/buildhome/repo/src/main.tsx, dynamic import will not move module into another chunk.
+2025-08-23T15:15:25.454174Z	[39m
+2025-08-23T15:15:25.454338Z	[33m[plugin vite:reporter] 
+2025-08-23T15:15:25.45454Z	(!) /opt/buildhome/repo/node_modules/firebase/analytics/dist/esm/index.esm.js is dynamically imported by /opt/buildhome/repo/src/lib/firebase/index.ts but also statically imported by /opt/buildhome/repo/src/main.tsx, dynamic import will not move module into another chunk.
+2025-08-23T15:15:25.454815Z	[39m
+2025-08-23T15:15:25.454985Z	[33m[plugin vite:reporter] 
+2025-08-23T15:15:25.455173Z	(!) /opt/buildhome/repo/src/lib/firebase/index.ts is dynamically imported by /opt/buildhome/repo/src/lib/services/openai-analysis.ts, /opt/buildhome/repo/src/lib/services/openai-analysis.ts, /opt/buildhome/repo/src/lib/services/report-generator.ts, /opt/buildhome/repo/src/lib/services/report-generator.ts, /opt/buildhome/repo/src/lib/services/report-generator.ts, /opt/buildhome/repo/src/lib/services/report-generator.ts but also statically imported by /opt/buildhome/repo/src/lib/api/notifications.ts, /opt/buildhome/repo/src/lib/firebase/config.ts, /opt/buildhome/repo/src/lib/firebase/firebase-context.tsx, /opt/buildhome/repo/src/main.tsx, dynamic import will not move module into another chunk.
+2025-08-23T15:15:25.455505Z	[39m
+2025-08-23T15:15:25.455679Z	[33m[plugin vite:reporter] 
+2025-08-23T15:15:25.455783Z	(!) /opt/buildhome/repo/src/lib/firebase/config.ts is dynamically imported by /opt/buildhome/repo/src/pages/hybrid-brief.tsx, /opt/buildhome/repo/src/pages/hybrid-brief.tsx but also statically imported by /opt/buildhome/repo/src/App.tsx, /opt/buildhome/repo/src/components/dashboard/dashboard.tsx, /opt/buildhome/repo/src/components/dashboard/pages/settings/clients.tsx, /opt/buildhome/repo/src/components/onboarding/setup-incomplete-banner.tsx, /opt/buildhome/repo/src/hooks/use-auth-fetch.ts, /opt/buildhome/repo/src/hooks/use-brief-items.ts, /opt/buildhome/repo/src/hooks/use-clients.ts, /opt/buildhome/repo/src/hooks/use-saved-reports.ts, /opt/buildhome/repo/src/hooks/use-subscription.ts, /opt/buildhome/repo/src/hooks/useStripePortal.ts, /opt/buildhome/repo/src/lib/api/data-chat.ts, /opt/buildhome/repo/src/lib/chat.ts, /opt/buildhome/repo/src/lib/firebase/analytics-api.ts, /opt/buildhome/repo/src/lib/firebase/auth-context.tsx, /opt/buildhome/repo/src/lib/firebase/device-tracking.ts, /opt/buildhome/repo/src/lib/firebase/google-analytics-api.ts, /opt/buildhome/repo/src/lib/firebase/setup.ts, /opt/buildhome/repo/src/lib/services/analytics.ts, /opt/buildhome/repo/src/pages/onboarding/index.tsx, /opt/buildhome/repo/src/pages/personalized-home.tsx, /opt/buildhome/repo/src/pages/report-editor.tsx, dynamic import will not move module into another chunk.
+2025-08-23T15:15:25.455891Z	[39m
+2025-08-23T15:15:25.458236Z	[33m[plugin vite:reporter] 
+2025-08-23T15:15:25.458377Z	(!) /opt/buildhome/repo/node_modules/html2canvas/dist/html2canvas.esm.js is dynamically imported by /opt/buildhome/repo/node_modules/jspdf/dist/jspdf.es.min.js, /opt/buildhome/repo/src/components/dashboard/components/narrative-distribution.tsx, /opt/buildhome/repo/src/components/dashboard/pages/keyword-search.tsx but also statically imported by /opt/buildhome/repo/src/components/dashboard/components/share-button.tsx, /opt/buildhome/repo/src/components/dashboard/pages/home.tsx, dynamic import will not move module into another chunk.
+2025-08-23T15:15:25.458495Z	[39m
+2025-08-23T15:15:25.568214Z	computing gzip size...
+2025-08-23T15:15:25.661798Z	[2mdist/[22m[32mindex.html                               [39m[1m[2m    3.02 kB[22m[1m[22m[2m │ gzip:   1.02 kB[22m
+2025-08-23T15:15:25.662065Z	[2mdist/[22m[2massets/[22m[35mstyle-CpYNTx7f.css                [39m[1m[2m  263.88 kB[22m[1m[22m[2m │ gzip:  35.86 kB[22m
+2025-08-23T15:15:25.662214Z	[2mdist/[22m[2massets/[22m[36mfirebase-diagnostics-DG9hHnjN.js  [39m[1m[2m    8.11 kB[22m[1m[22m[2m │ gzip:   2.69 kB[22m
+2025-08-23T15:15:25.662321Z	[2mdist/[22m[2massets/[22m[36mpurify.es-BwN3LSvX.js             [39m[1m[2m   21.83 kB[22m[1m[22m[2m │ gzip:   8.37 kB[22m
+2025-08-23T15:15:25.662446Z	[2mdist/[22m[2massets/[22m[36mindex.es-PfiCyTtE.js              [39m[1m[2m  156.18 kB[22m[1m[22m[2m │ gzip:  51.00 kB[22m
+2025-08-23T15:15:25.662606Z	[2mdist/[22m[2massets/[22m[36mindex-n6os6P7u.js                 [39m[1m[33m3,641.87 kB[39m[22m[2m │ gzip: 997.71 kB[22m
+2025-08-23T15:15:25.662722Z	[33m
+2025-08-23T15:15:25.662829Z	(!) Some chunks are larger than 2000 kB after minification. Consider:
+2025-08-23T15:15:25.66293Z	- Using dynamic import() to code-split the application
+2025-08-23T15:15:25.663019Z	- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2025-08-23T15:15:25.663102Z	- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+2025-08-23T15:15:25.663693Z	[32m✓ built in 32.90s[39m
+2025-08-23T15:15:25.854798Z	Finished
+2025-08-23T15:15:26.735532Z	Checking for configuration in a Wrangler configuration file (BETA)
+2025-08-23T15:15:26.736483Z	
+2025-08-23T15:15:27.850736Z	No wrangler.toml file found. Continuing.
+2025-08-23T15:15:27.851456Z	Found Functions directory at /functions. Uploading.
+2025-08-23T15:15:27.858154Z	 ⛅️ wrangler 3.101.0
+2025-08-23T15:15:27.8583Z	-------------------
+2025-08-23T15:15:28.879966Z	✨ Compiled Worker successfully
+2025-08-23T15:15:29.968016Z	Found _routes.json in output directory. Uploading.
+2025-08-23T15:15:29.979041Z	Validating asset output directory
+2025-08-23T15:15:32.788532Z	Deploying your site to Cloudflare's global network...
+2025-08-23T15:15:35.635763Z	Parsed 0 valid redirect rules.
+2025-08-23T15:15:35.636185Z	Found invalid redirect lines:
+2025-08-23T15:15:35.636274Z	  - #1: /*    /index.html   200
+2025-08-23T15:15:35.636334Z	    Infinite loop detected in this rule and has been ignored. This will cause a redirect to strip `.html` or `/index` and end up triggering this rule again. Please fix or remove this rule to silence this warning.
+2025-08-23T15:15:35.636401Z	Parsed 1 valid header rule.
+2025-08-23T15:15:35.636455Z	Found invalid header lines:
+2025-08-23T15:15:35.63651Z	    Ignoring line 11 as it exceeds the maximum allowed length of 2000.
+2025-08-23T15:15:35.636599Z	  - #12:  */
+2025-08-23T15:15:35.636676Z	    Expected a colon-separated header pair (e.g. name: value)
+2025-08-23T15:15:37.041905Z	Uploading... (110/114)
+2025-08-23T15:15:37.657521Z	Uploading... (111/114)
+2025-08-23T15:15:37.831125Z	Uploading... (112/114)
+2025-08-23T15:15:39.009818Z	Uploading... (114/114)
+2025-08-23T15:15:39.010148Z	✨ Success! Uploaded 4 files (110 already uploaded) (2.45 sec)
+2025-08-23T15:15:39.010379Z	
+2025-08-23T15:15:39.582489Z	✨ Upload complete!
+2025-08-23T15:15:43.205264Z	Success: Assets published!
+2025-08-23T15:15:45.95572Z	Success: Your site was deployed!
