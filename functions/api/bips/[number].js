@@ -3,78 +3,55 @@ export async function onRequest(context) {
   const bipNumber = parseInt(params.number);
   
   try {
-    // Fetch the specific BIP file from GitHub
-    const filename = `bip-${String(bipNumber).padStart(4, '0')}.mediawiki`;
-    const response = await fetch(`https://api.github.com/repos/bitcoin/bips/contents/${filename}`, {
-      headers: {
-        'Accept': 'application/vnd.github.v3.raw',
-        'User-Agent': 'BIP-Explorer'
-      }
-    });
-
-    if (!response.ok) {
-      if (response.status === 404) {
-        return new Response(JSON.stringify({ error: 'BIP not found' }), {
-          status: 404,
+    // Try different filename formats that exist in the BIPs repository
+    const possibleFilenames = [
+      `bip-${String(bipNumber).padStart(4, '0')}.mediawiki`,
+      `bip-${bipNumber}.mediawiki`
+    ];
+    
+    let content = null;
+    let filename = null;
+    let githubUrl = null;
+    
+    for (const possibleFilename of possibleFilenames) {
+      try {
+        const response = await fetch(`https://api.github.com/repos/bitcoin/bips/contents/${possibleFilename}`, {
           headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Accept': 'application/vnd.github.v3+json',
+            'User-Agent': 'BIP-Explorer'
           }
         });
-      }
-      throw new Error(`GitHub API returned ${response.status}`);
-    }
-
-    const content = await response.text();
-    
-    // Parse basic metadata from the content
-    const lines = content.split('\n').slice(0, 20); // First 20 lines usually contain metadata
-    let title = `BIP ${bipNumber}`;
-    let authors = ['Bitcoin Core Developers'];
-    let status = 'Final';
-    let type = 'Standards Track';
-    let created = '2009-01-01';
-    let abstract = '';
-    
-    // Try to parse metadata from content
-    for (const line of lines) {
-      if (line.includes('Title:')) {
-        title = line.split('Title:')[1]?.trim() || title;
-      } else if (line.includes('Author:')) {
-        const authorStr = line.split('Author:')[1]?.trim();
-        if (authorStr) {
-          authors = authorStr.split(',').map(a => a.trim());
+        
+        if (response.ok) {
+          const fileInfo = await response.json();
+          const contentResponse = await fetch(fileInfo.download_url, {
+            headers: { 'User-Agent': 'BIP-Explorer' }
+          });
+          
+          if (contentResponse.ok) {
+            content = await contentResponse.text();
+            filename = possibleFilename;
+            githubUrl = fileInfo.html_url;
+            break;
+          }
         }
-      } else if (line.includes('Status:')) {
-        status = line.split('Status:')[1]?.trim() || status;
-      } else if (line.includes('Type:')) {
-        type = line.split('Type:')[1]?.trim() || type;
-      } else if (line.includes('Created:')) {
-        created = line.split('Created:')[1]?.trim() || created;
+      } catch (error) {
+        // Try next filename format
+        continue;
       }
     }
     
-    // Find abstract section
-    const abstractStart = content.indexOf('==Abstract==');
-    if (abstractStart !== -1) {
-      const abstractEnd = content.indexOf('\n==', abstractStart + 1);
-      abstract = content.substring(abstractStart + 12, abstractEnd > 0 ? abstractEnd : abstractStart + 500).trim();
+    if (!content) {
+      return new Response(JSON.stringify({ error: 'BIP not found' }), {
+        status: 404,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+      });
     }
     
-    const bip = {
-      number: bipNumber,
-      title,
-      authors,
-      status,
-      type,
-      created,
-      abstract: abstract || `Bitcoin Improvement Proposal ${bipNumber}`,
-      content: content.substring(0, 10000), // Limit content size for now
-      filename: `bip-${String(bipNumber).padStart(4, '0')}.mediawiki`,
-      githubUrl: `https://github.com/bitcoin/bips/blob/master/bip-${String(bipNumber).padStart(4, '0')}.mediawiki`,
-      layer: 'Consensus',
-      comments: ''
-    };
+    const bip = parseBipContent(content, bipNumber, filename, githubUrl);
 
     return new Response(JSON.stringify(bip), {
       headers: {
@@ -91,4 +68,77 @@ export async function onRequest(context) {
       }
     });
   }
+}
+
+function parseBipContent(content, number, filename, githubUrl) {
+  const lines = content.split('\n');
+  
+  let title = `BIP ${number}`;
+  let authors = ['Unknown'];
+  let status = 'Draft';
+  let type = 'Standards Track';
+  let created = '2009-01-01';
+  let abstract = '';
+  let layer = '';
+  let comments = '';
+  let replaces = [];
+  let replacedBy = [];
+  
+  // Parse metadata from the header
+  for (let i = 0; i < Math.min(30, lines.length); i++) {
+    const line = lines[i].trim();
+    
+    if (line.match(/^\s*Title:\s*/i)) {
+      title = line.replace(/^\s*Title:\s*/i, '').trim();
+    } else if (line.match(/^\s*Author:\s*/i)) {
+      const authorStr = line.replace(/^\s*Author:\s*/i, '').trim();
+      if (authorStr) {
+        // Parse authors, handling various formats
+        authors = authorStr
+          .split(/,|&|\band\b/i)
+          .map(author => author.replace(/<[^>]*>/g, '').trim()) // Remove email addresses
+          .filter(author => author.length > 0);
+      }
+    } else if (line.match(/^\s*Status:\s*/i)) {
+      status = line.replace(/^\s*Status:\s*/i, '').trim();
+    } else if (line.match(/^\s*Type:\s*/i)) {
+      type = line.replace(/^\s*Type:\s*/i, '').trim();
+    } else if (line.match(/^\s*Created:\s*/i)) {
+      created = line.replace(/^\s*Created:\s*/i, '').trim();
+    } else if (line.match(/^\s*Layer:\s*/i)) {
+      layer = line.replace(/^\s*Layer:\s*/i, '').trim();
+    } else if (line.match(/^\s*Comments-URI:\s*/i)) {
+      comments = line.replace(/^\s*Comments-URI:\s*/i, '').trim();
+    } else if (line.match(/^\s*Replaces:\s*/i)) {
+      const replacesStr = line.replace(/^\s*Replaces:\s*/i, '').trim();
+      replaces = replacesStr.split(/,\s*/).map(n => parseInt(n)).filter(n => !isNaN(n));
+    } else if (line.match(/^\s*Replaced-By:\s*/i)) {
+      const replacedByStr = line.replace(/^\s*Replaced-By:\s*/i, '').trim();
+      replacedBy = replacedByStr.split(/,\s*/).map(n => parseInt(n)).filter(n => !isNaN(n));
+    }
+  }
+  
+  // Find abstract section
+  const abstractStart = content.indexOf('==Abstract==');
+  if (abstractStart !== -1) {
+    const abstractEnd = content.indexOf('\n==', abstractStart + 1);
+    abstract = content.substring(abstractStart + 12, abstractEnd > 0 ? abstractEnd : abstractStart + 1000).trim();
+  }
+  
+  return {
+    number,
+    title,
+    authors,
+    status,
+    type,
+    created,
+    abstract: abstract || `Bitcoin Improvement Proposal ${number}`,
+    content: content, // Return full content for individual BIP view
+    filename: filename,
+    githubUrl: githubUrl,
+    layer: layer || '',
+    comments: comments || '',
+    replaces: replaces.length > 0 ? replaces : undefined,
+    replacedBy: replacedBy.length > 0 ? replacedBy : undefined
+  };
 }
