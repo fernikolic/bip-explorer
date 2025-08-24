@@ -43,7 +43,8 @@ export default function SearchFilters({
     onSearchChange(value);
     if (isHero && value) {
       setTimeout(() => {
-        document.getElementById('bips-section')?.scrollIntoView({ behavior: 'smooth' });
+        const target = document.getElementById('bips-section') || document.getElementById('search-results');
+        target?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     }
   };

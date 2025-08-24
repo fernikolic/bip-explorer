@@ -8,8 +8,6 @@ import AdSpace from "../components/ad-space";
 import { useBips } from "../hooks/use-bips";
 import { useSearch } from "../hooks/use-search";
 import { useSEO } from "../hooks/use-seo";
-import { Input } from "../components/ui/input";
-import { Button } from "../components/ui/button";
 import { Search as SearchIcon } from "lucide-react";
 import { Skeleton } from "../components/ui/skeleton";
 
@@ -62,27 +60,32 @@ export default function Search() {
     <div className="min-h-screen bg-background">
       <Navigation />
       
-      {/* Hero Section */}
+      {/* Hero Section with Advanced Search */}
       <section className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 py-16 lg:py-20">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center">
-          <h1 className="text-5xl lg:text-6xl font-light text-foreground mb-6 tracking-tight">
-            Search Bitcoin Improvement Proposals
-          </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Find specific BIPs by number, title, author, or content. Use advanced filters to narrow your search.
-          </p>
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h1 className="text-5xl lg:text-6xl font-light text-foreground mb-6 tracking-tight">
+              Search Bitcoin Improvement Proposals
+            </h1>
+            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+              Find specific BIPs by number, title, author, or content. Use advanced filters to narrow your search.
+            </p>
+          </div>
           
-          <div className="max-w-2xl mx-auto">
-            <div className="relative">
-              <Input
-                type="text"
-                placeholder="Search BIPs by number, title, author, or keywords..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-6 py-4 pl-14 rounded-2xl border border-border text-lg focus:ring-2 focus:ring-bitcoin-500 focus:border-bitcoin-500 shadow-moderate"
-                data-testid="input-search"
+          {/* Advanced Search and Filters */}
+          <div className="max-w-5xl mx-auto">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-elevated border border-border/50">
+              <SearchFilters
+                searchTerm={searchTerm}
+                onSearchChange={setSearchTerm}
+                statusFilter={statusFilter}
+                onStatusChange={setStatusFilter}
+                typeFilter={typeFilter}
+                onTypeChange={setTypeFilter}
+                sortBy={sortBy}
+                onSortChange={setSortBy}
+                variant="hero"
               />
-              <SearchIcon className="absolute left-5 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
             </div>
           </div>
         </div>
@@ -93,19 +96,8 @@ export default function Search() {
         <div className="flex justify-center mb-8 lg:hidden">
           <AdSpace size="mobile-banner" />
         </div>
-        
-        <SearchFilters
-          searchTerm={searchTerm}
-          onSearchChange={setSearchTerm}
-          statusFilter={statusFilter}
-          onStatusChange={setStatusFilter}
-          typeFilter={typeFilter}
-          onTypeChange={setTypeFilter}
-          sortBy={sortBy}
-          onSortChange={setSortBy}
-        />
 
-        <section className="mt-12">
+        <section id="search-results">
           <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6 mb-8">
             <div>
               <h2 className="text-4xl font-light text-foreground mb-3 tracking-tight">
