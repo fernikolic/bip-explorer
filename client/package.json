@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "cd .. && npx vite build client --outDir dist",
+    "build": "cd .. && npx vite build --root client --outDir dist",
     "dev": "cd .. && npx vite client",
     "preview": "cd .. && npx vite preview"
   }
