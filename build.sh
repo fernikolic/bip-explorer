@@ -2,34 +2,14 @@
 # Build script for Cloudflare Pages deployment
 set -e
 
-echo "Setting environment for production..."
-export NODE_ENV=production
+echo "Running Node.js build script..."
+node deploy-build.js
 
-echo "Temporarily renaming problematic config files..."
-if [ -f "vite.config.ts" ]; then
-  mv vite.config.ts vite.config.ts.backup
-fi
-if [ -f "postcss.config.js" ]; then
-  mv postcss.config.js postcss.config.js.backup
-fi
-
-echo "Building frontend with minimal config..."
-npx vite build --config vite.minimal.config.js
-
-echo "Restoring config files..."
-if [ -f "vite.config.ts.backup" ]; then
-  mv vite.config.ts.backup vite.config.ts
-fi
-if [ -f "postcss.config.js.backup" ]; then
-  mv postcss.config.js.backup postcss.config.js
-fi
-
-echo "Checking build output..."
+echo "Verifying build output..."
 if [ ! -d "client/dist" ]; then
-  echo "Build failed - no output directory found"
+  echo "Build failed - no client/dist directory"
   exit 1
 fi
 
-echo "Build completed successfully!"
-echo "Files in client/dist:"
+echo "Build successful! Contents:"
 ls -la client/dist/
