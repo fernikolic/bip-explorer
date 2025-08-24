@@ -6,7 +6,7 @@ echo "Setting environment for production..."
 export NODE_ENV=production
 
 echo "Building frontend with production config..."
-npx vite build --config vite.production.config.ts
+npx vite build --config vite.production.config.js
 
 echo "Checking build output..."
 if [ ! -d "client/dist" ]; then
