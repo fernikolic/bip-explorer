@@ -1,0 +1,58 @@
+2025-08-24T09:29:53.148608Z	Cloning repository...
+2025-08-24T09:29:53.730071Z	From https://github.com/fernikolic/bip-explorer
+2025-08-24T09:29:53.730627Z	 * branch            7500a3a551cb97d6d9efbd9c43279ae7dd1f59db -> FETCH_HEAD
+2025-08-24T09:29:53.730845Z	
+2025-08-24T09:29:53.759858Z	HEAD is now at 7500a3a Adapt build script for new Node.js module system compatibility
+2025-08-24T09:29:53.760322Z	
+2025-08-24T09:29:53.838028Z	
+2025-08-24T09:29:53.838955Z	Using v2 root directory strategy
+2025-08-24T09:29:53.858548Z	Success: Finished cloning repository files
+2025-08-24T09:29:55.530269Z	Checking for configuration in a Wrangler configuration file (BETA)
+2025-08-24T09:29:55.530971Z	
+2025-08-24T09:29:55.532518Z	Found wrangler.toml file. Reading build configuration...
+2025-08-24T09:29:56.641955Z	A wrangler.toml file was found but it does not appear to be valid. Did you mean to use wrangler.toml to configure Pages? If so, then make sure the file is valid and contains the `pages_build_output_dir` property. Skipping file and continuing.
+2025-08-24T09:29:56.705605Z	Detected the following tools from environment: npm@10.9.2, nodejs@22.16.0
+2025-08-24T09:29:56.706095Z	Installing project dependencies: npm clean-install --progress=false
+2025-08-24T09:30:03.467241Z	
+2025-08-24T09:30:03.467442Z	added 375 packages, and audited 376 packages in 6s
+2025-08-24T09:30:03.468063Z	
+2025-08-24T09:30:03.468153Z	53 packages are looking for funding
+2025-08-24T09:30:03.468211Z	  run `npm fund` for details
+2025-08-24T09:30:03.469578Z	
+2025-08-24T09:30:03.469733Z	3 low severity vulnerabilities
+2025-08-24T09:30:03.470166Z	
+2025-08-24T09:30:03.470257Z	To address all issues, run:
+2025-08-24T09:30:03.470718Z	  npm audit fix
+2025-08-24T09:30:03.470866Z	
+2025-08-24T09:30:03.471017Z	Run `npm audit` for details.
+2025-08-24T09:30:03.497247Z	Executing user command: bash build.sh
+2025-08-24T09:30:03.504659Z	Running Node.js build script...
+2025-08-24T09:30:03.728267Z	Hidden vite.config.ts
+2025-08-24T09:30:03.728553Z	Hidden postcss.config.js
+2025-08-24T09:30:03.728751Z	Building with npm run build...
+2025-08-24T09:30:03.904118Z	
+2025-08-24T09:30:03.904316Z	> rest-express@1.0.0 build
+2025-08-24T09:30:03.904435Z	> vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-08-24T09:30:03.904533Z	
+2025-08-24T09:30:03.913557Z	sh: 1: vite: not found
+2025-08-24T09:30:03.921793Z	Build failed: Error: Command failed: npm run build
+2025-08-24T09:30:03.921965Z	    at genericNodeError (node:internal/errors:983:15)
+2025-08-24T09:30:03.922098Z	    at wrappedFn (node:internal/errors:537:14)
+2025-08-24T09:30:03.922206Z	    at checkExecSyncError (node:child_process:882:11)
+2025-08-24T09:30:03.922336Z	    at execSync (node:child_process:954:15)
+2025-08-24T09:30:03.922457Z	    at Object.<anonymous> (/opt/buildhome/repo/deploy-build.cjs:22:3)
+2025-08-24T09:30:03.922556Z	    at Module._compile (node:internal/modules/cjs/loader:1730:14)
+2025-08-24T09:30:03.92264Z	    at Object..js (node:internal/modules/cjs/loader:1895:10)
+2025-08-24T09:30:03.92275Z	    at Module.load (node:internal/modules/cjs/loader:1465:32)
+2025-08-24T09:30:03.922853Z	    at Function._load (node:internal/modules/cjs/loader:1282:12)
+2025-08-24T09:30:03.922962Z	    at TracingChannel.traceSync (node:diagnostics_channel:322:14) {
+2025-08-24T09:30:03.923065Z	  status: 127,
+2025-08-24T09:30:03.923164Z	  signal: null,
+2025-08-24T09:30:03.923266Z	  output: [ null, null, null ],
+2025-08-24T09:30:03.92338Z	  pid: 680,
+2025-08-24T09:30:03.923472Z	  stdout: null,
+2025-08-24T09:30:03.923568Z	  stderr: null
+2025-08-24T09:30:03.923756Z	}
+2025-08-24T09:30:03.92847Z	Failed: Error while executing user command. Exited with error code: 1
+2025-08-24T09:30:03.938726Z	Failed: build command exited with code: 1
+2025-08-24T09:30:08.887337Z	Failed: error occurred while running build command

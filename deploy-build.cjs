@@ -12,24 +12,14 @@ configsToHide.forEach(config => {
 });
 
 try {
-  console.log('Building with npm run build...');
+  console.log('Building frontend directly with npx...');
   
   // Change the build environment
   process.env.NODE_ENV = 'production';
   process.env.REPL_ID = undefined; // Disable Replit-specific features
   
-  // Run the build using the existing npm script
-  execSync('npm run build', { stdio: 'inherit' });
-  
-  // Move output if needed
-  if (fs.existsSync('dist/public')) {
-    if (fs.existsSync('client/dist')) {
-      execSync('rm -rf client/dist');
-    }
-    execSync('mkdir -p client');
-    execSync('mv dist/public client/dist');
-    console.log('Moved build output to client/dist');
-  }
+  // Build frontend directly - this bypasses all npm script path issues
+  execSync('cd client && npx vite build --outDir ../client/dist --emptyOutDir', { stdio: 'inherit' });
   
 } catch (error) {
   console.error('Build failed:', error);
