@@ -5,18 +5,15 @@ set -e
 echo "Setting environment for production..."
 export NODE_ENV=production
 
-echo "Building frontend with Vite..."
-npx vite build
+echo "Building frontend with production config..."
+npx vite build --config vite.production.config.ts
 
-echo "Moving build output to expected location..."
-# Vite outputs to dist/public, but Cloudflare Pages expects client/dist
-mkdir -p client/dist
-if [ -d "dist/public" ]; then
-  cp -r dist/public/* client/dist/
-  echo "Moved files from dist/public to client/dist"
+echo "Checking build output..."
+if [ ! -d "client/dist" ]; then
+  echo "Build failed - no output directory found"
+  exit 1
 fi
 
-echo "Building backend with esbuild..."
-npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
-
 echo "Build completed successfully!"
+echo "Files in client/dist:"
+ls -la client/dist/
