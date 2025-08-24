@@ -172,6 +172,31 @@ async function parseBipContent(content: string, filename: string): Promise<Bip |
   }
 }
 
+// Cache warming function to be called on server startup
+export async function warmCache() {
+  try {
+    const lastCache = await storage.getCacheTimestamp();
+    const now = Date.now();
+    
+    // Check if we have cached data
+    const bips = await storage.getBips();
+    
+    if (bips.length === 0 || !lastCache || (now - lastCache) > CACHE_DURATION) {
+      // No cache or cache is stale, fetch fresh data
+      console.log('Cache is empty or stale, fetching fresh BIP data from GitHub...');
+      const freshBips = await fetchBipsFromGitHub();
+      await storage.cacheBips(freshBips);
+      await storage.setCacheTimestamp(now);
+      console.log(`Cached ${freshBips.length} BIPs`);
+    } else {
+      console.log(`Using cached data with ${bips.length} BIPs (age: ${Math.round((now - lastCache) / 1000 / 60)} minutes)`);
+    }
+  } catch (error) {
+    console.error('Error warming cache:', error);
+    // Don't throw - let the server start even if cache warming fails
+  }
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
   
   // Helper function to ensure BIPs are loaded

@@ -41,15 +41,24 @@ export default function StatsOverview() {
 
   if (isLoading) {
     return (
-      <section className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-        {[...Array(4)].map((_, i) => (
-          <Card key={i} className="p-8 rounded-2xl shadow-subtle border border-gray-100">
-            <CardContent className="p-0">
-              <Skeleton className="h-10 w-20 mb-3" />
-              <Skeleton className="h-5 w-24" />
-            </CardContent>
-          </Card>
-        ))}
+      <section className="mb-20">
+        <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6 mb-12">
+          <div className="text-lg text-gray-500 font-light">
+            Live data from the official Bitcoin BIPs repository, updated every 15 minutes
+          </div>
+          <Skeleton className="h-12 w-40 rounded-xl" />
+        </div>
+        
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          {[...Array(4)].map((_, i) => (
+            <Card key={i} className="p-10 rounded-3xl shadow-subtle hover:shadow-prominent border border-border bg-card transition-apple">
+              <CardContent className="p-0 text-center">
+                <Skeleton className="h-12 w-20 mb-4 mx-auto" />
+                <Skeleton className="h-4 w-28 mx-auto" />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </section>
     );
   }
