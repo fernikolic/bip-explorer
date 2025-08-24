@@ -1,0 +1,48 @@
+2025-08-24T08:38:41.176724Z	Cloning repository...
+2025-08-24T08:38:41.801719Z	From https://github.com/fernikolic/bip-explorer
+2025-08-24T08:38:41.802236Z	 * branch            1e2a7556b9bc2dabc5eb973b457478fba77b4052 -> FETCH_HEAD
+2025-08-24T08:38:41.802421Z	
+2025-08-24T08:38:41.837265Z	HEAD is now at 1e2a755 Improve build process by temporarily excluding config files
+2025-08-24T08:38:41.838157Z	
+2025-08-24T08:38:41.924177Z	
+2025-08-24T08:38:41.925052Z	Using v2 root directory strategy
+2025-08-24T08:38:41.949125Z	Success: Finished cloning repository files
+2025-08-24T08:38:43.860417Z	Checking for configuration in a Wrangler configuration file (BETA)
+2025-08-24T08:38:43.861229Z	
+2025-08-24T08:38:43.862659Z	Found wrangler.toml file. Reading build configuration...
+2025-08-24T08:38:44.970595Z	A wrangler.toml file was found but it does not appear to be valid. Did you mean to use wrangler.toml to configure Pages? If so, then make sure the file is valid and contains the `pages_build_output_dir` property. Skipping file and continuing.
+2025-08-24T08:38:45.043659Z	Detected the following tools from environment: npm@10.9.2, nodejs@22.16.0
+2025-08-24T08:38:45.044366Z	Installing project dependencies: npm clean-install --progress=false
+2025-08-24T08:38:52.993844Z	
+2025-08-24T08:38:52.994185Z	added 375 packages, and audited 376 packages in 8s
+2025-08-24T08:38:52.99449Z	
+2025-08-24T08:38:52.994592Z	53 packages are looking for funding
+2025-08-24T08:38:52.994743Z	  run `npm fund` for details
+2025-08-24T08:38:52.996404Z	
+2025-08-24T08:38:52.996543Z	3 low severity vulnerabilities
+2025-08-24T08:38:52.996607Z	
+2025-08-24T08:38:52.996864Z	To address all issues, run:
+2025-08-24T08:38:52.996988Z	  npm audit fix
+2025-08-24T08:38:52.997187Z	
+2025-08-24T08:38:52.997341Z	Run `npm audit` for details.
+2025-08-24T08:38:53.027064Z	Executing user command: bash build.sh
+2025-08-24T08:38:53.035692Z	Setting environment for production...
+2025-08-24T08:38:53.036392Z	Temporarily renaming problematic config files...
+2025-08-24T08:38:53.044624Z	Building frontend with no config dependencies...
+2025-08-24T08:38:54.22915Z	npm warn exec The following package was not found and will be installed: vite@7.1.3
+2025-08-24T08:38:57.588093Z	file:///opt/buildhome/.npm/_npx/9ed06546b0653f96/node_modules/vite/dist/node/cli.js:314
+2025-08-24T08:38:57.588497Z				for (const name of Object.keys(options)) if (name !== "--" && !this.hasOption(name) && !globalCommand.hasOption(name)) throw new CACError(`Unknown option \`${name.length > 1 ? `--${name}` : `-${name}`}\``);
+2025-08-24T08:38:57.588629Z				                                                                                                                             ^
+2025-08-24T08:38:57.588822Z	
+2025-08-24T08:38:57.588984Z	CACError: Unknown option `--cssTarget`
+2025-08-24T08:38:57.589068Z	    at Command.checkUnknownOptions (file:///opt/buildhome/.npm/_npx/9ed06546b0653f96/node_modules/vite/dist/node/cli.js:314:129)
+2025-08-24T08:38:57.589196Z	    at CAC.runMatchedCommand (file:///opt/buildhome/.npm/_npx/9ed06546b0653f96/node_modules/vite/dist/node/cli.js:477:11)
+2025-08-24T08:38:57.589334Z	    at CAC.parse (file:///opt/buildhome/.npm/_npx/9ed06546b0653f96/node_modules/vite/dist/node/cli.js:433:17)
+2025-08-24T08:38:57.589439Z	    at file:///opt/buildhome/.npm/_npx/9ed06546b0653f96/node_modules/vite/dist/node/cli.js:706:5
+2025-08-24T08:38:57.589539Z	    at ModuleJob.run (node:internal/modules/esm/module_job:274:25)
+2025-08-24T08:38:57.589641Z	    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:644:26)
+2025-08-24T08:38:57.589746Z	
+2025-08-24T08:38:57.589876Z	Node.js v22.16.0
+2025-08-24T08:38:57.61147Z	Failed: Error while executing user command. Exited with error code: 1
+2025-08-24T08:38:57.62433Z	Failed: build command exited with code: 1
+2025-08-24T08:38:58.84426Z	Failed: error occurred while running build command

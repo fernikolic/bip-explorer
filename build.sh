@@ -15,7 +15,7 @@ fi
 
 echo "Building frontend with no config dependencies..."
 cd client
-npx vite build --outDir ../client/dist --emptyOutDir --css-target=es2022
+npx vite build --outDir ../client/dist --emptyOutDir
 cd ..
 
 echo "Restoring config files..."
