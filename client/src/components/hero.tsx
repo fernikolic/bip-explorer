@@ -1,27 +1,26 @@
-import { useState } from "react";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Search } from "lucide-react";
+import SearchFilters from "./search-filters";
 
 interface HeroProps {
-  onSearch: (query: string) => void;
+  searchTerm: string;
+  onSearchChange: (value: string) => void;
+  statusFilter: string;
+  onStatusChange: (value: string) => void;
+  typeFilter: string;
+  onTypeChange: (value: string) => void;
+  sortBy: string;
+  onSortChange: (value: string) => void;
 }
 
-export default function Hero({ onSearch }: HeroProps) {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSearch = () => {
-    onSearch(searchQuery);
-    // Scroll to results
-    document.getElementById('search-results')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleSearch();
-    }
-  };
-
+export default function Hero({
+  searchTerm,
+  onSearchChange,
+  statusFilter,
+  onStatusChange,
+  typeFilter,
+  onTypeChange,
+  sortBy,
+  onSortChange,
+}: HeroProps) {
   return (
     <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white py-24 lg:py-32 overflow-hidden">
       {/* Background Elements */}
@@ -47,28 +46,21 @@ export default function Hero({ onSearch }: HeroProps) {
             Explore technical specifications with intelligent summaries designed for professionals.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <div className="w-full sm:w-[28rem]">
-              <div className="relative">
-                <Input 
-                  type="text" 
-                  placeholder="Search by BIP number, title, or author..."
-                  className="w-full px-6 py-4 pl-14 rounded-2xl border-0 bg-white/95 backdrop-blur-sm text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-bitcoin-400 outline-none shadow-elevated font-medium text-lg transition-apple dark:bg-white/95 dark:text-gray-900"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  data-testid="input-hero-search"
-                />
-                <Search className="absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 dark:text-gray-500" />
-              </div>
+          {/* Advanced Search and Filters */}
+          <div className="max-w-5xl mx-auto">
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-elevated">
+              <SearchFilters
+                searchTerm={searchTerm}
+                onSearchChange={onSearchChange}
+                statusFilter={statusFilter}
+                onStatusChange={onStatusChange}
+                typeFilter={typeFilter}
+                onTypeChange={onTypeChange}
+                sortBy={sortBy}
+                onSortChange={onSortChange}
+                variant="hero"
+              />
             </div>
-            <Button 
-              className="bg-bitcoin-500 hover:bg-bitcoin-600 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-apple shadow-elevated hover-lift active-scale border-0"
-              onClick={handleSearch}
-              data-testid="button-start-exploring"
-            >
-              Explore Now
-            </Button>
           </div>
         </div>
       </div>

@@ -1,7 +1,6 @@
 import Navigation from "../components/navigation";
 import Hero from "../components/hero";
 import StatsOverview from "../components/stats-overview";
-import SearchFilters from "../components/search-filters";
 import BipCard from "../components/bip-card";
 import AdSpace from "../components/ad-space";
 import CategoriesSection from "../components/categories-section";
@@ -72,7 +71,16 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <Hero onSearch={setSearchTerm} />
+      <Hero 
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        statusFilter={statusFilter}
+        onStatusChange={setStatusFilter}
+        typeFilter={typeFilter}
+        onTypeChange={setTypeFilter}
+        sortBy={sortBy}
+        onSortChange={setSortBy}
+      />
       
       <main className="max-w-6xl mx-auto px-6 lg:px-8 py-16">
         <StatsOverview />
@@ -81,21 +89,8 @@ export default function Home() {
         <div className="flex justify-center mb-16">
           <AdSpace size="billboard" />
         </div>
-        
-        <div className="mb-12">
-          <SearchFilters
-            searchTerm={searchTerm}
-            onSearchChange={setSearchTerm}
-            statusFilter={statusFilter}
-            onStatusChange={setStatusFilter}
-            typeFilter={typeFilter}
-            onTypeChange={setTypeFilter}
-            sortBy={sortBy}
-            onSortChange={setSortBy}
-          />
-        </div>
 
-        <section>
+        <section id="bips-section">
           <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6 mb-8">
             <div>
               <h2 className="text-4xl font-light text-foreground mb-3 tracking-tight">

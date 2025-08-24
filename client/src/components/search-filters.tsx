@@ -13,6 +13,7 @@ interface SearchFiltersProps {
   onTypeChange: (value: string) => void;
   sortBy: string;
   onSortChange: (value: string) => void;
+  variant?: "hero" | "page";
 }
 
 export default function SearchFilters({
@@ -24,6 +25,7 @@ export default function SearchFilters({
   onTypeChange,
   sortBy,
   onSortChange,
+  variant = "page",
 }: SearchFiltersProps) {
   const clearAllFilters = () => {
     onSearchChange("");
@@ -34,29 +36,49 @@ export default function SearchFilters({
 
   const hasActiveFilters = searchTerm || (statusFilter !== "all") || (typeFilter !== "all") || sortBy !== "number";
 
-  return (
-    <section className="bg-card rounded-lg p-6 shadow-sm border border-border mb-8" id="search-results">
+  const isHero = variant === "hero";
+  
+  // Scroll to results when used in hero
+  const handleSearchChange = (value: string) => {
+    onSearchChange(value);
+    if (isHero && value) {
+      setTimeout(() => {
+        document.getElementById('bips-section')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  };
+
+  const content = (
+    <>
       <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center">
         <div className="flex-1">
-          <label className="block text-sm font-medium text-foreground mb-2">Search & Filter</label>
+          {!isHero && (
+            <label className="block text-sm font-medium text-foreground mb-2">Search & Filter</label>
+          )}
           <div className="relative">
             <Input 
               type="text" 
               placeholder="Search by BIP number, title, author, or content..."
-              className="w-full px-4 py-2 pl-10 border border-border rounded-lg focus:ring-2 focus:ring-bitcoin-500 focus:border-bitcoin-500 outline-none"
+              className={`w-full px-4 py-3 pl-12 border rounded-xl focus:ring-2 focus:ring-bitcoin-500 focus:border-bitcoin-500 outline-none text-lg ${
+                isHero 
+                  ? "border-gray-300 text-gray-900 placeholder-gray-500 bg-white"
+                  : "border-border"
+              }`}
               value={searchTerm}
-              onChange={(e) => onSearchChange(e.target.value)}
+              onChange={(e) => handleSearchChange(e.target.value)}
               data-testid="input-search"
             />
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+            <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ${
+              isHero ? "text-gray-400" : "text-muted-foreground"
+            }`} />
           </div>
         </div>
         
         <div className="flex flex-wrap gap-2">
           <div className="flex flex-col">
-            <label className="text-xs text-muted-foreground mb-1">Status</label>
+            {!isHero && <label className="text-xs text-muted-foreground mb-1">Status</label>}
             <Select value={statusFilter} onValueChange={onStatusChange}>
-              <SelectTrigger className="w-40" data-testid="select-status">
+              <SelectTrigger className={`w-40 ${isHero ? "bg-white border-gray-300 text-gray-900" : ""}`} data-testid="select-status">
                 <SelectValue placeholder="All Status" />
               </SelectTrigger>
               <SelectContent>
@@ -74,9 +96,9 @@ export default function SearchFilters({
           </div>
           
           <div className="flex flex-col">
-            <label className="text-xs text-muted-foreground mb-1">Type</label>
+            {!isHero && <label className="text-xs text-muted-foreground mb-1">Type</label>}
             <Select value={typeFilter} onValueChange={onTypeChange}>
-              <SelectTrigger className="w-40" data-testid="select-type">
+              <SelectTrigger className={`w-40 ${isHero ? "bg-white border-gray-300 text-gray-900" : ""}`} data-testid="select-type">
                 <SelectValue placeholder="All Types" />
               </SelectTrigger>
               <SelectContent>
@@ -89,9 +111,9 @@ export default function SearchFilters({
           </div>
           
           <div className="flex flex-col">
-            <label className="text-xs text-muted-foreground mb-1">Sort By</label>
+            {!isHero && <label className="text-xs text-muted-foreground mb-1">Sort By</label>}
             <Select value={sortBy} onValueChange={onSortChange}>
-              <SelectTrigger className="w-36" data-testid="select-sort">
+              <SelectTrigger className={`w-36 ${isHero ? "bg-white border-gray-300 text-gray-900" : ""}`} data-testid="select-sort">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -108,7 +130,7 @@ export default function SearchFilters({
       {/* Active Filters */}
       {hasActiveFilters && (
         <div className="mt-4 flex flex-wrap gap-2 items-center">
-          <span className="text-sm text-muted-foreground">Active filters:</span>
+          <span className={`text-sm ${isHero ? "text-gray-600" : "text-muted-foreground"}`}>Active filters:</span>
           {statusFilter !== "all" && (
             <Badge variant="secondary" className="flex items-center gap-1" data-testid="badge-filter-status">
               Status: {statusFilter}
@@ -144,7 +166,7 @@ export default function SearchFilters({
                 variant="ghost"
                 size="sm"
                 className="h-auto p-0 ml-1 text-muted-foreground hover:text-foreground"
-                onClick={() => onSearchChange("")}
+                onClick={() => handleSearchChange("")}
                 data-testid="button-clear-search"
               >
                 <X className="w-3 h-3" />
@@ -161,6 +183,16 @@ export default function SearchFilters({
           </Button>
         </div>
       )}
+    </>
+  );
+
+  if (isHero) {
+    return content;
+  }
+
+  return (
+    <section className="bg-card rounded-lg p-6 shadow-sm border border-border mb-8" id="search-results">
+      {content}
     </section>
   );
 }
