@@ -1,15 +1,15 @@
 import { useState, useMemo } from "react";
 import { Link } from "wouter";
-import Navigation from "../../components/navigation";
-import Footer from "../../components/footer";
-import AdSpace from "../../components/ad-space";
-import { useBips } from "../../hooks/use-bips";
-import { useSEO } from "../../hooks/use-seo";
-import { Input } from "../../components/ui/input";
-import { Button } from "../../components/ui/button";
-import { Badge } from "../../components/ui/badge";
+import Navigation from "../components/navigation";
+import Footer from "../components/footer";
+import AdSpace from "../components/ad-space";
+import { useBips } from "../hooks/use-bips";
+import { useSEO } from "../hooks/use-seo";
+import { Input } from "../components/ui/input";
+import { Button } from "../components/ui/button";
+import { Badge } from "../components/ui/badge";
 import { Search, User, FileText } from "lucide-react";
-import { Skeleton } from "../../components/ui/skeleton";
+import { Skeleton } from "../components/ui/skeleton";
 import type { Bip } from "@shared/schema";
 
 interface AuthorSummary {
