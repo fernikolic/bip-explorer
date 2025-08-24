@@ -1,5 +1,5 @@
 export async function onRequest(context) {
-  const { params } = context;
+  const { params, env } = context;
   const bipNumber = parseInt(params.number);
   
   try {
@@ -52,6 +52,19 @@ export async function onRequest(context) {
     }
     
     const bip = parseBipContent(content, bipNumber, filename, githubUrl);
+    
+    // Generate ELI5 explanation using OpenAI if API key is available
+    if (env.OPENAI_API_KEY && bip.abstract) {
+      try {
+        const eli5 = await generateEli5Explanation(bip, env.OPENAI_API_KEY);
+        if (eli5) {
+          bip.eli5 = eli5;
+        }
+      } catch (error) {
+        console.error('Failed to generate ELI5 explanation:', error);
+        // Continue without ELI5 - don't fail the entire request
+      }
+    }
 
     return new Response(JSON.stringify(bip), {
       headers: {
@@ -67,6 +80,41 @@ export async function onRequest(context) {
         'Access-Control-Allow-Origin': '*'
       }
     });
+  }
+}
+
+async function generateEli5Explanation(bip, apiKey) {
+  try {
+    const prompt = `Please explain this Bitcoin Improvement Proposal (BIP) in simple terms that anyone can understand:
+
+Title: ${bip.title}
+Abstract: ${bip.abstract}
+
+Provide a clear, concise explanation (2-3 sentences) of what this BIP does and why it matters, avoiding technical jargon. Focus on the practical impact for Bitcoin users.`;
+
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 150,
+        temperature: 0.7,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`OpenAI API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.choices[0]?.message?.content?.trim();
+  } catch (error) {
+    console.error('OpenAI API call failed:', error);
+    return null;
   }
 }
 
