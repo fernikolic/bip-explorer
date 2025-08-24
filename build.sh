@@ -4,19 +4,23 @@ set -e
 
 echo "Setting production environment..."
 export NODE_ENV=production
+export REPL_ID=""
 
 echo "Installing vite globally for PATH access..."
 npm install -g vite
 
-echo "Building frontend with production config..."
-npx vite build --config vite.prod.config.ts
+echo "Building with npm script (plugins disabled by env vars)..."
+npm run build
 
-echo "Checking build output..."
-if [ -d "dist" ]; then
-  echo "✓ Build output found in dist/"
+echo "Moving build output to correct location..."
+if [ -d "dist/public" ]; then
+  echo "✓ Moving from dist/public to dist/"
+  mv dist/public/* dist/
+  rmdir dist/public
+  echo "✓ Build output now in dist/"
   ls -la dist/
 else
-  echo "❌ No dist directory found"
+  echo "❌ No dist/public directory found"
   exit 1
 fi
 
