@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
-import { Settings, Info, Workflow, CheckCircle, Clock } from "lucide-react";
+import { Clock } from "lucide-react";
 import { useLocation } from "wouter";
 import type { Stats } from "@shared/schema";
 
@@ -61,60 +61,48 @@ export default function CategoriesSection() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Card className="p-6 border border-border hover:shadow-md transition-shadow cursor-pointer" data-testid="card-standards-track">
               <CardContent className="p-0">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="font-semibold text-foreground">Standards Track</h4>
-                    <p className="text-sm text-muted-foreground mt-1">Protocol specifications</p>
-                    <span className="text-2xl font-bold text-purple-600 mt-2 block" data-testid="text-standards-count">
-                      {stats?.standardsTrack || 0}
-                    </span>
-                  </div>
-                  <Settings className="w-8 h-8 text-purple-500" />
+                <div>
+                  <h4 className="font-semibold text-foreground">Standards Track</h4>
+                  <p className="text-sm text-muted-foreground mt-1">Protocol specifications</p>
+                  <span className="text-2xl font-bold text-foreground mt-2 block" data-testid="text-standards-count">
+                    {stats?.standardsTrack || 0}
+                  </span>
                 </div>
               </CardContent>
             </Card>
             
             <Card className="p-6 border border-border hover:shadow-md transition-shadow cursor-pointer" data-testid="card-informational">
               <CardContent className="p-0">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="font-semibold text-foreground">Informational</h4>
-                    <p className="text-sm text-muted-foreground mt-1">Educational content</p>
-                    <span className="text-2xl font-bold text-blue-600 mt-2 block" data-testid="text-informational-count">
-                      {stats?.informational || 0}
-                    </span>
-                  </div>
-                  <Info className="w-8 h-8 text-blue-500" />
+                <div>
+                  <h4 className="font-semibold text-foreground">Informational</h4>
+                  <p className="text-sm text-muted-foreground mt-1">Educational content</p>
+                  <span className="text-2xl font-bold text-foreground mt-2 block" data-testid="text-informational-count">
+                    {stats?.informational || 0}
+                  </span>
                 </div>
               </CardContent>
             </Card>
             
             <Card className="p-6 border border-border hover:shadow-md transition-shadow cursor-pointer" data-testid="card-process">
               <CardContent className="p-0">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="font-semibold text-foreground">Process</h4>
-                    <p className="text-sm text-muted-foreground mt-1">Development procedures</p>
-                    <span className="text-2xl font-bold text-green-600 mt-2 block" data-testid="text-process-count">
-                      {stats?.process || 0}
-                    </span>
-                  </div>
-                  <Workflow className="w-8 h-8 text-green-500" />
+                <div>
+                  <h4 className="font-semibold text-foreground">Process</h4>
+                  <p className="text-sm text-muted-foreground mt-1">Development procedures</p>
+                  <span className="text-2xl font-bold text-foreground mt-2 block" data-testid="text-process-count">
+                    {stats?.process || 0}
+                  </span>
                 </div>
               </CardContent>
             </Card>
             
             <Card className="p-6 border border-border hover:shadow-md transition-shadow cursor-pointer" data-testid="card-final-status">
               <CardContent className="p-0">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="font-semibold text-foreground">Final Status</h4>
-                    <p className="text-sm text-muted-foreground mt-1">Accepted proposals</p>
-                    <span className="text-2xl font-bold text-bitcoin-600 mt-2 block" data-testid="text-final-status-count">
-                      {stats?.finalBips || 0}
-                    </span>
-                  </div>
-                  <CheckCircle className="w-8 h-8 text-bitcoin-500" />
+                <div>
+                  <h4 className="font-semibold text-foreground">Final Status</h4>
+                  <p className="text-sm text-muted-foreground mt-1">Accepted proposals</p>
+                  <span className="text-2xl font-bold text-foreground mt-2 block" data-testid="text-final-status-count">
+                    {stats?.finalBips || 0}
+                  </span>
                 </div>
               </CardContent>
             </Card>
