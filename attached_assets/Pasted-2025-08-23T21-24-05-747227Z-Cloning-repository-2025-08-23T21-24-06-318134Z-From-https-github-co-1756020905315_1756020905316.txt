@@ -1,0 +1,36 @@
+2025-08-23T21:24:05.747227Z	Cloning repository...
+2025-08-23T21:24:06.318134Z	From https://github.com/fernikolic/bip-explorer
+2025-08-23T21:24:06.318801Z	 * branch            3e6d63717d27d5c28623e17911297cbf343bf8d0 -> FETCH_HEAD
+2025-08-23T21:24:06.318929Z	
+2025-08-23T21:24:06.348877Z	HEAD is now at 3e6d637 Add Git command-line tool for managing code repositories
+2025-08-23T21:24:06.349588Z	
+2025-08-23T21:24:06.428735Z	
+2025-08-23T21:24:06.429369Z	Using v2 root directory strategy
+2025-08-23T21:24:06.451985Z	Success: Finished cloning repository files
+2025-08-23T21:24:08.273551Z	Checking for configuration in a Wrangler configuration file (BETA)
+2025-08-23T21:24:08.274702Z	
+2025-08-23T21:24:08.275912Z	Found wrangler.toml file. Reading build configuration...
+2025-08-23T21:24:09.379138Z	A wrangler.toml file was found but it does not appear to be valid. Did you mean to use wrangler.toml to configure Pages? If so, then make sure the file is valid and contains the `pages_build_output_dir` property. Skipping file and continuing.
+2025-08-23T21:24:09.443221Z	Detected the following tools from environment: npm@10.9.2, nodejs@22.16.0
+2025-08-23T21:24:09.443996Z	Installing project dependencies: npm clean-install --progress=false
+2025-08-23T21:24:16.338571Z	
+2025-08-23T21:24:16.3392Z	added 375 packages, and audited 376 packages in 7s
+2025-08-23T21:24:16.339609Z	
+2025-08-23T21:24:16.339712Z	53 packages are looking for funding
+2025-08-23T21:24:16.340174Z	  run `npm fund` for details
+2025-08-23T21:24:16.341332Z	
+2025-08-23T21:24:16.341435Z	3 low severity vulnerabilities
+2025-08-23T21:24:16.341742Z	
+2025-08-23T21:24:16.341822Z	To address all issues, run:
+2025-08-23T21:24:16.342044Z	  npm audit fix
+2025-08-23T21:24:16.342272Z	
+2025-08-23T21:24:16.342426Z	Run `npm audit` for details.
+2025-08-23T21:24:16.370277Z	Executing user command: npm run build
+2025-08-23T21:24:16.746074Z	
+2025-08-23T21:24:16.746352Z	> rest-express@1.0.0 build
+2025-08-23T21:24:16.746509Z	> vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-08-23T21:24:16.746637Z	
+2025-08-23T21:24:16.753997Z	sh: 1: vite: not found
+2025-08-23T21:24:16.762053Z	Failed: Error while executing user command. Exited with error code: 127
+2025-08-23T21:24:16.772588Z	Failed: build command exited with code: 1
+2025-08-23T21:24:18.048629Z	Failed: error occurred while running build command
