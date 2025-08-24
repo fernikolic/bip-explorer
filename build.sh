@@ -13,10 +13,8 @@ if [ -f "postcss.config.js" ]; then
   mv postcss.config.js postcss.config.js.backup
 fi
 
-echo "Building frontend with no config dependencies..."
-cd client
-npx vite build --outDir ../client/dist --emptyOutDir
-cd ..
+echo "Building frontend with minimal config..."
+npx vite build --config vite.minimal.config.js
 
 echo "Restoring config files..."
 if [ -f "vite.config.ts.backup" ]; then
