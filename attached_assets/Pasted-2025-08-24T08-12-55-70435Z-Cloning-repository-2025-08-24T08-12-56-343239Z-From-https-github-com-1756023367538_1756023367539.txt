@@ -1,0 +1,32 @@
+2025-08-24T08:12:55.70435Z	Cloning repository...
+2025-08-24T08:12:56.343239Z	From https://github.com/fernikolic/bip-explorer
+2025-08-24T08:12:56.344076Z	 * branch            cff4d0bc9f643462d86f8fd64a041b27b78c234a -> FETCH_HEAD
+2025-08-24T08:12:56.344226Z	
+2025-08-24T08:12:56.374174Z	HEAD is now at cff4d0b Update build script to prepare for production deployment
+2025-08-24T08:12:56.374554Z	
+2025-08-24T08:12:56.455865Z	
+2025-08-24T08:12:56.456329Z	Using v2 root directory strategy
+2025-08-24T08:12:56.47744Z	Success: Finished cloning repository files
+2025-08-24T08:12:58.238025Z	Checking for configuration in a Wrangler configuration file (BETA)
+2025-08-24T08:12:58.238717Z	
+2025-08-24T08:12:58.240386Z	Found wrangler.toml file. Reading build configuration...
+2025-08-24T08:12:59.354277Z	A wrangler.toml file was found but it does not appear to be valid. Did you mean to use wrangler.toml to configure Pages? If so, then make sure the file is valid and contains the `pages_build_output_dir` property. Skipping file and continuing.
+2025-08-24T08:12:59.420752Z	Detected the following tools from environment: npm@10.9.2, nodejs@22.16.0
+2025-08-24T08:12:59.421465Z	Installing project dependencies: npm clean-install --progress=false
+2025-08-24T08:13:06.404596Z	
+2025-08-24T08:13:06.404869Z	added 375 packages, and audited 376 packages in 7s
+2025-08-24T08:13:06.405071Z	
+2025-08-24T08:13:06.405187Z	53 packages are looking for funding
+2025-08-24T08:13:06.40529Z	  run `npm fund` for details
+2025-08-24T08:13:06.407685Z	
+2025-08-24T08:13:06.407888Z	3 low severity vulnerabilities
+2025-08-24T08:13:06.40804Z	
+2025-08-24T08:13:06.40816Z	To address all issues, run:
+2025-08-24T08:13:06.40828Z	  npm audit fix
+2025-08-24T08:13:06.408453Z	
+2025-08-24T08:13:06.408589Z	Run `npm audit` for details.
+2025-08-24T08:13:06.435367Z	Executing user command: ./build.sh
+2025-08-24T08:13:06.443605Z	/bin/sh: 1: ./build.sh: Permission denied
+2025-08-24T08:13:06.445082Z	Failed: Error while executing user command. Exited with error code: 126
+2025-08-24T08:13:06.457179Z	Failed: build command exited with code: 1
+2025-08-24T08:13:07.899359Z	Failed: error occurred while running build command
