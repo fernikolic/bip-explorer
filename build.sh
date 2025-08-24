@@ -15,11 +15,13 @@ npm install -g vite
 echo "Building with npm run build..."
 npm run build
 
-echo "Moving build output to expected location..."
+echo "Checking build output..."
 if [ -d "dist/public" ]; then
-  mkdir -p client/dist
-  cp -r dist/public/* client/dist/
-  echo "✓ Moved from dist/public to client/dist"
+  echo "✓ Build output found in dist/public"
+  ls -la dist/public/
+else
+  echo "✓ Build output should be in dist/"
+  ls -la dist/ || echo "No dist directory found"
 fi
 
 echo "Restoring configs..."
