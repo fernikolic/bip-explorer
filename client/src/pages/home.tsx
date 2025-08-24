@@ -85,6 +85,11 @@ export default function Home() {
       <main className="max-w-6xl mx-auto px-6 lg:px-8 py-16">
         <StatsOverview />
         
+        {/* Browse by Category and Recent Updates */}
+        <div className="mb-20">
+          <CategoriesSection />
+        </div>
+        
         {/* Billboard Ad */}
         <div className="flex justify-center mb-16">
           <AdSpace size="billboard" />
@@ -166,7 +171,6 @@ export default function Home() {
         </section>
       </main>
 
-      <CategoriesSection />
       <Footer />
     </div>
   );

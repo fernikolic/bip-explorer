@@ -12,8 +12,7 @@ export default function CategoriesSection() {
 
   if (isLoading) {
     return (
-      <aside className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <Skeleton className="h-6 w-48 mb-4" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -48,14 +47,12 @@ export default function CategoriesSection() {
               </div>
             </Card>
           </div>
-        </section>
-      </aside>
+      </section>
     );
   }
 
   return (
-    <aside className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <h3 className="text-lg font-semibold text-foreground mb-4">Browse by Category</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -166,7 +163,6 @@ export default function CategoriesSection() {
             </CardContent>
           </Card>
         </div>
-      </section>
-    </aside>
+    </section>
   );
 }
