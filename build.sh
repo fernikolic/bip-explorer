@@ -5,8 +5,20 @@ set -e
 echo "Setting environment for production..."
 export NODE_ENV=production
 
-echo "Building frontend with production config..."
-npx vite build --config vite.production.config.js
+echo "Temporarily renaming problematic vite config..."
+if [ -f "vite.config.ts" ]; then
+  mv vite.config.ts vite.config.ts.backup
+fi
+
+echo "Building frontend with minimal configuration..."
+cd client
+npx vite build --outDir ../client/dist --emptyOutDir
+cd ..
+
+echo "Restoring vite config..."
+if [ -f "vite.config.ts.backup" ]; then
+  mv vite.config.ts.backup vite.config.ts
+fi
 
 echo "Checking build output..."
 if [ ! -d "client/dist" ]; then
