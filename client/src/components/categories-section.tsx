@@ -3,12 +3,15 @@ import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
 import { Settings, Info, Workflow, CheckCircle, Clock } from "lucide-react";
+import { useLocation } from "wouter";
 import type { Stats } from "@shared/schema";
 
 export default function CategoriesSection() {
   const { data: stats, isLoading } = useQuery<Stats>({
     queryKey: ['/api/stats'],
   });
+  
+  const [, setLocation] = useLocation();
 
   if (isLoading) {
     return (
@@ -157,7 +160,12 @@ export default function CategoriesSection() {
                   </div>
                 </div>
               </div>
-              <Button variant="link" className="w-full mt-4 text-sm text-bitcoin-600 hover:text-bitcoin-700 font-medium p-0" data-testid="button-view-all-updates">
+              <Button 
+                variant="link" 
+                className="w-full mt-4 text-sm text-bitcoin-600 hover:text-bitcoin-700 font-medium p-0" 
+                data-testid="button-view-all-updates"
+                onClick={() => setLocation('/search?sort=created')}
+              >
                 View All Updates
               </Button>
             </CardContent>

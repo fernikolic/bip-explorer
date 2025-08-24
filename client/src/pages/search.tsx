@@ -34,6 +34,7 @@ export default function Search() {
     const urlType = params.get('type');
     const urlStatus = params.get('status');
     const urlSearch = params.get('q');
+    const urlSort = params.get('sort');
     
     if (urlType) {
       setTypeFilter(urlType);
@@ -43,6 +44,9 @@ export default function Search() {
     }
     if (urlSearch) {
       setSearchTerm(urlSearch);
+    }
+    if (urlSort) {
+      setSortBy(urlSort);
     }
   }, [searchParams]);
   
