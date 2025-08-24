@@ -64,19 +64,19 @@ export const useSEO = (seoData: SEOData) => {
     const ogTitle = seoData.ogTitle || seoData.title;
     const ogDescription = seoData.ogDescription || seoData.description;
     const ogType = seoData.ogType || 'website';
+    const ogImage = seoData.ogImage || '/BIP_Explorer_Main_Image.png';
 
     setMetaTag('og:title', ogTitle, true);
     setMetaTag('og:description', ogDescription, true);
     setMetaTag('og:type', ogType, true);
     setMetaTag('og:site_name', 'BIP Explorer', true);
+    setMetaTag('og:image', ogImage, true);
+    setMetaTag('og:image:width', '1920', true);
+    setMetaTag('og:image:height', '1080', true);
+    setMetaTag('og:image:alt', ogTitle, true);
     
     if (seoData.canonicalUrl) {
       setMetaTag('og:url', seoData.canonicalUrl, true);
-    }
-
-    if (seoData.ogImage) {
-      setMetaTag('og:image', seoData.ogImage, true);
-      setMetaTag('og:image:alt', ogTitle, true);
     }
 
     // Twitter Card tags
@@ -84,10 +84,8 @@ export const useSEO = (seoData: SEOData) => {
     setMetaTag('twitter:card', twitterCard);
     setMetaTag('twitter:title', ogTitle);
     setMetaTag('twitter:description', ogDescription);
-    
-    if (seoData.ogImage) {
-      setMetaTag('twitter:image', seoData.ogImage);
-    }
+    setMetaTag('twitter:image', ogImage);
+    setMetaTag('twitter:image:alt', ogTitle);
 
     // Structured Data (JSON-LD)
     if (seoData.structuredData) {
