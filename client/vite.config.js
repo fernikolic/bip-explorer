@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
-import { resolve } from 'path'
+const { resolve } = require('path')
+const { defineConfig } = require('vite')
 
-export default defineConfig({
+module.exports = defineConfig({
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
