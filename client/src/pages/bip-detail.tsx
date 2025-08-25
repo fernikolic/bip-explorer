@@ -1,6 +1,5 @@
 import { useParams, Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { useState, useEffect } from "react";
 import Navigation from "../components/navigation";
 import Footer from "../components/footer";
 import AdSpace from "../components/ad-space";
@@ -15,27 +14,11 @@ import type { Bip } from "@shared/schema";
 
 export default function BipDetail() {
   const { number } = useParams<{ number: string }>();
-  const [isPolling, setIsPolling] = useState(false);
   
-  const { data: bip, isLoading, error, refetch } = useQuery<Bip>({
+  const { data: bip, isLoading, error } = useQuery<Bip>({
     queryKey: ['/api/bips', number],
     enabled: !!number,
-    refetchInterval: isPolling ? 3000 : false, // Poll every 3 seconds when generating ELI5
   });
-
-  // Start polling if BIP exists but has no ELI5
-  useEffect(() => {
-    if (bip && !bip.eli5 && !isPolling) {
-      setIsPolling(true);
-      // Stop polling after 30 seconds max
-      const timeout = setTimeout(() => {
-        setIsPolling(false);
-      }, 30000);
-      return () => clearTimeout(timeout);
-    } else if (bip && bip.eli5 && isPolling) {
-      setIsPolling(false);
-    }
-  }, [bip, isPolling]);
   
   // SEO implementation for individual BIP pages
   useSEO({
@@ -232,19 +215,9 @@ export default function BipDetail() {
                     {bip.eli5}
                   </p>
                 ) : (
-                  <div className="space-y-3">
-                    <div className="animate-pulse">
-                      <div className="h-4 bg-muted rounded w-full mb-2"></div>
-                      <div className="h-4 bg-muted rounded w-5/6 mb-2"></div>
-                      <div className="h-4 bg-muted rounded w-4/6"></div>
-                    </div>
-                    <p className="text-muted-foreground text-sm italic">
-                      {isPolling ? 
-                        "Generating explanation... This may take up to 30 seconds." : 
-                        "Loading explanation..."
-                      }
-                    </p>
-                  </div>
+                  <p className="text-muted-foreground text-base italic">
+                    Explanation is being prepared for this BIP. Please check back soon.
+                  </p>
                 )}
               </CardContent>
             </Card>

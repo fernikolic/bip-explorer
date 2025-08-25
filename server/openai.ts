@@ -1,7 +1,14 @@
 import OpenAI from "openai";
 
 // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+let openai: OpenAI | null = null;
+
+function getOpenAIClient(): OpenAI {
+  if (!openai) {
+    openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  }
+  return openai;
+}
 
 export async function generateELI5(title: string, abstract: string, content: string): Promise<string> {
   // Check if OpenAI API key is configured
@@ -26,7 +33,8 @@ Write a clear, direct explanation that:
 
 Assume the reader understands networking, cryptography basics, and software engineering concepts. No analogies to games or everyday objects. Be direct, factual, and technically accurate. Use proper technical terminology but explain Bitcoin-specific concepts when they first appear. Keep it focused and informative - around 150-180 words.`;
 
-    const response = await openai.chat.completions.create({
+    const client = getOpenAIClient();
+    const response = await client.chat.completions.create({
       model: "gpt-4o",
       messages: [{ role: "user", content: prompt }],
       max_tokens: 300,

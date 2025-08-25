@@ -188,12 +188,53 @@ export async function warmCache() {
       await storage.cacheBips(freshBips);
       await storage.setCacheTimestamp(now);
       console.log(`Cached ${freshBips.length} BIPs`);
+      
+      // After initial cache, run ELI5 generation in background
+      console.log('Starting background ELI5 generation...');
+      generateELI5Background();
     } else {
       console.log(`Using cached data with ${bips.length} BIPs (age: ${Math.round((now - lastCache) / 1000 / 60)} minutes)`);
     }
   } catch (error) {
     console.error('Error warming cache:', error);
     // Don't throw - let the server start even if cache warming fails
+  }
+}
+
+// Background ELI5 generation function
+async function generateELI5Background() {
+  try {
+    const bips = await storage.getBips();
+    const bipsNeedingELI5 = bips.filter(bip => !bip.eli5);
+    
+    if (bipsNeedingELI5.length === 0) {
+      console.log('All BIPs already have ELI5 explanations');
+      return;
+    }
+    
+    console.log(`Found ${bipsNeedingELI5.length} BIPs that need ELI5 explanations`);
+    
+    // Process a few BIPs to start with, then continue in background
+    const initialBatch = bipsNeedingELI5.slice(0, 5);
+    
+    for (const bip of initialBatch) {
+      try {
+        console.log(`Generating ELI5 for BIP ${bip.number}: ${bip.title}`);
+        const eli5 = await generateELI5(bip.title, bip.abstract, bip.content);
+        bip.eli5 = eli5;
+        await storage.updateBip(bip);
+        console.log(`✅ Generated ELI5 for BIP ${bip.number}`);
+        
+        // Small delay to be respectful to the API
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      } catch (error) {
+        console.error(`Failed to generate ELI5 for BIP ${bip.number}:`, error);
+      }
+    }
+    
+    console.log(`Generated ELI5 for ${initialBatch.length} BIPs. Run 'npm run generate-eli5' to complete the rest.`);
+  } catch (error) {
+    console.error('Error in background ELI5 generation:', error);
   }
 }
 
@@ -235,7 +276,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get specific BIP by number with on-demand ELI5 generation
+  // Get specific BIP by number
   app.get("/api/bips/:number", async (req, res) => {
     try {
       const number = parseInt(req.params.number, 10);
@@ -246,22 +287,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const bip = await storage.getBip(number);
       if (!bip) {
         return res.status(404).json({ message: 'BIP not found' });
-      }
-      
-      // Generate ELI5 explanation on-demand if not already present
-      if (!bip.eli5) {
-        try {
-          console.log(`Generating ELI5 for BIP ${number}...`);
-          bip.eli5 = await generateELI5(bip.title, bip.abstract, bip.content);
-          // Update the stored BIP with the new ELI5
-          await storage.updateBip(bip);
-          console.log(`Successfully generated ELI5 for BIP ${number}`);
-        } catch (error) {
-          console.error(`Failed to generate ELI5 for BIP ${number}:`, error);
-          // Provide a fallback ELI5 if OpenAI fails
-          bip.eli5 = `${bip.title} is a Bitcoin Improvement Proposal that ${bip.abstract ? bip.abstract.substring(0, 100) + '...' : 'introduces changes to the Bitcoin protocol'}. This BIP is currently in ${bip.status} status and falls under the ${bip.type} category. For detailed technical specifications, please refer to the full content below.`;
-          await storage.updateBip(bip);
-        }
       }
       
       res.json(bip);
