@@ -63,7 +63,7 @@ export default function BipCard({ bip }: BipCardProps) {
             </div>
             
             <div className="mb-8">
-              <p className="text-muted-foreground text-base lg:text-lg font-light leading-relaxed line-clamp-3" data-testid={`text-bip-abstract-${bip.number}`}>
+              <p className="text-muted-foreground text-base lg:text-lg font-light leading-relaxed" data-testid={`text-bip-abstract-${bip.number}`}>
                 {bip.eli5 || bip.abstract}
               </p>
             </div>

@@ -28,7 +28,8 @@ function generateSimpleELI5(bipNumber: number, title: string, abstract: string):
     174: "This BIP defines Partially Signed Bitcoin Transactions (PSBT), a standard format that allows multiple parties or devices to collaboratively sign transactions. Great for multi-sig and hardware wallets.",
     340: "This is part of the Taproot upgrade, introducing Schnorr signatures to Bitcoin. Schnorr signatures are more efficient and private than the previous ECDSA signatures.",
     341: "This BIP defines Tapscript, the scripting language for Taproot transactions. It makes Bitcoin's smart contract capabilities more powerful while maintaining privacy and efficiency.",
-    342: "This BIP completes the Taproot upgrade by defining how Taproot addresses and transactions work. Taproot makes complex Bitcoin transactions look like simple ones for better privacy."
+    342: "This BIP completes the Taproot upgrade by defining how Taproot addresses and transactions work. Taproot makes complex Bitcoin transactions look like simple ones for better privacy.",
+    431: "This BIP addresses transaction pinning attacks in Bitcoin's mempool. It proposes topology restrictions that prevent attackers from blocking transactions by exploiting mempool policy rules. The goal is to make Bitcoin's fee market more predictable and prevent denial-of-service attacks on the payment system."
   };
 
   // Return predefined explanation if available
@@ -38,10 +39,16 @@ function generateSimpleELI5(bipNumber: number, title: string, abstract: string):
 
   // Generate explanation based on title and abstract
   if (abstract && abstract.length > 50) {
-    // Use first part of abstract if it's substantial
+    // Use the full abstract if it's substantial - no truncation
     const cleanAbstract = abstract.replace(/\n+/g, ' ').trim();
     if (cleanAbstract.length > 100) {
-      return cleanAbstract.substring(0, 300) + (cleanAbstract.length > 300 ? '...' : '');
+      // Check if abstract is truncated (ends with "...")
+      if (cleanAbstract.endsWith('...')) {
+        // Abstract is incomplete, use title-based explanation instead
+        // Fall through to title-based generation below
+      } else {
+        return cleanAbstract; // Return full abstract without truncation
+      }
     }
   }
 
