@@ -64,16 +64,21 @@ export const useSEO = (seoData: SEOData) => {
     const ogTitle = seoData.ogTitle || seoData.title;
     const ogDescription = seoData.ogDescription || seoData.description;
     const ogType = seoData.ogType || 'website';
-    const ogImage = seoData.ogImage || '/BIP_Explorer_Main_Image.png';
+    const ogImage = seoData.ogImage || '/BIP_Explorer_Social_1200x630.png';
+    const twitterImage = seoData.twitterCard === 'summary' ? '/BIP_Explorer_Social_400x400.png' : '/BIP_Explorer_Social_1024x512.png';
 
+    // Open Graph meta tags
     setMetaTag('og:title', ogTitle, true);
     setMetaTag('og:description', ogDescription, true);
     setMetaTag('og:type', ogType, true);
     setMetaTag('og:site_name', 'BIP Explorer', true);
     setMetaTag('og:image', ogImage, true);
-    setMetaTag('og:image:width', '1920', true);
-    setMetaTag('og:image:height', '1080', true);
+    setMetaTag('og:image:secure_url', ogImage, true);
+    setMetaTag('og:image:type', 'image/png', true);
+    setMetaTag('og:image:width', '1200', true);
+    setMetaTag('og:image:height', '630', true);
     setMetaTag('og:image:alt', ogTitle, true);
+    setMetaTag('og:locale', 'en_US', true);
     
     if (seoData.canonicalUrl) {
       setMetaTag('og:url', seoData.canonicalUrl, true);
@@ -82,10 +87,31 @@ export const useSEO = (seoData: SEOData) => {
     // Twitter Card tags
     const twitterCard = seoData.twitterCard || 'summary_large_image';
     setMetaTag('twitter:card', twitterCard);
+    setMetaTag('twitter:site', '@BIPExplorer', false); // Update with actual Twitter handle
+    setMetaTag('twitter:creator', '@BIPExplorer', false); // Update with actual Twitter handle
     setMetaTag('twitter:title', ogTitle);
     setMetaTag('twitter:description', ogDescription);
-    setMetaTag('twitter:image', ogImage);
+    setMetaTag('twitter:image', twitterImage);
     setMetaTag('twitter:image:alt', ogTitle);
+    
+    // Additional Twitter meta tags
+    if (twitterCard === 'summary_large_image') {
+      setMetaTag('twitter:image:width', '1024');
+      setMetaTag('twitter:image:height', '512');
+    } else {
+      setMetaTag('twitter:image:width', '400');
+      setMetaTag('twitter:image:height', '400');
+    }
+
+    // Facebook App ID (if you have one)
+    // setMetaTag('fb:app_id', 'YOUR_FACEBOOK_APP_ID', true);
+    
+    // LinkedIn specific tags
+    setMetaTag('linkedin:owner', 'BIP Explorer', false);
+    
+    // Additional meta tags for better social sharing
+    setMetaTag('article:publisher', 'BIP Explorer', true);
+    setMetaTag('article:author', 'BIP Explorer', true);
 
     // Structured Data (JSON-LD)
     if (seoData.structuredData) {
