@@ -286,11 +286,21 @@ async function parseBipContent(content: string, filename: string): Promise<Bip |
     // Get categories for this BIP using simple mapping
     try {
       const categories = getBipCategories(number);
-      bip.categories = categories.length > 0 ? categories : ['general'];
-      console.log(`BIP ${number} categorized with:`, categories);
+      // Force categories to ensure they exist
+      if (categories && categories.length > 0) {
+        bip.categories = categories;
+      } else {
+        // Assign basic categories based on BIP number ranges
+        if (number <= 2) bip.categories = ['governance'];
+        else if (number <= 50) bip.categories = ['consensus'];
+        else if (number <= 100) bip.categories = ['wallets'];
+        else if (number <= 200) bip.categories = ['transactions'];
+        else bip.categories = ['general'];
+      }
+      console.log(`BIP ${number} categorized with:`, bip.categories);
     } catch (error) {
       console.error(`Error categorizing BIP ${number}:`, error);
-      bip.categories = ['general'];
+      bip.categories = ['debug-error'];
     }
 
     // Validate the BIP object
