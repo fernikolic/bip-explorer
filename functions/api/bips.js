@@ -30,8 +30,44 @@ function getBipCategories(bipNumber) {
     174: ['transactions', 'wallets'], 175: ['payments'], 176: ['transactions'], 178: ['wallets'],
     
     // Modern Features (200+)
-    300: ['contracts'], 310: ['contracts'], 340: ['taproot', 'signatures'], 341: ['taproot', 'scripts'], 
-    342: ['taproot', 'validation'], 343: ['consensus'], 350: ['addresses'], 431: ['consensus', 'security']
+    101: ['consensus'], 102: ['capacity', 'blocks'], 103: ['capacity', 'blocks'], 105: ['capacity', 'consensus'], 
+    109: ['capacity', 'consensus'], 111: ['network'], 112: ['time-locks', 'scripts'], 113: ['sequence', 'consensus'], 
+    114: ['lightning', 'transactions'], 115: ['consensus'], 116: ['consensus'], 117: ['consensus'], 118: ['lightning', 'smart-contracts'], 
+    119: ['lightning', 'scripts'], 120: ['scripts'], 121: ['scripts'], 122: ['standards', 'uri'], 123: ['process'], 
+    124: ['wallets'], 125: ['rbf', 'fees'], 126: ['standards', 'process'], 127: ['wallets'], 128: ['wallets'], 129: ['wallets'],
+    130: ['network'], 132: ['standards', 'process'], 133: ['network'], 134: ['consensus'], 135: ['consensus'], 
+    136: ['transactions'], 137: ['signatures'], 138: ['signatures'], 139: ['signatures'], 140: ['transactions'],
+    
+    // SegWit Era
+    141: ['segwit', 'consensus'], 142: ['segwit', 'addresses'], 143: ['segwit', 'consensus'], 144: ['segwit', 'consensus'],
+    145: ['segwit', 'consensus'], 146: ['consensus'], 147: ['segwit', 'consensus'], 148: ['segwit', 'consensus'],
+    150: ['network'], 151: ['network', 'privacy'], 152: ['network'], 155: ['network'], 156: ['network'], 157: ['network'],
+    173: ['addresses', 'bech32', 'segwit'], 174: ['psbt', 'transactions'], 175: ['payments'], 176: ['transactions'], 
+    178: ['wallets'], 179: ['transactions'], 180: ['blocks'], 197: ['transactions'], 198: ['contracts'], 199: ['contracts'],
+    
+    // Script and Transaction Updates
+    200: ['scripts'], 201: ['scripts'], 202: ['scripts'], 203: ['scripts'], 204: ['scripts'], 
+    210: ['consensus'], 211: ['consensus'], 212: ['consensus'], 213: ['consensus'], 214: ['consensus'],
+    220: ['transactions'], 221: ['transactions'], 270: ['contracts'], 271: ['contracts'], 272: ['contracts'],
+    
+    // Modern Era
+    300: ['contracts'], 301: ['consensus'], 310: ['contracts'], 311: ['contracts'], 312: ['contracts'], 313: ['contracts'],
+    320: ['consensus'], 322: ['payments'], 323: ['payments'], 324: ['consensus'], 325: ['consensus'], 326: ['consensus'],
+    327: ['transactions'], 328: ['wallets'], 329: ['wallets'], 330: ['transactions'], 331: ['transactions'],
+    337: ['transactions'], 338: ['consensus'], 339: ['transactions'],
+    
+    // Taproot Era
+    340: ['taproot', 'schnorr'], 341: ['taproot', 'scripts'], 342: ['taproot', 'signatures'], 343: ['consensus'], 
+    344: ['consensus'], 345: ['consensus'], 346: ['consensus'], 347: ['consensus'], 348: ['consensus'],
+    349: ['wallets'], 350: ['addresses', 'bech32'], 351: ['wallets'], 352: ['bech32', 'addresses'], 353: ['wallets'],
+    354: ['wallets'], 355: ['wallets'], 360: ['consensus'], 361: ['consensus'], 362: ['consensus'], 363: ['consensus'],
+    364: ['consensus'], 365: ['consensus'], 366: ['consensus'], 367: ['consensus'], 368: ['consensus'], 369: ['wallets'],
+    
+    // PSBT and Modern Wallets
+    370: ['psbt', 'transactions'], 371: ['psbt', 'transactions'], 372: ['transactions'], 373: ['wallets'], 374: ['wallets'],
+    375: ['wallets'], 376: ['wallets'], 377: ['wallets'], 378: ['wallets'], 379: ['wallets'], 380: ['encoding'],
+    381: ['encoding'], 382: ['wallets'], 383: ['wallets'], 384: ['wallets'], 385: ['wallets'], 386: ['transactions'],
+    387: ['transactions'], 388: ['wallets'], 389: ['wallets'], 431: ['consensus', 'security']
   };
   
   return bipCategoriesMap[bipNumber] || [];
@@ -59,52 +95,74 @@ export async function onRequest(context) {
     const bipFiles = files.filter(file => file.name.endsWith('.mediawiki'));
     const bips = [];
     
-    // Process first 50 BIPs to avoid timeout (you can increase this or implement pagination)
-    for (const file of bipFiles.slice(0, 50)) {
-      const match = file.name.match(/bip-(\d+)\.mediawiki/);
-      if (!match) continue;
+    // Process BIPs in parallel batches to optimize performance
+    const maxBips = Math.min(bipFiles.length, 300); // Process up to 300 BIPs
+    const filesToProcess = bipFiles.slice(0, maxBips);
+    
+    // Process in batches of 10 to avoid overwhelming the API
+    const batchSize = 10;
+    for (let i = 0; i < filesToProcess.length; i += batchSize) {
+      const batch = filesToProcess.slice(i, i + batchSize);
       
-      const number = parseInt(match[1]);
-      
-      try {
-        // Fetch the actual file content
-        const contentResponse = await fetch(file.download_url, {
-          headers: { 'User-Agent': 'BIP-Explorer' }
-        });
+      const batchPromises = batch.map(async (file) => {
+        const match = file.name.match(/bip-(\d+)\.mediawiki/);
+        if (!match) return null;
         
-        if (contentResponse.ok) {
-          const content = await contentResponse.text();
-          const parsedBip = parseBipContent(content, number, file);
-          if (parsedBip) {
-            bips.push(parsedBip);
+        const number = parseInt(match[1]);
+        
+        try {
+          // Fetch the actual file content with timeout
+          const contentResponse = await Promise.race([
+            fetch(file.download_url, {
+              headers: { 'User-Agent': 'BIP-Explorer' }
+            }),
+            new Promise((_, reject) => 
+              setTimeout(() => reject(new Error('Timeout')), 5000)
+            )
+          ]);
+          
+          if (contentResponse.ok) {
+            const content = await contentResponse.text();
+            const parsedBip = parseBipContent(content, number, file);
+            if (parsedBip) {
+              return parsedBip;
+            }
           }
+        } catch (error) {
+          // Create a basic entry with categories if content fetch fails
+          const categories = getBipCategories(number);
+          const fallbackCategories = categories.length > 0 ? categories : 
+            (number <= 2 ? ['governance'] : 
+             number <= 50 ? ['consensus'] : 
+             number <= 100 ? ['wallets'] : 
+             number <= 200 ? ['transactions'] : ['general']);
+             
+          return {
+            number,
+            title: `BIP ${number}`,
+            authors: ['Unknown'],
+            status: 'Draft',
+            type: 'Standards Track',
+            created: '2009-01-01',
+            abstract: `Bitcoin Improvement Proposal ${number}`,
+            content: '',
+            filename: file.name,
+            githubUrl: file.html_url,
+            layer: 'Consensus',
+            comments: '',
+            categories: fallbackCategories
+          };
         }
-      } catch (error) {
-        // If we can't fetch content, create a basic entry
-        console.log(`Failed to fetch content for ${file.name}:`, error);
-        // Add categories to fallback BIP
-        const categories = getBipCategories(number);
-        const fallbackCategories = categories.length > 0 ? categories : 
-          (number <= 2 ? ['governance'] : 
-           number <= 50 ? ['consensus'] : 
-           number <= 100 ? ['wallets'] : 
-           number <= 200 ? ['transactions'] : ['general']);
-           
-        bips.push({
-          number,
-          title: `BIP ${number}`,
-          authors: ['Unknown'],
-          status: 'Draft',
-          type: 'Standards Track',
-          created: '2009-01-01',
-          abstract: `Bitcoin Improvement Proposal ${number}`,
-          content: '',
-          filename: file.name,
-          githubUrl: file.html_url,
-          layer: 'Consensus',
-          comments: '',
-          categories: fallbackCategories
-        });
+        
+        return null;
+      });
+      
+      const batchResults = await Promise.all(batchPromises);
+      bips.push(...batchResults.filter(Boolean));
+      
+      // Small delay between batches to be respectful to GitHub API
+      if (i + batchSize < filesToProcess.length) {
+        await new Promise(resolve => setTimeout(resolve, 100));
       }
     }
 

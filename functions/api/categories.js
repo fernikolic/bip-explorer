@@ -30,8 +30,44 @@ function getBipCategories(bipNumber) {
     174: ['transactions', 'wallets'], 175: ['payments'], 176: ['transactions'], 178: ['wallets'],
     
     // Modern Features (200+)
-    300: ['contracts'], 310: ['contracts'], 340: ['taproot', 'signatures'], 341: ['taproot', 'scripts'], 
-    342: ['taproot', 'validation'], 343: ['consensus'], 350: ['addresses'], 431: ['consensus', 'security']
+    101: ['consensus'], 102: ['capacity', 'blocks'], 103: ['capacity', 'blocks'], 105: ['capacity', 'consensus'], 
+    109: ['capacity', 'consensus'], 111: ['network'], 112: ['time-locks', 'scripts'], 113: ['sequence', 'consensus'], 
+    114: ['lightning', 'transactions'], 115: ['consensus'], 116: ['consensus'], 117: ['consensus'], 118: ['lightning', 'smart-contracts'], 
+    119: ['lightning', 'scripts'], 120: ['scripts'], 121: ['scripts'], 122: ['standards', 'uri'], 123: ['process'], 
+    124: ['wallets'], 125: ['rbf', 'fees'], 126: ['standards', 'process'], 127: ['wallets'], 128: ['wallets'], 129: ['wallets'],
+    130: ['network'], 132: ['standards', 'process'], 133: ['network'], 134: ['consensus'], 135: ['consensus'], 
+    136: ['transactions'], 137: ['signatures'], 138: ['signatures'], 139: ['signatures'], 140: ['transactions'],
+    
+    // SegWit Era
+    141: ['segwit', 'consensus'], 142: ['segwit', 'addresses'], 143: ['segwit', 'consensus'], 144: ['segwit', 'consensus'],
+    145: ['segwit', 'consensus'], 146: ['consensus'], 147: ['segwit', 'consensus'], 148: ['segwit', 'consensus'],
+    150: ['network'], 151: ['network', 'privacy'], 152: ['network'], 155: ['network'], 156: ['network'], 157: ['network'],
+    173: ['addresses', 'bech32', 'segwit'], 174: ['psbt', 'transactions'], 175: ['payments'], 176: ['transactions'], 
+    178: ['wallets'], 179: ['transactions'], 180: ['blocks'], 197: ['transactions'], 198: ['contracts'], 199: ['contracts'],
+    
+    // Script and Transaction Updates
+    200: ['scripts'], 201: ['scripts'], 202: ['scripts'], 203: ['scripts'], 204: ['scripts'], 
+    210: ['consensus'], 211: ['consensus'], 212: ['consensus'], 213: ['consensus'], 214: ['consensus'],
+    220: ['transactions'], 221: ['transactions'], 270: ['contracts'], 271: ['contracts'], 272: ['contracts'],
+    
+    // Modern Era
+    300: ['contracts'], 301: ['consensus'], 310: ['contracts'], 311: ['contracts'], 312: ['contracts'], 313: ['contracts'],
+    320: ['consensus'], 322: ['payments'], 323: ['payments'], 324: ['consensus'], 325: ['consensus'], 326: ['consensus'],
+    327: ['transactions'], 328: ['wallets'], 329: ['wallets'], 330: ['transactions'], 331: ['transactions'],
+    337: ['transactions'], 338: ['consensus'], 339: ['transactions'],
+    
+    // Taproot Era
+    340: ['taproot', 'schnorr'], 341: ['taproot', 'scripts'], 342: ['taproot', 'signatures'], 343: ['consensus'], 
+    344: ['consensus'], 345: ['consensus'], 346: ['consensus'], 347: ['consensus'], 348: ['consensus'],
+    349: ['wallets'], 350: ['addresses', 'bech32'], 351: ['wallets'], 352: ['bech32', 'addresses'], 353: ['wallets'],
+    354: ['wallets'], 355: ['wallets'], 360: ['consensus'], 361: ['consensus'], 362: ['consensus'], 363: ['consensus'],
+    364: ['consensus'], 365: ['consensus'], 366: ['consensus'], 367: ['consensus'], 368: ['consensus'], 369: ['wallets'],
+    
+    // PSBT and Modern Wallets
+    370: ['psbt', 'transactions'], 371: ['psbt', 'transactions'], 372: ['transactions'], 373: ['wallets'], 374: ['wallets'],
+    375: ['wallets'], 376: ['wallets'], 377: ['wallets'], 378: ['wallets'], 379: ['wallets'], 380: ['encoding'],
+    381: ['encoding'], 382: ['wallets'], 383: ['wallets'], 384: ['wallets'], 385: ['wallets'], 386: ['transactions'],
+    387: ['transactions'], 388: ['wallets'], 389: ['wallets'], 431: ['consensus', 'security']
   };
   
   return bipCategoriesMap[bipNumber] || [];
