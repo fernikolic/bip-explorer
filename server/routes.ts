@@ -3,7 +3,40 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { Bip, bipSchema } from "@shared/schema";
 import { generateELI5 } from "./openai";
-import { getBipCategories } from "@shared/bip-categories-map";
+// Inline BIP categorization to avoid import issues in serverless deployment
+function getBipCategories(bipNumber: number): string[] {
+  const bipCategoriesMap: Record<number, string[]> = {
+    // Process & Governance
+    1: ['governance', 'process', 'foundational'],
+    2: ['governance', 'process', 'foundational'],
+    8: ['activation', 'soft-fork', 'versioning'],
+    9: ['activation', 'soft-fork', 'versioning'],
+    
+    // Transactions & Scripts
+    11: ['transactions', 'multisig', 'scripts'],
+    13: ['addresses', 'p2sh', 'scripts'],
+    16: ['transactions', 'p2sh', 'scripts'],
+    21: ['payments', 'uri', 'usability'],
+    125: ['rbf', 'fees', 'mempool', 'transactions'],
+    
+    // Keys & Wallets
+    32: ['wallets', 'keys', 'hd-wallets', 'derivation'],
+    39: ['wallets', 'mnemonics', 'backup'],
+    43: ['wallets', 'hd-wallets', 'derivation'],
+    44: ['wallets', 'hd-wallets', 'multi-coin', 'derivation'],
+    
+    // Advanced Features
+    141: ['segwit', 'consensus', 'capacity', 'malleability'],
+    173: ['addresses', 'bech32', 'segwit', 'encoding'],
+    174: ['psbt', 'transactions', 'hardware-wallets'],
+    340: ['taproot', 'schnorr', 'signatures', 'privacy'],
+    341: ['taproot', 'scripts', 'smart-contracts'],
+    342: ['taproot', 'signatures', 'validation'],
+    431: ['consensus', 'mempool', 'security']
+  };
+  
+  return bipCategoriesMap[bipNumber] || [];
+}
 
 /**
  * Generate a simple ELI5 explanation for a BIP
