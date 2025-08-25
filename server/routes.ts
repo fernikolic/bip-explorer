@@ -5,48 +5,39 @@ import { Bip, bipSchema } from "@shared/schema";
 import { generateELI5 } from "./openai";
 // Inline BIP categorization to avoid import issues in serverless deployment
 function getBipCategories(bipNumber: number): string[] {
+  // Comprehensive BIP categorization mapping
   const bipCategoriesMap: Record<number, string[]> = {
-    // Process & Governance
-    1: ['governance', 'process'],
-    2: ['governance', 'process'],
-    8: ['activation', 'consensus'],
-    9: ['activation', 'consensus'],
+    // Process & Governance (1-10)
+    1: ['governance', 'process'], 2: ['governance', 'process'], 3: ['process'], 4: ['process'], 5: ['process'],
+    8: ['activation', 'consensus'], 9: ['activation', 'consensus'], 10: ['multisig'],
     
-    // Transactions & Scripts  
-    11: ['transactions', 'multisig'],
-    13: ['addresses', 'scripts'],
-    16: ['transactions', 'scripts'],
-    21: ['payments', 'usability'],
-    125: ['transactions', 'fees'],
+    // Core Protocol (11-50)
+    11: ['transactions', 'multisig'], 12: ['transactions'], 13: ['addresses', 'scripts'], 14: ['network'], 15: ['addresses'],
+    16: ['transactions', 'scripts'], 17: ['transactions'], 18: ['transactions'], 19: ['multisig'], 20: ['payments'],
+    21: ['payments', 'usability'], 22: ['mining', 'rpc'], 23: ['mining', 'rpc'], 30: ['consensus', 'validation'], 31: ['network'],
+    32: ['wallets', 'keys'], 33: ['network'], 34: ['consensus', 'validation'], 35: ['network'], 36: ['network'],
+    37: ['network'], 38: ['process'], 39: ['wallets', 'backup'], 42: ['consensus'], 43: ['wallets', 'derivation'],
+    44: ['wallets', 'derivation'], 45: ['multisig', 'wallets'], 47: ['privacy'], 49: ['wallets', 'derivation'], 50: ['security'],
     
-    // Keys & Wallets
-    32: ['wallets', 'keys'],
-    39: ['wallets', 'backup'],
-    43: ['wallets', 'derivation'],
-    44: ['wallets', 'derivation'],
-    49: ['wallets', 'derivation'],
-    84: ['wallets', 'derivation'],
+    // Extended Features (51-100)
+    60: ['network'], 61: ['network'], 62: ['consensus'], 64: ['network'], 65: ['consensus', 'scripts'],
+    66: ['consensus'], 67: ['wallets', 'multisig'], 68: ['transactions', 'consensus'], 69: ['transactions'], 70: ['payments'],
+    71: ['payments'], 72: ['payments'], 73: ['payments'], 74: ['payments'], 75: ['network'], 80: ['wallets'],
+    81: ['wallets'], 83: ['wallets'], 84: ['wallets', 'derivation'], 85: ['wallets'], 86: ['wallets'], 87: ['wallets'],
     
-    // Advanced Features
-    141: ['segwit', 'consensus'],
-    173: ['addresses', 'encoding'],
-    174: ['transactions', 'wallets'],
-    340: ['taproot', 'signatures'],
-    341: ['taproot', 'scripts'],
-    342: ['taproot', 'validation'],
-    431: ['consensus', 'security'],
+    // Advanced Protocol (101-150)
+    101: ['consensus'], 102: ['consensus'], 103: ['consensus'], 109: ['consensus'], 111: ['network'], 112: ['consensus', 'scripts'],
+    113: ['transactions', 'consensus'], 114: ['scripts'], 115: ['consensus'], 116: ['consensus'], 117: ['consensus'],
+    118: ['scripts'], 119: ['scripts'], 122: ['payments'], 123: ['process'], 125: ['transactions', 'fees'],
     
-    // Network & Mining
-    22: ['mining', 'rpc'],
-    23: ['mining', 'rpc'],
-    30: ['consensus', 'validation'],
-    34: ['consensus', 'validation'],
+    // SegWit Era (141-180)
+    141: ['segwit', 'consensus'], 142: ['segwit', 'addresses'], 143: ['segwit', 'consensus'], 144: ['segwit', 'consensus'],
+    145: ['segwit', 'consensus'], 147: ['segwit', 'consensus'], 148: ['segwit', 'consensus'], 173: ['addresses', 'encoding'],
+    174: ['transactions', 'wallets'], 175: ['payments'], 176: ['transactions'], 178: ['wallets'],
     
-    // Time & Sequence
-    65: ['consensus', 'scripts'],
-    68: ['transactions', 'consensus'],
-    112: ['consensus', 'scripts'],
-    113: ['transactions', 'consensus']
+    // Modern Features (200+)
+    300: ['contracts'], 310: ['contracts'], 340: ['taproot', 'signatures'], 341: ['taproot', 'scripts'], 
+    342: ['taproot', 'validation'], 343: ['consensus'], 350: ['addresses'], 431: ['consensus', 'security']
   };
   
   return bipCategoriesMap[bipNumber] || [];
@@ -280,7 +271,7 @@ async function parseBipContent(content: string, filename: string): Promise<Bip |
       layer: metadata.layer,
       comments: metadata.comments,
       eli5: eli5,
-      categories: [] as string[], // Initialize as empty array
+      categories: ['temp'] as string[], // Initialize with temp value
     };
 
     // Get categories for this BIP using simple mapping
