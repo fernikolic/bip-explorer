@@ -25,7 +25,7 @@ export default function Home() {
     title: 'BIP Explorer - Bitcoin Improvement Proposals Directory',
     description: 'Comprehensive directory of Bitcoin Improvement Proposals (BIPs) with authentic GitHub data, advanced search, and intelligent explanations for technical Bitcoin concepts.',
     keywords: 'Bitcoin, BIP, Bitcoin Improvement Proposals, cryptocurrency, blockchain, technical documentation, Bitcoin development',
-    canonicalUrl: 'https://bip-explorer.com/',
+    canonicalUrl: 'https://bip-explorer.pages.dev/',
     ogType: 'website',
     structuredData: {
       '@context': 'https://schema.org',
@@ -35,7 +35,7 @@ export default function Home() {
       'url': 'https://bip-explorer.com',
       'potentialAction': {
         '@type': 'SearchAction',
-        'target': 'https://bip-explorer.com/search?q={search_term_string}',
+        'target': 'https://bip-explorer.pages.dev/search?q={search_term_string}',
         'query-input': 'required name=search_term_string'
       }
     }

@@ -44,7 +44,7 @@ export default function About() {
     title: 'About BIP Explorer - Bitcoin Improvement Proposals Educational Platform',
     description: 'Learn about BIP Explorer, the comprehensive educational resource for Bitcoin Improvement Proposals featuring authentic GitHub data and intelligent explanations.',
     keywords: 'about BIP Explorer, Bitcoin education, BIP directory platform, Bitcoin improvement proposals guide',
-    canonicalUrl: 'https://bip-explorer.com/about',
+    canonicalUrl: 'https://bip-explorer.pages.dev/about',
     ogType: 'website'
   });
   

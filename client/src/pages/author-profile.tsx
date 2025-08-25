@@ -25,7 +25,7 @@ export default function AuthorProfile() {
     title: author ? `${decodeURIComponent(author)} - Bitcoin Developer Profile` : 'Bitcoin Developer Profile',
     description: author ? `Explore Bitcoin Improvement Proposals by ${decodeURIComponent(author)}, including technical contributions and BIP development history.` : 'Bitcoin developer profile and contribution history',
     keywords: author ? `${decodeURIComponent(author)}, Bitcoin developer, BIP author, Bitcoin contributor` : 'Bitcoin developer, BIP author',
-    canonicalUrl: author ? `https://bip-explorer.com/author/${encodeURIComponent(author)}` : undefined,
+    canonicalUrl: author ? `https://bip-explorer.pages.dev/author/${encodeURIComponent(author)}` : undefined,
     author: author ? decodeURIComponent(author) : undefined,
     ogType: 'profile',
     structuredData: author && bips ? {
@@ -35,7 +35,7 @@ export default function AuthorProfile() {
       'jobTitle': 'Bitcoin Developer',
       'description': `Bitcoin developer who has contributed ${bips.length} improvement proposals`,
       'knowsAbout': ['Bitcoin', 'Cryptocurrency', 'Blockchain Technology'],
-      'url': `https://bip-explorer.com/author/${encodeURIComponent(author)}`
+      'url': `https://bip-explorer.pages.dev/author/${encodeURIComponent(author)}`
     } : undefined
   });
 

@@ -24,7 +24,7 @@ export default function Search() {
     title: 'Search Bitcoin Improvement Proposals - BIP Explorer',
     description: 'Search and filter Bitcoin Improvement Proposals by status, type, author, or content. Find specific BIPs with advanced search capabilities.',
     keywords: 'Bitcoin BIP search, filter BIP proposals, Bitcoin improvement search, BIP directory search',
-    canonicalUrl: 'https://bip-explorer.com/search',
+    canonicalUrl: 'https://bip-explorer.pages.dev/search',
     ogType: 'website'
   });
   

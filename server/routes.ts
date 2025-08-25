@@ -255,9 +255,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
           bip.eli5 = await generateELI5(bip.title, bip.abstract, bip.content);
           // Update the stored BIP with the new ELI5
           await storage.updateBip(bip);
+          console.log(`Successfully generated ELI5 for BIP ${number}`);
         } catch (error) {
           console.error(`Failed to generate ELI5 for BIP ${number}:`, error);
-          // Continue without ELI5 if generation fails
+          // Provide a fallback ELI5 if OpenAI fails
+          bip.eli5 = `${bip.title} is a Bitcoin Improvement Proposal that ${bip.abstract ? bip.abstract.substring(0, 100) + '...' : 'introduces changes to the Bitcoin protocol'}. This BIP is currently in ${bip.status} status and falls under the ${bip.type} category. For detailed technical specifications, please refer to the full content below.`;
+          await storage.updateBip(bip);
         }
       }
       

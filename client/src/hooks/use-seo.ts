@@ -64,8 +64,8 @@ export const useSEO = (seoData: SEOData) => {
     const ogTitle = seoData.ogTitle || seoData.title;
     const ogDescription = seoData.ogDescription || seoData.description;
     const ogType = seoData.ogType || 'website';
-    const ogImage = seoData.ogImage || '/BIP_Explorer_Social_1200x630.png';
-    const twitterImage = seoData.twitterCard === 'summary' ? '/BIP_Explorer_Social_400x400.png' : '/BIP_Explorer_Social_1024x512.png';
+    const ogImage = seoData.ogImage || 'https://bip-explorer.pages.dev/BIP_Explorer_Social_1200x630.png';
+    const twitterImage = seoData.twitterCard === 'summary' ? 'https://bip-explorer.pages.dev/BIP_Explorer_Social_400x400.png' : 'https://bip-explorer.pages.dev/BIP_Explorer_Social_1024x512.png';
 
     // Open Graph meta tags
     setMetaTag('og:title', ogTitle, true);

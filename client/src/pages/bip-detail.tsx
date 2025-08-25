@@ -25,7 +25,7 @@ export default function BipDetail() {
     title: bip ? `BIP ${bip.number}: ${bip.title} - Bitcoin Improvement Proposal` : `BIP ${number} - Bitcoin Improvement Proposal`,
     description: bip ? `${bip.title} - ${bip.eli5?.substring(0, 155) || bip.abstract?.substring(0, 155) || 'Bitcoin Improvement Proposal detailed specification'}...` : `Bitcoin Improvement Proposal ${number} details and technical specification`,
     keywords: bip ? `BIP ${bip.number}, ${bip.title}, Bitcoin improvement, ${bip.type}, ${bip.status}` : `BIP ${number}, Bitcoin improvement proposal`,
-    canonicalUrl: `https://bip-explorer.com/bip/${number}`,
+    canonicalUrl: `https://bip-explorer.pages.dev/bip/${number}`,
     author: bip ? bip.authors.join(', ') : undefined,
     ogType: 'article',
     structuredData: bip ? {
@@ -202,22 +202,33 @@ export default function BipDetail() {
             </div>
 
             {/* ELI5 Explanation */}
-            {bip.eli5 && (
-              <Card className="border-l-4 border-l-bitcoin-500">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <span className="text-bitcoin-600">💡</span>
-                    Executive Summary
-                    <span className="text-xs bg-bitcoin-100 text-bitcoin-700 dark:bg-bitcoin-900/30 dark:text-bitcoin-300 px-2 py-1 rounded-full">CONTEXT</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
+            <Card className="border-l-4 border-l-bitcoin-500">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <span className="text-bitcoin-600">💡</span>
+                  Executive Summary
+                  <span className="text-xs bg-bitcoin-100 text-bitcoin-700 dark:bg-bitcoin-900/30 dark:text-bitcoin-300 px-2 py-1 rounded-full">AI-GENERATED</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {bip.eli5 ? (
                   <p className="text-foreground leading-relaxed text-lg" data-testid="text-eli5">
                     {bip.eli5}
                   </p>
-                </CardContent>
-              </Card>
-            )}
+                ) : (
+                  <div className="space-y-3">
+                    <div className="animate-pulse">
+                      <div className="h-4 bg-muted rounded w-full mb-2"></div>
+                      <div className="h-4 bg-muted rounded w-5/6 mb-2"></div>
+                      <div className="h-4 bg-muted rounded w-4/6"></div>
+                    </div>
+                    <p className="text-muted-foreground text-sm italic">
+                      Generating intelligent explanation... This may take a moment.
+                    </p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
 
             {/* Banner Ad */}
             <div className="flex justify-center my-8">

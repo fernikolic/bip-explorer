@@ -29,7 +29,7 @@ export default function Authors() {
     title: 'BIP Authors & Contributors - Bitcoin Development Community',
     description: 'Explore Bitcoin Improvement Proposal authors and contributors who have shaped Bitcoin\'s evolution through technical specifications.',
     keywords: 'Bitcoin developers, BIP authors, Bitcoin contributors, Bitcoin development community',
-    canonicalUrl: 'https://bip-explorer.com/authors',
+    canonicalUrl: 'https://bip-explorer.pages.dev/authors',
     ogType: 'website'
   });
 
