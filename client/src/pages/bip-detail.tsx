@@ -163,12 +163,12 @@ export default function BipDetail() {
                               const categoryDef = getCategoryDefinition(categoryId);
                               return (
                                 <Link key={categoryId} href={`/category/${categoryId}`}>
-                                  <div className={`inline-flex items-center px-3 py-1 rounded-xl text-xs font-medium transition-all hover:scale-105 cursor-pointer ${
+                                  <div className={`inline-flex items-center px-3 py-1 rounded-xl text-xs font-medium transition-all hover:scale-105 cursor-pointer shadow-sm hover:shadow-md ${
                                     categoryDef 
-                                      ? `bg-gradient-to-r ${categoryDef.color} text-white shadow-sm hover:shadow-md`
+                                      ? `bg-gradient-to-r ${categoryDef.color}/90 hover:${categoryDef.color} text-white backdrop-blur-sm`
                                       : 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
                                   }`}>
-                                    <Tag className="w-3 h-3 mr-1.5" />
+                                    <Tag className="w-3 h-3 mr-1.5 opacity-90" />
                                     {categoryDef ? categoryDef.name : categoryId}
                                   </div>
                                 </Link>
