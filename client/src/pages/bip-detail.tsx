@@ -202,23 +202,23 @@ export default function BipDetail() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
                   {/* Authors Card */}
                   <div className="group relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 rounded-2xl" />
-                    <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl border border-blue-200/50 dark:border-blue-800/50 p-5 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-200">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-slate-50 dark:from-gray-950/30 dark:to-slate-950/30 rounded-2xl" />
+                    <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl border border-gray-200/50 dark:border-gray-700/50 p-5 hover:shadow-lg hover:shadow-gray-500/10 transition-all duration-200">
                       <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-gray-600 to-slate-700 rounded-xl flex items-center justify-center shadow-lg">
                           <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                           </svg>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-1">
+                          <div className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
                             Author{bip.authors.length > 1 ? 's' : ''}
                           </div>
                           <div className="text-foreground font-medium leading-tight" data-testid="text-authors">
                             {bip.authors.map((author, index) => (
                               <span key={author}>
                                 <Link href={`/author/${encodeURIComponent(author)}`}>
-                                  <span className="hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer transition-colors duration-200 underline decoration-transparent hover:decoration-current underline-offset-2">
+                                  <span className="hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer transition-colors duration-200 underline decoration-transparent hover:decoration-current underline-offset-2">
                                     {author}
                                   </span>
                                 </Link>
@@ -235,16 +235,16 @@ export default function BipDetail() {
 
                   {/* Created Date Card */}
                   <div className="group relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 rounded-2xl" />
-                    <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl border border-green-200/50 dark:border-green-800/50 p-5 hover:shadow-lg hover:shadow-green-500/10 transition-all duration-200">
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-gray-50 dark:from-slate-950/30 dark:to-gray-950/30 rounded-2xl" />
+                    <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl border border-slate-200/50 dark:border-slate-700/50 p-5 hover:shadow-lg hover:shadow-slate-500/10 transition-all duration-200">
                       <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-slate-600 to-gray-700 rounded-xl flex items-center justify-center shadow-lg">
                           <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                           </svg>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-sm font-medium text-green-600 dark:text-green-400 mb-1">
+                          <div className="text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">
                             Created
                           </div>
                           <div className="text-foreground font-medium" data-testid="text-created">
@@ -263,19 +263,19 @@ export default function BipDetail() {
                   {bip.layer && (
                     <Link href={`/layer/${encodeURIComponent(bip.layer)}`}>
                       <div className="group relative overflow-hidden cursor-pointer">
-                        <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/30 dark:to-violet-950/30 rounded-2xl" />
-                        <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl border border-purple-200/50 dark:border-purple-800/50 p-5 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-200 hover:-translate-y-0.5">
+                        <div className="absolute inset-0 bg-gradient-to-br from-zinc-50 to-stone-50 dark:from-zinc-950/30 dark:to-stone-950/30 rounded-2xl" />
+                        <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl border border-zinc-200/50 dark:border-zinc-700/50 p-5 hover:shadow-lg hover:shadow-zinc-500/10 transition-all duration-200 hover:-translate-y-0.5">
                           <div className="flex items-start gap-4">
-                            <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                            <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-zinc-600 to-stone-700 rounded-xl flex items-center justify-center shadow-lg">
                               <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                               </svg>
                             </div>
                             <div className="flex-1 min-w-0">
-                              <div className="text-sm font-medium text-purple-600 dark:text-purple-400 mb-1 group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
+                              <div className="text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-1 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
                                 Layer
                               </div>
-                              <div className="text-foreground font-medium group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors" data-testid="text-layer">
+                              <div className="text-foreground font-medium group-hover:text-zinc-700 dark:group-hover:text-zinc-400 transition-colors" data-testid="text-layer">
                                 {bip.layer}
                               </div>
                             </div>
