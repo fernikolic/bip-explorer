@@ -4,7 +4,15 @@ import OpenAI from "openai";
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export async function generateELI5(title: string, abstract: string, content: string): Promise<string> {
+  // Check if OpenAI API key is configured
+  if (!process.env.OPENAI_API_KEY) {
+    console.warn('OpenAI API key not configured, using fallback explanation');
+    return `${title} is a Bitcoin Improvement Proposal that ${abstract ? abstract.substring(0, 200) + '...' : 'introduces changes to the Bitcoin protocol'}. This proposal aims to enhance Bitcoin's functionality and address specific technical challenges. The implementation details and rationale are outlined in the full specification below.`;
+  }
+
   try {
+    console.log(`Starting ELI5 generation for: ${title}`);
+    
     const prompt = `Explain this Bitcoin Improvement Proposal to someone with college-level technical understanding who knows general computer science concepts but isn't familiar with Bitcoin's specific implementation details.
 
 BIP Title: ${title}
@@ -25,9 +33,14 @@ Assume the reader understands networking, cryptography basics, and software engi
       temperature: 0.7,
     });
 
-    return response.choices[0].message.content || "This BIP introduces technical improvements to Bitcoin.";
+    const result = response.choices[0].message.content || "This BIP introduces technical improvements to Bitcoin.";
+    console.log(`Successfully generated ELI5 for: ${title} (${result.length} characters)`);
+    return result;
   } catch (error) {
     console.error('Error generating ELI5 explanation:', error);
-    return "This BIP introduces technical improvements to Bitcoin. More details can be found in the full specification above.";
+    console.error('Error details:', error);
+    
+    // Provide a more informative fallback based on the BIP data
+    return `${title} is a Bitcoin Improvement Proposal that ${abstract ? abstract.substring(0, 200) + '...' : 'introduces changes to the Bitcoin protocol'}. This proposal aims to enhance Bitcoin's functionality and address specific technical challenges. The implementation details and rationale are outlined in the full specification below.`;
   }
 }
