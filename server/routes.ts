@@ -7,32 +7,46 @@ import { generateELI5 } from "./openai";
 function getBipCategories(bipNumber: number): string[] {
   const bipCategoriesMap: Record<number, string[]> = {
     // Process & Governance
-    1: ['governance', 'process', 'foundational'],
-    2: ['governance', 'process', 'foundational'],
-    8: ['activation', 'soft-fork', 'versioning'],
-    9: ['activation', 'soft-fork', 'versioning'],
+    1: ['governance', 'process'],
+    2: ['governance', 'process'],
+    8: ['activation', 'consensus'],
+    9: ['activation', 'consensus'],
     
-    // Transactions & Scripts
-    11: ['transactions', 'multisig', 'scripts'],
-    13: ['addresses', 'p2sh', 'scripts'],
-    16: ['transactions', 'p2sh', 'scripts'],
-    21: ['payments', 'uri', 'usability'],
-    125: ['rbf', 'fees', 'mempool', 'transactions'],
+    // Transactions & Scripts  
+    11: ['transactions', 'multisig'],
+    13: ['addresses', 'scripts'],
+    16: ['transactions', 'scripts'],
+    21: ['payments', 'usability'],
+    125: ['transactions', 'fees'],
     
     // Keys & Wallets
-    32: ['wallets', 'keys', 'hd-wallets', 'derivation'],
-    39: ['wallets', 'mnemonics', 'backup'],
-    43: ['wallets', 'hd-wallets', 'derivation'],
-    44: ['wallets', 'hd-wallets', 'multi-coin', 'derivation'],
+    32: ['wallets', 'keys'],
+    39: ['wallets', 'backup'],
+    43: ['wallets', 'derivation'],
+    44: ['wallets', 'derivation'],
+    49: ['wallets', 'derivation'],
+    84: ['wallets', 'derivation'],
     
     // Advanced Features
-    141: ['segwit', 'consensus', 'capacity', 'malleability'],
-    173: ['addresses', 'bech32', 'segwit', 'encoding'],
-    174: ['psbt', 'transactions', 'hardware-wallets'],
-    340: ['taproot', 'schnorr', 'signatures', 'privacy'],
-    341: ['taproot', 'scripts', 'smart-contracts'],
-    342: ['taproot', 'signatures', 'validation'],
-    431: ['consensus', 'mempool', 'security']
+    141: ['segwit', 'consensus'],
+    173: ['addresses', 'encoding'],
+    174: ['transactions', 'wallets'],
+    340: ['taproot', 'signatures'],
+    341: ['taproot', 'scripts'],
+    342: ['taproot', 'validation'],
+    431: ['consensus', 'security'],
+    
+    // Network & Mining
+    22: ['mining', 'rpc'],
+    23: ['mining', 'rpc'],
+    30: ['consensus', 'validation'],
+    34: ['consensus', 'validation'],
+    
+    // Time & Sequence
+    65: ['consensus', 'scripts'],
+    68: ['transactions', 'consensus'],
+    112: ['consensus', 'scripts'],
+    113: ['transactions', 'consensus']
   };
   
   return bipCategoriesMap[bipNumber] || [];
@@ -270,7 +284,14 @@ async function parseBipContent(content: string, filename: string): Promise<Bip |
     };
 
     // Get categories for this BIP using simple mapping
-    bip.categories = getBipCategories(number);
+    try {
+      const categories = getBipCategories(number);
+      bip.categories = categories.length > 0 ? categories : ['general'];
+      console.log(`BIP ${number} categorized with:`, categories);
+    } catch (error) {
+      console.error(`Error categorizing BIP ${number}:`, error);
+      bip.categories = ['general'];
+    }
 
     // Validate the BIP object
     return bipSchema.parse(bip);
