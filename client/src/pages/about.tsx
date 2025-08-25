@@ -57,10 +57,10 @@ export default function About() {
         <div className="absolute inset-0 bg-gradient-to-r from-bitcoin-500/10 to-bitcoin-600/10" />
         <div className="relative max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-5xl lg:text-7xl font-extralight mb-6 leading-tight tracking-tight text-foreground">
+            <h1 className="text-5xl lg:text-7xl font-extralight mb-6 leading-tight tracking-tight text-white">
               About BIP Explorer
             </h1>
-            <p className="text-xl lg:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl lg:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
               Your comprehensive guide to understanding how Bitcoin evolves through 
               community-driven technical specifications and improvements.
             </p>

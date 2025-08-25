@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { Bip, bipSchema } from "@shared/schema";
 import { generateELI5 } from "./openai";
-import { categorizeBip } from "./categorizer";
+import { getBipCategories } from "@shared/bip-categories-map";
 
 const GITHUB_API_BASE = "https://api.github.com/repos/bitcoin/bips";
 const CACHE_DURATION = 1000 * 60 * 15; // 15 minutes
@@ -166,26 +166,8 @@ async function parseBipContent(content: string, filename: string): Promise<Bip |
       categories: [] as string[], // Initialize as empty array
     };
 
-    // Try to categorize the BIP
-    try {
-      bip.categories = categorizeBip({
-        number,
-        title: metadata.title || 'Unknown Title',
-        authors,
-        status: status,
-        type: metadata.type || 'Standards Track',
-        created: metadata.created || '',
-        abstract: abstract,
-        content: fullContent,
-        filename,
-        githubUrl: `https://github.com/bitcoin/bips/blob/master/${filename}`,
-        layer: metadata.layer,
-        comments: metadata.comments,
-      });
-    } catch (categorizationError) {
-      console.error(`Error categorizing BIP ${number}:`, categorizationError);
-      // Keep empty categories array if categorization fails
-    }
+    // Get categories for this BIP using simple mapping
+    bip.categories = getBipCategories(number);
 
     // Validate the BIP object
     return bipSchema.parse(bip);
