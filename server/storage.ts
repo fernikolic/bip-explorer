@@ -13,5 +13,20 @@ export interface IStorage {
   setCacheTimestamp(timestamp: number): Promise<void>;
 }
 
-// Use FileStorage for persistent caching
-export const storage = new FileStorage();
+// Use FileStorage by default - Firestore is opt-in via USE_FIRESTORE=true
+function createStorage(): IStorage {
+  const useFirestore = process.env.USE_FIRESTORE === 'true';
+
+  if (useFirestore) {
+    console.log('🔥 Firestore mode enabled - make sure Firebase credentials are configured');
+    // Note: Firestore will be imported and initialized when needed
+    // This avoids loading Firebase dependencies when not using Firestore
+  } else {
+    console.log('📁 Using file storage (default)');
+  }
+  
+  return new FileStorage();
+}
+
+// Export singleton instance
+export const storage = createStorage();
