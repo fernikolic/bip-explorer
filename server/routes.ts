@@ -5,6 +5,70 @@ import { Bip, bipSchema } from "@shared/schema";
 import { generateELI5 } from "./openai";
 import { getBipCategories } from "@shared/bip-categories-map";
 
+/**
+ * Generate a simple ELI5 explanation for a BIP
+ */
+function generateSimpleELI5(bipNumber: number, title: string, abstract: string): string {
+  // Predefined explanations for key BIPs
+  const predefinedExplanations: Record<number, string> = {
+    1: "This BIP establishes the process for how Bitcoin improvements are proposed, discussed, and implemented. Think of it as the rulebook for how Bitcoin evolves through community consensus.",
+    2: "This is an updated version of BIP 1 that refined the process for Bitcoin improvements, making it clearer and more organized for developers to contribute to Bitcoin's development.",
+    8: "This BIP introduced a way for Bitcoin to activate soft fork upgrades safely by using version bits in block headers. It's like a voting system where miners signal their readiness for new features.",
+    9: "This extends BIP 8's activation mechanism with additional safety features and timeouts, ensuring that Bitcoin upgrades happen smoothly without forcing anyone.",
+    11: "This BIP enables multi-signature transactions, allowing multiple people to control Bitcoin funds together. For example, requiring 2 out of 3 signatures to spend coins, useful for shared wallets or escrow services.",
+    13: "This BIP introduced Pay-to-Script-Hash (P2SH), which allows for more complex transaction types while keeping Bitcoin addresses simple. It enabled features like multi-sig without cluttering the blockchain.",
+    16: "This extends P2SH to allow for even more complex scripts and transaction types, making Bitcoin more programmable while maintaining security and efficiency.",
+    21: "This BIP standardizes the 'bitcoin:' URI scheme, allowing websites and applications to create clickable Bitcoin payment links that automatically open wallet software with pre-filled payment details.",
+    32: "This BIP introduced Hierarchical Deterministic (HD) wallets, which can generate unlimited Bitcoin addresses from a single seed phrase. This makes wallet backup much simpler and more secure.",
+    39: "This BIP standardizes mnemonic seed phrases - those 12-24 word backup phrases that can recover your entire wallet. It ensures compatibility between different wallet software.",
+    44: "This BIP defines how HD wallets work with multiple cryptocurrencies, allowing one seed phrase to manage Bitcoin, Ethereum, and other coins in separate, organized paths.",
+    125: "This BIP introduces Replace-by-Fee (RBF), allowing users to increase transaction fees after broadcasting a transaction. Useful when network fees spike and you need faster confirmation.",
+    141: "This is Segregated Witness (SegWit), one of Bitcoin's most important upgrades. It separates transaction signatures from transaction data, fixing transaction malleability and increasing block capacity.",
+    173: "This BIP introduced Bech32, a new address format for SegWit transactions. These addresses start with 'bc1' and are more efficient, have better error detection, and lower fees.",
+    174: "This BIP defines Partially Signed Bitcoin Transactions (PSBT), a standard format that allows multiple parties or devices to collaboratively sign transactions. Great for multi-sig and hardware wallets.",
+    340: "This is part of the Taproot upgrade, introducing Schnorr signatures to Bitcoin. Schnorr signatures are more efficient and private than the previous ECDSA signatures.",
+    341: "This BIP defines Tapscript, the scripting language for Taproot transactions. It makes Bitcoin's smart contract capabilities more powerful while maintaining privacy and efficiency.",
+    342: "This BIP completes the Taproot upgrade by defining how Taproot addresses and transactions work. Taproot makes complex Bitcoin transactions look like simple ones for better privacy."
+  };
+
+  // Return predefined explanation if available
+  if (predefinedExplanations[bipNumber]) {
+    return predefinedExplanations[bipNumber];
+  }
+
+  // Generate explanation based on title and abstract
+  if (abstract && abstract.length > 50) {
+    // Use first part of abstract if it's substantial
+    const cleanAbstract = abstract.replace(/\n+/g, ' ').trim();
+    if (cleanAbstract.length > 100) {
+      return cleanAbstract.substring(0, 300) + (cleanAbstract.length > 300 ? '...' : '');
+    }
+  }
+
+  // Generate basic explanation based on title
+  const titleLower = title.toLowerCase();
+  if (titleLower.includes('wallet') || titleLower.includes('key')) {
+    return `This BIP deals with Bitcoin wallet functionality and key management. It defines standards or improvements for how Bitcoin wallets handle private keys, addresses, or user interactions.`;
+  } else if (titleLower.includes('transaction') || titleLower.includes('tx')) {
+    return `This BIP focuses on Bitcoin transaction functionality, defining how transactions are created, validated, or processed on the Bitcoin network.`;
+  } else if (titleLower.includes('script') || titleLower.includes('opcode')) {
+    return `This BIP relates to Bitcoin's scripting language, defining new script operations or improving how Bitcoin validates and executes transaction scripts.`;
+  } else if (titleLower.includes('address') || titleLower.includes('encoding')) {
+    return `This BIP deals with Bitcoin address formats or data encoding standards, making Bitcoin addresses more efficient, secure, or user-friendly.`;
+  } else if (titleLower.includes('signature') || titleLower.includes('signing')) {
+    return `This BIP focuses on Bitcoin's digital signature methods, improving how transactions are signed and verified for security and efficiency.`;
+  } else if (titleLower.includes('consensus') || titleLower.includes('fork')) {
+    return `This BIP involves Bitcoin's consensus rules - the fundamental rules that all Bitcoin nodes must agree on for the network to function properly.`;
+  } else if (titleLower.includes('network') || titleLower.includes('peer') || titleLower.includes('p2p')) {
+    return `This BIP deals with Bitcoin's peer-to-peer network protocol, improving how Bitcoin nodes communicate and share information.`;
+  } else if (titleLower.includes('payment') || titleLower.includes('uri')) {
+    return `This BIP focuses on Bitcoin payment protocols or standards, making it easier for users and applications to handle Bitcoin payments.`;
+  }
+
+  // Generic fallback
+  return `This Bitcoin Improvement Proposal introduces changes to enhance Bitcoin's functionality, security, or usability. The technical details and implementation are specified in the full BIP documentation.`;
+}
+
 const GITHUB_API_BASE = "https://api.github.com/repos/bitcoin/bips";
 const CACHE_DURATION = 1000 * 60 * 15; // 15 minutes
 
@@ -144,9 +208,8 @@ async function parseBipContent(content: string, filename: string): Promise<Bip |
     else if (status.includes('Replaced')) status = 'Replaced';
     else if (status.includes('Deferred')) status = 'Deferred';
 
-    // Skip ELI5 generation during initial load to avoid rate limits
-    // ELI5 will be generated on-demand when viewing individual BIPs
-    const eli5 = undefined;
+    // Generate simple ELI5 explanation based on BIP content
+    const eli5 = generateSimpleELI5(number, metadata.title || 'Unknown Title', abstract);
 
     // Create BIP object
     const bip: Bip = {

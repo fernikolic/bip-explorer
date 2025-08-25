@@ -68,42 +68,70 @@ export default function BipCard({ bip }: BipCardProps) {
               </p>
             </div>
             
-            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4 text-sm text-gray-500">
-              <div className="flex items-center gap-2 min-w-0">
-                <User className="w-4 h-4 flex-shrink-0" />
-                <span className="truncate" data-testid={`text-authors-${bip.number}`}>
-                  {bip.authors.slice(0, 2).map((author, index) => (
-                    <span key={author}>
-                      <Link href={`/author/${encodeURIComponent(author)}`}>
-                        <span className="text-bitcoin-600 hover:text-bitcoin-700 font-medium cursor-pointer transition-apple">
-                          {author}
-                        </span>
-                      </Link>
-                      {index < Math.min(bip.authors.length, 2) - 1 && ', '}
-                    </span>
-                  ))}
-                  {bip.authors.length > 2 && (
-                    <span className="text-gray-400"> +{bip.authors.length - 2} more</span>
-                  )}
-                </span>
+            {/* Modern Apple-inspired metadata section */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              {/* Author Card */}
+              <div className="group flex items-center gap-3 bg-gray-50/60 dark:bg-gray-900/30 backdrop-blur-sm rounded-xl px-4 py-3 hover:bg-gray-100/60 dark:hover:bg-gray-800/40 transition-all duration-200 flex-1 sm:flex-initial">
+                <div className="w-8 h-8 bg-gradient-to-br from-gray-500 to-gray-600 rounded-lg flex items-center justify-center shadow-sm">
+                  <User className="w-4 h-4 text-white" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">
+                    Author
+                  </div>
+                  <div className="truncate" data-testid={`text-authors-${bip.number}`}>
+                    {bip.authors.slice(0, 2).map((author, index) => (
+                      <span key={author}>
+                        <Link href={`/author/${encodeURIComponent(author)}`}>
+                          <span className="text-gray-700 dark:text-gray-300 hover:text-bitcoin-600 dark:hover:text-bitcoin-400 font-medium cursor-pointer transition-colors text-sm">
+                            {author}
+                          </span>
+                        </Link>
+                        {index < Math.min(bip.authors.length, 2) - 1 && ', '}
+                      </span>
+                    ))}
+                    {bip.authors.length > 2 && (
+                      <span className="text-gray-400 dark:text-gray-500 text-sm"> +{bip.authors.length - 2}</span>
+                    )}
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 flex-shrink-0" />
-                <span className="whitespace-nowrap" data-testid={`text-created-${bip.number}`}>{bip.created}</span>
+
+              {/* Date Card */}
+              <div className="flex items-center gap-3 bg-gray-50/60 dark:bg-gray-900/30 backdrop-blur-sm rounded-xl px-4 py-3 hover:bg-gray-100/60 dark:hover:bg-gray-800/40 transition-all duration-200 flex-1 sm:flex-initial">
+                <div className="w-8 h-8 bg-gradient-to-br from-slate-500 to-slate-600 rounded-lg flex items-center justify-center shadow-sm">
+                  <Calendar className="w-4 h-4 text-white" />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">
+                    Created
+                  </div>
+                  <div className="text-gray-700 dark:text-gray-300 font-medium text-sm whitespace-nowrap" data-testid={`text-created-${bip.number}`}>
+                    {bip.created}
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <i className="fab fa-github flex-shrink-0"></i>
-                <a 
-                  href={bip.githubUrl} 
-                  className="text-bitcoin-600 hover:text-bitcoin-700 flex items-center gap-1 font-medium transition-apple whitespace-nowrap" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-testid={`link-github-${bip.number}`}
-                >
-                  View Source
-                  <ExternalLink className="w-3 h-3 flex-shrink-0" />
-                </a>
-              </div>
+
+              {/* View Source Card */}
+              <a 
+                href={bip.githubUrl} 
+                className="group flex items-center gap-3 bg-bitcoin-50/60 dark:bg-bitcoin-950/20 backdrop-blur-sm rounded-xl px-4 py-3 hover:bg-bitcoin-100/80 dark:hover:bg-bitcoin-900/30 transition-all duration-200 flex-1 sm:flex-initial" 
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid={`link-github-${bip.number}`}
+              >
+                <div className="w-8 h-8 bg-gradient-to-br from-bitcoin-500 to-bitcoin-600 rounded-lg flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all duration-200">
+                  <ExternalLink className="w-4 h-4 text-white" />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-xs font-medium text-bitcoin-600/70 dark:text-bitcoin-400/70 uppercase tracking-wider mb-0.5 group-hover:text-bitcoin-600 dark:group-hover:text-bitcoin-400 transition-colors">
+                    GitHub
+                  </div>
+                  <div className="text-bitcoin-700 dark:text-bitcoin-300 font-medium text-sm whitespace-nowrap group-hover:text-bitcoin-800 dark:group-hover:text-bitcoin-200 transition-colors">
+                    View Source
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
