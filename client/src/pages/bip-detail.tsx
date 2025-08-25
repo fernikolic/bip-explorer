@@ -117,149 +117,269 @@ export default function BipDetail() {
             </Card>
           </div>
         ) : bip ? (
-          <div className="space-y-6">
-            {/* Header */}
-            <div className="bg-card rounded-lg border border-border p-6">
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-4 mb-2">
-                    <div className="w-16 h-16 bg-bitcoin-100 dark:bg-bitcoin-900/30 rounded-lg flex items-center justify-center">
-                      <span className="text-bitcoin-700 dark:text-bitcoin-300 font-bold text-xl" data-testid="text-bip-number">
-                        {bip.number}
-                      </span>
-                    </div>
-                    <div>
-                      <h1 className="text-2xl font-bold text-foreground" data-testid="text-bip-title">
-                        {bip.title}
-                      </h1>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        <Badge className={getStatusColor(bip.status)} data-testid="badge-status">
-                          {bip.status}
-                        </Badge>
-                        <Badge className={getTypeColor(bip.type)} data-testid="badge-type">
-                          {bip.type}
-                        </Badge>
+          <div className="space-y-8">
+            {/* Modern Hero Header */}
+            <div className="relative overflow-hidden">
+              {/* Background gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-bitcoin-50/80 via-white to-bitcoin-50/60 dark:from-bitcoin-950/40 dark:via-background dark:to-bitcoin-950/20" />
+              
+              <div className="relative bg-white/80 dark:bg-background/80 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-bitcoin-500/5">
+                <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+                  <div className="flex-1">
+                    {/* BIP Number and Title */}
+                    <div className="flex items-start gap-6 mb-6">
+                      <div className="relative">
+                        <div className="w-20 h-20 bg-gradient-to-br from-bitcoin-400 to-bitcoin-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-bitcoin-500/20">
+                          <span className="text-white font-bold text-2xl tracking-tight" data-testid="text-bip-number">
+                            {bip.number}
+                          </span>
+                        </div>
+                        <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-green-400 to-green-500 rounded-full flex items-center justify-center shadow-lg">
+                          <div className="w-2 h-2 bg-white rounded-full" />
+                        </div>
+                      </div>
+                      
+                      <div className="flex-1 min-w-0">
+                        <h1 className="text-3xl lg:text-4xl font-bold text-foreground leading-tight mb-4" data-testid="text-bip-title">
+                          {bip.title}
+                        </h1>
+                        
+                        {/* Modern Status Badges */}
+                        <div className="flex flex-wrap gap-3">
+                          <div className={`inline-flex items-center px-4 py-2 rounded-2xl font-medium text-sm shadow-lg backdrop-blur-sm ${getStatusColor(bip.status)}`} data-testid="badge-status">
+                            <div className="w-2 h-2 rounded-full bg-current mr-2 opacity-70" />
+                            {bip.status}
+                          </div>
+                          <div className={`inline-flex items-center px-4 py-2 rounded-2xl font-medium text-sm shadow-lg backdrop-blur-sm ${getTypeColor(bip.type)}`} data-testid="badge-type">
+                            {bip.type}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  
+                  {/* GitHub Link */}
+                  <a
+                    href={bip.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 px-6 py-3 bg-white/60 dark:bg-gray-800/60 backdrop-blur-xl hover:bg-white/80 dark:hover:bg-gray-800/80 border border-border/50 rounded-2xl font-medium text-foreground transition-all duration-200 hover:shadow-lg hover:scale-[1.02] group"
+                    data-testid="link-github"
+                  >
+                    <ExternalLink className="w-5 h-5 group-hover:rotate-12 transition-transform duration-200" />
+                    View on GitHub
+                  </a>
                 </div>
-                
-                <a
-                  href={bip.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-bitcoin-600 hover:text-bitcoin-700"
-                  data-testid="link-github"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  View on GitHub
-                </a>
-              </div>
 
-              {/* Metadata */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                <div className="flex items-center gap-2">
-                  <User className="w-4 h-4 text-muted-foreground" />
-                  <div>
-                    <span className="text-muted-foreground">Authors:</span>
-                    <div className="font-medium" data-testid="text-authors">
-                      {bip.authors.map((author, index) => (
-                        <span key={author}>
-                          <Link href={`/author/${encodeURIComponent(author)}`}>
-                            <span className="text-bitcoin-600 hover:text-bitcoin-700 cursor-pointer">
-                              {author}
-                            </span>
-                          </Link>
-                          {index < bip.authors.length - 1 && ', '}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-muted-foreground" />
-                  <div>
-                    <span className="text-muted-foreground">Created:</span>
-                    <div className="font-medium" data-testid="text-created">
-                      {bip.created}
-                    </div>
-                  </div>
-                </div>
-                
-                {bip.layer && (
-                  <div className="flex items-center gap-2">
-                    <Tag className="w-4 h-4 text-muted-foreground" />
-                    <div>
-                      <span className="text-muted-foreground">Layer:</span>
-                      <div className="font-medium" data-testid="text-layer">
-                        {bip.layer}
+                {/* Modern Metadata Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+                  {/* Authors Card */}
+                  <div className="group relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 rounded-2xl" />
+                    <div className="relative bg-white/70 dark:bg-background/70 backdrop-blur-xl rounded-2xl border border-blue-200/50 dark:border-blue-800/50 p-5 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-200">
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                          </svg>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-1">
+                            Author{bip.authors.length > 1 ? 's' : ''}
+                          </div>
+                          <div className="text-foreground font-medium leading-tight" data-testid="text-authors">
+                            {bip.authors.map((author, index) => (
+                              <span key={author}>
+                                <Link href={`/author/${encodeURIComponent(author)}`}>
+                                  <span className="hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer transition-colors duration-200 underline decoration-transparent hover:decoration-current underline-offset-2">
+                                    {author}
+                                  </span>
+                                </Link>
+                                {index < bip.authors.length - 1 && (
+                                  <span className="text-muted-foreground mx-1">•</span>
+                                )}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                )}
+
+                  {/* Created Date Card */}
+                  <div className="group relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 rounded-2xl" />
+                    <div className="relative bg-white/70 dark:bg-background/70 backdrop-blur-xl rounded-2xl border border-green-200/50 dark:border-green-800/50 p-5 hover:shadow-lg hover:shadow-green-500/10 transition-all duration-200">
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
+                          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium text-green-600 dark:text-green-400 mb-1">
+                            Created
+                          </div>
+                          <div className="text-foreground font-medium" data-testid="text-created">
+                            {new Date(bip.created).toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric'
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Layer Card (if available) */}
+                  {bip.layer && (
+                    <div className="group relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/30 dark:to-violet-950/30 rounded-2xl" />
+                      <div className="relative bg-white/70 dark:bg-background/70 backdrop-blur-xl rounded-2xl border border-purple-200/50 dark:border-purple-800/50 p-5 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-200">
+                        <div className="flex items-start gap-4">
+                          <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                            </svg>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="text-sm font-medium text-purple-600 dark:text-purple-400 mb-1">
+                              Layer
+                            </div>
+                            <div className="text-foreground font-medium" data-testid="text-layer">
+                              {bip.layer}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
-            {/* ELI5 Explanation */}
-            <Card className="border-l-4 border-l-bitcoin-500">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <span className="text-bitcoin-600">💡</span>
-                  Explained in simple terms
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {bip.eli5 ? (
-                  <p className="text-foreground leading-relaxed text-lg" data-testid="text-eli5">
-                    {bip.eli5}
-                  </p>
-                ) : (
-                  <p className="text-muted-foreground text-base italic">
-                    Explanation is being prepared for this BIP. Please check back soon.
-                  </p>
-                )}
-              </CardContent>
-            </Card>
+            {/* Modern ELI5 Explanation */}
+            <div className="relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-bitcoin-50/60 via-orange-50/40 to-yellow-50/60 dark:from-bitcoin-950/20 dark:via-orange-950/10 dark:to-yellow-950/20 rounded-3xl" />
+              
+              <div className="relative bg-white/90 dark:bg-background/90 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-bitcoin-500/5">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-bitcoin-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-xl shadow-bitcoin-500/20">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h2 className="text-2xl font-bold text-foreground mb-2">
+                      Explained in simple terms
+                    </h2>
+                    <div className="text-sm text-muted-foreground">
+                      A clear, technical explanation without the jargon
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="pl-16">
+                  {bip.eli5 ? (
+                    <div className="prose prose-lg max-w-none text-foreground leading-relaxed" data-testid="text-eli5">
+                      <p className="text-lg font-medium leading-relaxed">
+                        {bip.eli5}
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 rounded-2xl border border-amber-200/50 dark:border-amber-800/50">
+                      <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <p className="text-amber-700 dark:text-amber-300 font-medium">
+                        Explanation is being prepared for this BIP. Please check back soon.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
 
             {/* Banner Ad */}
             <div className="flex justify-center my-8">
               <AdSpace size="banner" />
             </div>
 
-            {/* Abstract */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Technical Abstract</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-foreground leading-relaxed" data-testid="text-abstract">
-                  {bip.abstract}
-                </p>
-              </CardContent>
-            </Card>
+            {/* Modern Abstract */}
+            <div className="relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-50/80 via-gray-50/60 to-zinc-50/80 dark:from-slate-950/30 dark:via-gray-950/20 dark:to-zinc-950/30 rounded-3xl" />
+              
+              <div className="relative bg-white/90 dark:bg-background/90 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-slate-500/5">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-slate-500 to-zinc-600 rounded-2xl flex items-center justify-center shadow-xl shadow-slate-500/20">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h2 className="text-2xl font-bold text-foreground mb-2">
+                      Technical Abstract
+                    </h2>
+                    <div className="text-sm text-muted-foreground">
+                      The formal technical summary of this proposal
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="pl-16">
+                  <div className="prose prose-lg max-w-none text-foreground leading-relaxed" data-testid="text-abstract">
+                    <p className="text-base font-medium leading-relaxed">
+                      {bip.abstract}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             {/* Rectangle Ad */}
             <div className="flex justify-center my-8">
               <AdSpace size="rectangle" />
             </div>
 
-            {/* Full Content */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Specification</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div 
-                  className="prose prose-sm max-w-none text-foreground"
-                  data-testid="text-content"
-                >
-                  <pre className="whitespace-pre-wrap font-mono text-sm bg-muted p-4 rounded border border-border overflow-x-auto text-foreground">
-                    {bip.content}
-                  </pre>
+            {/* Modern Specification */}
+            <div className="relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-50/80 via-slate-50/60 to-gray-50/80 dark:from-gray-950/30 dark:via-slate-950/20 dark:to-gray-950/30 rounded-3xl" />
+              
+              <div className="relative bg-white/90 dark:bg-background/90 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-gray-500/5">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-gray-600 to-slate-700 rounded-2xl flex items-center justify-center shadow-xl shadow-gray-500/20">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h2 className="text-2xl font-bold text-foreground mb-2">
+                      Full Specification
+                    </h2>
+                    <div className="text-sm text-muted-foreground">
+                      Complete technical documentation and implementation details
+                    </div>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+                
+                <div className="pl-16">
+                  <div 
+                    className="prose prose-sm max-w-none text-foreground"
+                    data-testid="text-content"
+                  >
+                    <div className="relative overflow-hidden rounded-2xl">
+                      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-gray-900 to-zinc-900 dark:from-slate-800 dark:via-gray-800 dark:to-zinc-800" />
+                      <pre className="relative whitespace-pre-wrap font-mono text-sm bg-slate-950/90 dark:bg-slate-900/90 backdrop-blur-sm text-slate-100 dark:text-slate-200 p-6 rounded-2xl overflow-x-auto border border-slate-700/50 shadow-2xl shadow-slate-900/20">
+                        {bip.content}
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             {/* Bottom Banner Ad */}
             <div className="flex justify-center mt-8">
