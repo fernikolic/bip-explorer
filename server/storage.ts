@@ -19,13 +19,13 @@ function createStorage(): IStorage {
 
   if (useFirestore) {
     console.log('🔥 Firestore mode enabled - make sure Firebase credentials are configured');
-    // Note: Firestore will be imported and initialized when needed
-    // This avoids loading Firebase dependencies when not using Firestore
+    // Dynamically import Firestore to avoid loading dependencies when not needed
+    const { FirestoreStorage } = require('./firestore-storage');
+    return new FirestoreStorage();
   } else {
     console.log('📁 Using file storage (default)');
+    return new FileStorage();
   }
-  
-  return new FileStorage();
 }
 
 // Export singleton instance
