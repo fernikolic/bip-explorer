@@ -55,6 +55,7 @@ export default function CategoriesPage() {
 
   const totalBipsWithCategories = bips?.filter(bip => bip.categories && bip.categories.length > 0).length || 0;
   const totalCategoriesWithBips = categoryStats.size; // Only count categories that have BIPs
+  const hasAnyCategories = totalCategoriesWithBips > 0;
 
   return (
     <div className="min-h-screen bg-background">
@@ -173,6 +174,32 @@ export default function CategoriesPage() {
                   </div>
                 </div>
               ))}
+            </div>
+          ) : !hasAnyCategories ? (
+            <div className="text-center py-16">
+              <div className="max-w-md mx-auto">
+                <Grid3X3 className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-foreground mb-2">
+                  Categories Loading...
+                </h3>
+                <p className="text-muted-foreground mb-6">
+                  The BIP categorization system is initializing. This may take a moment on first load.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Button 
+                    onClick={() => window.location.reload()} 
+                    variant="outline"
+                  >
+                    Refresh Page
+                  </Button>
+                  <Link href="/">
+                    <Button variant="default">
+                      <ArrowLeft className="w-4 h-4 mr-2" />
+                      Back to Home
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             </div>
           ) : (
             categoryGroups.map((group) => {

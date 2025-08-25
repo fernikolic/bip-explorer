@@ -163,7 +163,12 @@ async function parseBipContent(content: string, filename: string): Promise<Bip |
       layer: metadata.layer,
       comments: metadata.comments,
       eli5: eli5,
-      categories: categorizeBip({
+      categories: [] as string[], // Initialize as empty array
+    };
+
+    // Try to categorize the BIP
+    try {
+      bip.categories = categorizeBip({
         number,
         title: metadata.title || 'Unknown Title',
         authors,
@@ -176,8 +181,11 @@ async function parseBipContent(content: string, filename: string): Promise<Bip |
         githubUrl: `https://github.com/bitcoin/bips/blob/master/${filename}`,
         layer: metadata.layer,
         comments: metadata.comments,
-      }),
-    };
+      });
+    } catch (categorizationError) {
+      console.error(`Error categorizing BIP ${number}:`, categorizationError);
+      // Keep empty categories array if categorization fails
+    }
 
     // Validate the BIP object
     return bipSchema.parse(bip);
