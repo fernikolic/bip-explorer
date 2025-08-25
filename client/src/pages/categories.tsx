@@ -54,7 +54,7 @@ export default function CategoriesPage() {
     .filter(item => item.definition);
 
   const totalBipsWithCategories = bips?.filter(bip => bip.categories && bip.categories.length > 0).length || 0;
-  const totalCategories = Object.keys(categoryDefinitions).length;
+  const totalCategoriesWithBips = categoryStats.size; // Only count categories that have BIPs
 
   return (
     <div className="min-h-screen bg-background">
@@ -89,7 +89,7 @@ export default function CategoriesPage() {
                 {/* Stats */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="bg-white/60 dark:bg-background/60 backdrop-blur-sm rounded-xl p-4 border border-border/50">
-                    <div className="text-2xl font-bold text-foreground">{totalCategories}</div>
+                    <div className="text-2xl font-bold text-foreground">{totalCategoriesWithBips}</div>
                     <div className="text-sm text-muted-foreground">Categories</div>
                   </div>
                   <div className="bg-white/60 dark:bg-background/60 backdrop-blur-sm rounded-xl p-4 border border-border/50">
@@ -182,6 +182,7 @@ export default function CategoriesPage() {
                   ...cat,
                   count: categoryStats.get(cat.id) || 0
                 }))
+                .filter(cat => cat.count > 0) // Only show categories with BIPs
                 .sort((a, b) => b.count - a.count);
 
               if (categoriesWithCounts.length === 0) return null;
@@ -210,11 +211,9 @@ export default function CategoriesPage() {
                                   {category.description}
                                 </p>
                               </div>
-                              {category.count > 0 && (
-                                <Badge variant="secondary" className="text-xs font-medium">
-                                  {category.count}
-                                </Badge>
-                              )}
+                              <Badge variant="secondary" className="text-xs font-medium">
+                                {category.count}
+                              </Badge>
                             </div>
                           </CardContent>
                         </Card>
