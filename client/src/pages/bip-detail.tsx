@@ -203,7 +203,7 @@ export default function BipDetail() {
                   {/* Authors Card */}
                   <div className="group relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 rounded-2xl" />
-                    <div className="relative bg-white/70 dark:bg-background/70 backdrop-blur-xl rounded-2xl border border-blue-200/50 dark:border-blue-800/50 p-5 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-200">
+                    <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl border border-blue-200/50 dark:border-blue-800/50 p-5 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-200">
                       <div className="flex items-start gap-4">
                         <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
                           <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -236,7 +236,7 @@ export default function BipDetail() {
                   {/* Created Date Card */}
                   <div className="group relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 rounded-2xl" />
-                    <div className="relative bg-white/70 dark:bg-background/70 backdrop-blur-xl rounded-2xl border border-green-200/50 dark:border-green-800/50 p-5 hover:shadow-lg hover:shadow-green-500/10 transition-all duration-200">
+                    <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl border border-green-200/50 dark:border-green-800/50 p-5 hover:shadow-lg hover:shadow-green-500/10 transition-all duration-200">
                       <div className="flex items-start gap-4">
                         <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
                           <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -261,26 +261,28 @@ export default function BipDetail() {
                   
                   {/* Layer Card (if available) */}
                   {bip.layer && (
-                    <div className="group relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/30 dark:to-violet-950/30 rounded-2xl" />
-                      <div className="relative bg-white/70 dark:bg-background/70 backdrop-blur-xl rounded-2xl border border-purple-200/50 dark:border-purple-800/50 p-5 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-200">
-                        <div className="flex items-start gap-4">
-                          <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                            </svg>
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="text-sm font-medium text-purple-600 dark:text-purple-400 mb-1">
-                              Layer
+                    <Link href={`/layer/${encodeURIComponent(bip.layer)}`}>
+                      <div className="group relative overflow-hidden cursor-pointer">
+                        <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/30 dark:to-violet-950/30 rounded-2xl" />
+                        <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl border border-purple-200/50 dark:border-purple-800/50 p-5 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-200 hover:-translate-y-0.5">
+                          <div className="flex items-start gap-4">
+                            <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                              </svg>
                             </div>
-                            <div className="text-foreground font-medium" data-testid="text-layer">
-                              {bip.layer}
+                            <div className="flex-1 min-w-0">
+                              <div className="text-sm font-medium text-purple-600 dark:text-purple-400 mb-1 group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
+                                Layer
+                              </div>
+                              <div className="text-foreground font-medium group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors" data-testid="text-layer">
+                                {bip.layer}
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   )}
                 </div>
               </div>
