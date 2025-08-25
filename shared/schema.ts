@@ -17,6 +17,7 @@ export const bipSchema = z.object({
   replacedBy: z.array(z.number()).optional(),
   layer: z.string().optional(),
   comments: z.string().optional(),
+  categories: z.array(z.string()).optional(),
 });
 
 export const authorSchema = z.object({

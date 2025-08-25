@@ -254,6 +254,49 @@ export class FirestoreStorage implements IStorage {
 
   // Firestore-specific methods for better management
   
+  async getBipsByCategory(category: string): Promise<Bip[]> {
+    try {
+      console.log(`🔍 Finding BIPs in category: ${category}`);
+      const snapshot = await this.bipsCollection
+        .where('categories', 'array-contains', category)
+        .orderBy('number')
+        .get();
+      
+      const categoryBips: Bip[] = [];
+      snapshot.forEach(doc => {
+        categoryBips.push(doc.data() as Bip);
+      });
+      
+      console.log(`Found ${categoryBips.length} BIPs in category ${category}`);
+      return categoryBips;
+    } catch (error) {
+      console.error(`Error finding BIPs in category ${category}:`, error);
+      return [];
+    }
+  }
+
+  async getAllCategories(): Promise<{ category: string; count: number }[]> {
+    try {
+      const bips = await this.getBips();
+      const categoryCount = new Map<string, number>();
+      
+      for (const bip of bips) {
+        if (bip.categories) {
+          for (const category of bip.categories) {
+            categoryCount.set(category, (categoryCount.get(category) || 0) + 1);
+          }
+        }
+      }
+      
+      return Array.from(categoryCount.entries())
+        .map(([category, count]) => ({ category, count }))
+        .sort((a, b) => b.count - a.count);
+    } catch (error) {
+      console.error('Error getting all categories:', error);
+      return [];
+    }
+  }
+  
   async getBipsWithoutELI5(): Promise<Bip[]> {
     try {
       console.log('🔍 Finding BIPs without ELI5 explanations...');

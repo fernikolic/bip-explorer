@@ -11,6 +11,7 @@ import { Alert, AlertDescription } from "../components/ui/alert";
 import { useSEO } from "../hooks/use-seo";
 import { AlertCircle, ArrowLeft, ExternalLink, User, Calendar, Tag } from "lucide-react";
 import type { Bip } from "@shared/schema";
+import { getCategoryDefinition } from "@shared/categories";
 
 export default function BipDetail() {
   const { number } = useParams<{ number: string }>();
@@ -154,6 +155,32 @@ export default function BipDetail() {
                             {bip.type}
                           </div>
                         </div>
+                        
+                        {/* Categories */}
+                        {bip.categories && bip.categories.length > 0 && (
+                          <div className="flex flex-wrap gap-2 mt-4">
+                            {bip.categories.slice(0, 6).map((categoryId) => {
+                              const categoryDef = getCategoryDefinition(categoryId);
+                              return (
+                                <Link key={categoryId} href={`/category/${categoryId}`}>
+                                  <div className={`inline-flex items-center px-3 py-1 rounded-xl text-xs font-medium transition-all hover:scale-105 cursor-pointer ${
+                                    categoryDef 
+                                      ? `bg-gradient-to-r ${categoryDef.color} text-white shadow-sm hover:shadow-md`
+                                      : 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
+                                  }`}>
+                                    <Tag className="w-3 h-3 mr-1.5" />
+                                    {categoryDef ? categoryDef.name : categoryId}
+                                  </div>
+                                </Link>
+                              );
+                            })}
+                            {bip.categories.length > 6 && (
+                              <div className="inline-flex items-center px-3 py-1 rounded-xl text-xs font-medium bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400">
+                                +{bip.categories.length - 6} more
+                              </div>
+                            )}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

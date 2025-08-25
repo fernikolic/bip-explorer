@@ -13,6 +13,8 @@ import AuthorProfile from "./pages/author-profile";
 import Search from "./pages/search";
 import Authors from "./pages/authors";
 import About from "./pages/about";
+import CategoriesPage from "./pages/categories";
+import CategoryPage from "./pages/category";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -36,6 +38,8 @@ function Router() {
         <Route path="/search" component={Search} />
         <Route path="/authors" component={Authors} />
         <Route path="/about" component={About} />
+        <Route path="/categories" component={CategoriesPage} />
+        <Route path="/category/:category" component={CategoryPage} />
         <Route path="/bip/:number" component={BipDetail} />
         <Route path="/author/:author" component={AuthorProfile} />
         <Route component={NotFound} />

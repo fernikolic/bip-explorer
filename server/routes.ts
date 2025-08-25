@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { Bip, bipSchema } from "@shared/schema";
 import { generateELI5 } from "./openai";
+import { categorizeBip } from "./categorizer";
 
 const GITHUB_API_BASE = "https://api.github.com/repos/bitcoin/bips";
 const CACHE_DURATION = 1000 * 60 * 15; // 15 minutes
@@ -162,6 +163,20 @@ async function parseBipContent(content: string, filename: string): Promise<Bip |
       layer: metadata.layer,
       comments: metadata.comments,
       eli5: eli5,
+      categories: categorizeBip({
+        number,
+        title: metadata.title || 'Unknown Title',
+        authors,
+        status: status,
+        type: metadata.type || 'Standards Track',
+        created: metadata.created || '',
+        abstract: abstract,
+        content: fullContent,
+        filename,
+        githubUrl: `https://github.com/bitcoin/bips/blob/master/${filename}`,
+        layer: metadata.layer,
+        comments: metadata.comments,
+      }),
     };
 
     // Validate the BIP object

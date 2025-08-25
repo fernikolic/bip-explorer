@@ -43,6 +43,15 @@ export default function Navigation() {
                   Search
                 </span>
               </Link>
+              <Link href="/categories" data-testid="link-categories">
+                <span className={`font-medium transition-apple cursor-pointer px-4 py-2 rounded-lg ${
+                  isActive('/categories') || (typeof window !== 'undefined' && window.location.pathname.startsWith('/category/'))
+                    ? 'text-bitcoin-400 bg-bitcoin-900/30' 
+                    : 'text-gray-300 hover:text-bitcoin-400 hover:bg-white/10'
+                }`}>
+                  Categories
+                </span>
+              </Link>
               <Link href="/authors" data-testid="link-authors">
                 <span className={`font-medium transition-apple cursor-pointer px-4 py-2 rounded-lg ${
                   isActive('/authors') 

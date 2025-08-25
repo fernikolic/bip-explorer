@@ -9,4 +9,9 @@ export default defineConfig({
     outDir: path.resolve("dist"),
     emptyOutDir: true,
   },
+  resolve: {
+    alias: {
+      "@shared": path.resolve(__dirname, "..", "shared"),
+    },
+  },
 });
