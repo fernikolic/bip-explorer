@@ -1,0 +1,108 @@
+{
+  "name": "BIP Explorer - Bitcoin Improvement Proposals Directory",
+  "short_name": "BIP Explorer",
+  "description": "Comprehensive directory of Bitcoin Improvement Proposals (BIPs) with authentic GitHub data, advanced search, and intelligent explanations for technical Bitcoin concepts.",
+  "icons": [
+    {
+      "src": "/BIP_Explorer_Social_400x400.png",
+      "sizes": "400x400",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/BIP_Explorer_Social_1024x512.png",
+      "sizes": "1024x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/BIP_Explorer_Social_1200x630.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/BIP_Explorer_Social_1200x1200.png",
+      "sizes": "1200x1200",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "theme_color": "#f7931a",
+  "background_color": "#ffffff",
+  "lang": "en",
+  "dir": "ltr",
+  "scope": "/",
+  "categories": [
+    "productivity", 
+    "utilities", 
+    "developer", 
+    "finance", 
+    "reference"
+  ],
+  "screenshots": [
+    {
+      "src": "/BIP_Explorer_Social_1200x630.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/BIP_Explorer_Social_1200x1200.png",
+      "sizes": "1200x1200",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Search BIPs",
+      "short_name": "Search",
+      "description": "Search through all Bitcoin Improvement Proposals",
+      "url": "/search",
+      "icons": [
+        {
+          "src": "/BIP_Explorer_Social_400x400.png",
+          "sizes": "400x400",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Browse Authors",
+      "short_name": "Authors",
+      "description": "Explore BIP authors and contributors",
+      "url": "/authors",
+      "icons": [
+        {
+          "src": "/BIP_Explorer_Social_400x400.png",
+          "sizes": "400x400",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Browse Categories",
+      "short_name": "Categories",
+      "description": "Explore BIPs by category",
+      "url": "/categories",
+      "icons": [
+        {
+          "src": "/BIP_Explorer_Social_400x400.png",
+          "sizes": "400x400",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "handle_links": "preferred"
+}

@@ -38,7 +38,27 @@ export default function BipDetail() {
       'dateCreated': bip.created,
       'articleSection': bip.type,
       'keywords': [bip.type, bip.status, 'Bitcoin', 'BIP', 'cryptocurrency'].join(', ')
-    } : undefined
+    } : undefined,
+    breadcrumbs: bip ? [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://bip-explorer.pages.dev/'
+      },
+      {
+        '@type': 'ListItem', 
+        position: 2,
+        name: 'Bitcoin Improvement Proposals',
+        item: 'https://bip-explorer.pages.dev/#bips-section'
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: `BIP ${bip.number}: ${bip.title}`,
+        item: `https://bip-explorer.pages.dev/bip/${bip.number}`
+      }
+    ] : undefined
   });
 
   const getStatusColor = (status: string) => {

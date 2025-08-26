@@ -1,5 +1,12 @@
 import { useEffect } from 'react';
 
+interface BreadcrumbItem {
+  '@type': 'ListItem';
+  position: number;
+  name: string;
+  item: string;
+}
+
 interface SEOData {
   title: string;
   description: string;
@@ -12,6 +19,7 @@ interface SEOData {
   ogType?: 'website' | 'article' | 'profile';
   twitterCard?: 'summary' | 'summary_large_image';
   structuredData?: object;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 export const useSEO = (seoData: SEOData) => {
@@ -47,17 +55,16 @@ export const useSEO = (seoData: SEOData) => {
       setMetaTag('author', seoData.author);
     }
 
-    // Set canonical URL if provided
-    if (seoData.canonicalUrl) {
-      let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-      if (canonical) {
-        canonical.href = seoData.canonicalUrl;
-      } else {
-        canonical = document.createElement('link');
-        canonical.rel = 'canonical';
-        canonical.href = seoData.canonicalUrl;
-        document.head.appendChild(canonical);
-      }
+    // Set canonical URL if provided, otherwise use current URL
+    const canonicalUrl = seoData.canonicalUrl || window.location.href.split('?')[0].split('#')[0];
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (canonical) {
+      canonical.href = canonicalUrl;
+    } else {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      canonical.href = canonicalUrl;
+      document.head.appendChild(canonical);
     }
 
     // Open Graph tags
@@ -80,9 +87,8 @@ export const useSEO = (seoData: SEOData) => {
     setMetaTag('og:image:alt', ogTitle, true);
     setMetaTag('og:locale', 'en_US', true);
     
-    if (seoData.canonicalUrl) {
-      setMetaTag('og:url', seoData.canonicalUrl, true);
-    }
+    // Always set og:url to match canonical URL
+    setMetaTag('og:url', canonicalUrl, true);
 
     // Twitter Card tags
     const twitterCard = seoData.twitterCard || 'summary_large_image';
@@ -115,14 +121,35 @@ export const useSEO = (seoData: SEOData) => {
 
     // Structured Data (JSON-LD)
     if (seoData.structuredData) {
-      let jsonLd = document.querySelector('script[type="application/ld+json"]');
+      let jsonLd = document.querySelector('script[type="application/ld+json"][data-structured-data]');
       if (jsonLd) {
         jsonLd.textContent = JSON.stringify(seoData.structuredData);
       } else {
         jsonLd = document.createElement('script');
         (jsonLd as HTMLScriptElement).type = 'application/ld+json';
+        (jsonLd as HTMLScriptElement).setAttribute('data-structured-data', 'true');
         jsonLd.textContent = JSON.stringify(seoData.structuredData);
         document.head.appendChild(jsonLd);
+      }
+    }
+
+    // Breadcrumb Structured Data
+    if (seoData.breadcrumbs) {
+      const breadcrumbData = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        'itemListElement': seoData.breadcrumbs
+      };
+
+      let breadcrumbJsonLd = document.querySelector('script[type="application/ld+json"][data-breadcrumbs]');
+      if (breadcrumbJsonLd) {
+        breadcrumbJsonLd.textContent = JSON.stringify(breadcrumbData);
+      } else {
+        breadcrumbJsonLd = document.createElement('script');
+        (breadcrumbJsonLd as HTMLScriptElement).type = 'application/ld+json';
+        (breadcrumbJsonLd as HTMLScriptElement).setAttribute('data-breadcrumbs', 'true');
+        breadcrumbJsonLd.textContent = JSON.stringify(breadcrumbData);
+        document.head.appendChild(breadcrumbJsonLd);
       }
     }
   }, [seoData]);

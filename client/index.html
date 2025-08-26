@@ -7,9 +7,25 @@
     <!-- Base SEO Meta Tags -->
     <title>BIP Explorer - Bitcoin Improvement Proposals Directory</title>
     <meta name="description" content="Comprehensive directory of Bitcoin Improvement Proposals (BIPs) with authentic GitHub data, advanced search, and intelligent explanations for technical Bitcoin concepts." />
-    <meta name="keywords" content="Bitcoin, BIP, Bitcoin Improvement Proposals, cryptocurrency, blockchain, technical documentation, Bitcoin development" />
+    <meta name="keywords" content="Bitcoin, BIP, Bitcoin Improvement Proposals, cryptocurrency, blockchain, technical documentation, Bitcoin development, SegWit, Taproot, Lightning Network" />
     <meta name="author" content="BIP Explorer" />
+    <meta name="publisher" content="BIP Explorer" />
+    <meta name="copyright" content="© 2025 BIP Explorer" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
+    <meta name="bingbot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="category" content="Technology" />
+    <meta name="coverage" content="Worldwide" />
+    <meta name="distribution" content="Global" />
+    <meta name="rating" content="General" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="expires" content="never" />
+    <meta name="cache-control" content="public, max-age=31536000" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://bip-explorer.pages.dev/" />
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:locale" content="en_US" />
@@ -41,17 +57,193 @@
     <!-- LinkedIn specific -->
     <meta name="linkedin:owner" content="BIP Explorer" />
     
+    <!-- Schema.org for Organization -->
+    <meta property="og:see_also" content="https://github.com/bitcoin/bips" />
+    <meta property="article:section" content="Technology" />
+    <meta property="article:tag" content="Bitcoin" />
+    <meta property="article:tag" content="Blockchain" />
+    <meta property="article:tag" content="Cryptocurrency" />
+    
     <!-- Additional SEO Meta Tags -->
     <meta name="theme-color" content="#f7931a" />
+    <meta name="msapplication-TileColor" content="#f7931a" />
+    <meta name="msapplication-navbutton-color" content="#f7931a" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="application-name" content="BIP Explorer" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="BIP Explorer" />
     <meta name="format-detection" content="telephone=no" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="//api.github.com" />
+    <link rel="dns-prefetch" href="//github.com" />
+    
+    <!-- Humans.txt -->
+    <link type="text/plain" rel="author" href="/humans.txt" />
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png" />
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="/mstile-310x310.png" />
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://bip-explorer.pages.dev/#website",
+      "url": "https://bip-explorer.pages.dev/",
+      "name": "BIP Explorer - Bitcoin Improvement Proposals Directory",
+      "description": "Comprehensive directory of Bitcoin Improvement Proposals (BIPs) with authentic GitHub data, advanced search, and intelligent explanations for technical Bitcoin concepts.",
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://bip-explorer.pages.dev/#organization",
+        "name": "BIP Explorer",
+        "url": "https://bip-explorer.pages.dev/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://bip-explorer.pages.dev/BIP_Explorer_Social_1200x630.png",
+          "width": 1200,
+          "height": 630
+        }
+      },
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://bip-explorer.pages.dev/search?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      ],
+      "inLanguage": "en-US",
+      "copyrightYear": "2025",
+      "genre": [
+        "Technology",
+        "Cryptocurrency",
+        "Blockchain",
+        "Bitcoin"
+      ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "@id": "https://bip-explorer.pages.dev/#webapp",
+      "name": "BIP Explorer",
+      "alternateName": "Bitcoin Improvement Proposals Directory",
+      "url": "https://bip-explorer.pages.dev/",
+      "description": "Comprehensive directory of Bitcoin Improvement Proposals (BIPs) with authentic GitHub data, advanced search, and intelligent explanations for technical Bitcoin concepts.",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Reference",
+      "operatingSystem": "Any",
+      "softwareVersion": "1.0.0",
+      "author": {
+        "@type": "Organization",
+        "name": "BIP Explorer"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Search Bitcoin Improvement Proposals",
+        "Browse by author and category",
+        "View BIP details and metadata",
+        "Explore Bitcoin development history",
+        "Access GitHub integration"
+      ],
+      "screenshot": "https://bip-explorer.pages.dev/BIP_Explorer_Social_1200x630.png"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "@id": "https://bip-explorer.pages.dev/#article",
+      "headline": "Bitcoin Improvement Proposals Directory",
+      "description": "Complete collection of Bitcoin Improvement Proposals (BIPs) - the technical documents that define Bitcoin's evolution and development standards.",
+      "image": "https://bip-explorer.pages.dev/BIP_Explorer_Social_1200x630.png",
+      "author": {
+        "@type": "Organization",
+        "name": "BIP Explorer"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BIP Explorer",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://bip-explorer.pages.dev/BIP_Explorer_Social_1200x630.png"
+        }
+      },
+      "datePublished": "2025-01-01",
+      "dateModified": "2025-08-26",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://bip-explorer.pages.dev/"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Bitcoin",
+          "sameAs": "https://en.wikipedia.org/wiki/Bitcoin"
+        },
+        {
+          "@type": "Thing",
+          "name": "Blockchain",
+          "sameAs": "https://en.wikipedia.org/wiki/Blockchain"
+        },
+        {
+          "@type": "Thing",
+          "name": "Cryptocurrency",
+          "sameAs": "https://en.wikipedia.org/wiki/Cryptocurrency"
+        }
+      ],
+      "keywords": [
+        "Bitcoin",
+        "BIP",
+        "Improvement Proposals", 
+        "Blockchain",
+        "Cryptocurrency",
+        "SegWit",
+        "Taproot",
+        "Lightning Network"
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,0 +1,40 @@
+User-agent: *
+Allow: /
+
+# Explicitly allow important pages
+Allow: /search
+Allow: /authors  
+Allow: /about
+Allow: /categories
+
+# Dynamic content pages
+Allow: /bip/*
+Allow: /author/*
+Allow: /category/*
+Allow: /layer/*
+
+# Block unnecessary paths
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /_vite/
+Disallow: /api/refresh
+Disallow: *.json$
+Disallow: *.map$
+
+# Allow static assets
+Allow: /assets/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.webp
+Allow: /*.svg
+Allow: /*.ico
+
+# Sitemap location
+Sitemap: https://bip-explorer.pages.dev/sitemap.xml
+
+# Reasonable crawl delay to prevent server overload
+Crawl-delay: 1

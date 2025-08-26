@@ -1,0 +1,51 @@
+/* TEAM */
+Developer: BIP Explorer Team
+Site: https://bip-explorer.pages.dev/
+Location: Worldwide
+
+/* THANKS */
+Bitcoin Core Contributors
+GitHub Bitcoin BIPs Repository: https://github.com/bitcoin/bips
+All BIP Authors and Contributors
+Bitcoin Community
+
+/* SITE */
+Last Update: 2025-08-26
+Language: English
+Doctype: HTML5
+IDE: Visual Studio Code, Claude Code
+Technologies: React, TypeScript, Vite, Tailwind CSS, Cloudflare Pages
+
+/* BIP DATA SOURCE */
+Primary: GitHub Bitcoin BIPs Repository
+API: GitHub REST API v3
+Update Frequency: Real-time
+Content: Authentic BIP data from bitcoin/bips
+
+/* INSPIRATION */
+Bitcoin's Open Source Nature
+Decentralized Development
+Technical Documentation Excellence
+Community-Driven Innovation
+
+/* DEDICATION */
+This site is dedicated to:
+- Bitcoin developers past, present, and future
+- The spirit of open source collaboration
+- Making Bitcoin technical documentation accessible
+- Preserving the history of Bitcoin's evolution
+
+/* CONTACT */
+Issues: Please report issues on GitHub
+Feedback: Always welcome for improvements
+
+                 .-.
+               ,'   `.
+              /       \
+             |  Bitcoin |
+             |   BIPs   |
+              \       /
+               `.   ,'
+                 `-'
+
+"In code we trust, in BIPs we document."
