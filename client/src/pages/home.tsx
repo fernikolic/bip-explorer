@@ -90,9 +90,9 @@ export default function Home() {
           <CategoriesSection />
         </div>
         
-        {/* Billboard Ad */}
-        <div className="flex justify-center mb-16">
-          <AdSpace size="billboard" />
+        {/* Leaderboard Ad */}
+        <div className="mb-16">
+          <AdSpace size="leaderboard" />
         </div>
 
         <section id="bips-section">
@@ -114,14 +114,14 @@ export default function Home() {
               </p>
             </div>
             
-            {/* Rectangle Ad for desktop */}
-            <div className="hidden lg:block">
-              <AdSpace size="rectangle" />
+            {/* Large Rectangle Ad for desktop */}
+            <div className="hidden lg:block lg:flex-shrink-0 lg:w-full lg:max-w-sm">
+              <AdSpace size="large-rectangle" />
             </div>
           </div>
           
           {/* Mobile Banner Ad */}
-          <div className="flex justify-center mb-8 lg:hidden">
+          <div className="mb-8 lg:hidden">
             <AdSpace size="mobile-banner" />
           </div>
 
@@ -151,7 +151,7 @@ export default function Home() {
                   <BipCard bip={bip} />
                   {/* Insert banner ad after every 6th BIP */}
                   {(index + 1) % 6 === 0 && (
-                    <div className="flex justify-center my-12">
+                    <div className="my-12">
                       <AdSpace size="banner" />
                     </div>
                   )}

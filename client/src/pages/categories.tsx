@@ -71,9 +71,9 @@ export default function CategoriesPage() {
 
         {/* Header */}
         <div className="relative overflow-hidden mb-12">
-          <div className="absolute inset-0 bg-gradient-to-br from-bitcoin-50/80 via-white to-bitcoin-50/60 dark:from-bitcoin-950/40 dark:via-background dark:to-bitcoin-950/20 rounded-3xl" />
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 rounded-3xl" />
           
-          <div className="relative bg-white/80 dark:bg-background/80 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-bitcoin-500/5">
+          <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-bitcoin-500/5">
             <div className="flex items-start gap-6">
               <div className="w-20 h-20 bg-gradient-to-br from-bitcoin-400 to-bitcoin-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-bitcoin-500/20">
                 <Grid3X3 className="w-10 h-10 text-white" />
@@ -89,15 +89,15 @@ export default function CategoriesPage() {
                 
                 {/* Stats */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="bg-white/60 dark:bg-background/60 backdrop-blur-sm rounded-xl p-4 border border-border/50">
+                  <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 border border-border/50">
                     <div className="text-2xl font-bold text-foreground">{totalCategoriesWithBips}</div>
                     <div className="text-sm text-muted-foreground">Categories</div>
                   </div>
-                  <div className="bg-white/60 dark:bg-background/60 backdrop-blur-sm rounded-xl p-4 border border-border/50">
+                  <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 border border-border/50">
                     <div className="text-2xl font-bold text-foreground">{totalBipsWithCategories}</div>
                     <div className="text-sm text-muted-foreground">Categorized BIPs</div>
                   </div>
-                  <div className="bg-white/60 dark:bg-background/60 backdrop-blur-sm rounded-xl p-4 border border-border/50">
+                  <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 border border-border/50">
                     <div className="text-2xl font-bold text-foreground">{categoryGroups.length}</div>
                     <div className="text-sm text-muted-foreground">Topic Groups</div>
                   </div>
@@ -118,7 +118,7 @@ export default function CategoriesPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {popularCategories.map(({ definition, count }) => (
                 <Link key={definition.id} href={`/category/${definition.id}`}>
-                  <Card className="group h-full hover:shadow-lg hover:shadow-bitcoin-500/10 transition-all duration-200 hover:-translate-y-1 cursor-pointer">
+                  <Card className="group h-full hover:shadow-lg hover:shadow-bitcoin-500/10 transition-all duration-200 hover:-translate-y-1 cursor-pointer bg-card dark:bg-gray-900">
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4 mb-4">
                         <div className={`w-12 h-12 bg-gradient-to-br ${definition.color} rounded-xl flex items-center justify-center shadow-lg flex-shrink-0`}>
@@ -160,7 +160,7 @@ export default function CategoriesPage() {
                   <Skeleton className="h-8 w-64 mb-6" />
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {[...Array(6)].map((_, i) => (
-                      <Card key={i} className="p-4">
+                      <Card key={i} className="p-4 bg-card dark:bg-gray-900">
                         <div className="flex items-center gap-3">
                           <Skeleton className="h-10 w-10 rounded-lg" />
                           <div className="flex-1">
@@ -224,7 +224,7 @@ export default function CategoriesPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     {categoriesWithCounts.map((category) => (
                       <Link key={category.id} href={`/category/${category.id}`}>
-                        <Card className="group hover:shadow-lg hover:shadow-bitcoin-500/10 transition-all duration-200 hover:-translate-y-0.5 cursor-pointer">
+                        <Card className="group hover:shadow-lg hover:shadow-bitcoin-500/10 transition-all duration-200 hover:-translate-y-0.5 cursor-pointer bg-card dark:bg-gray-900">
                           <CardContent className="p-4">
                             <div className="flex items-center gap-3">
                               <div className={`w-10 h-10 bg-gradient-to-br ${category.color} rounded-lg flex items-center justify-center shadow-md flex-shrink-0`}>

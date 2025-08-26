@@ -90,7 +90,7 @@ export default function About() {
           </h2>
           <div className="grid gap-8 lg:grid-cols-2">
             {features.map((feature, index) => (
-              <Card key={index} className="rounded-2xl shadow-subtle hover:shadow-moderate border border-gray-100 transition-apple hover-lift">
+              <Card key={index} className="rounded-2xl shadow-subtle hover:shadow-moderate border border-gray-100 transition-apple hover-lift bg-card dark:bg-gray-900">
                 <CardContent className="p-8">
                   <div className="flex items-start gap-6">
                     <div className="flex-shrink-0">
@@ -161,7 +161,7 @@ export default function About() {
         {/* Technical Details */}
         <section className="mb-20">
           <div className="grid gap-8 lg:grid-cols-2">
-            <Card className="rounded-3xl shadow-subtle border-0">
+            <Card className="rounded-3xl shadow-subtle border-0 bg-card dark:bg-gray-900">
               <CardContent className="p-10">
                 <h3 className="text-2xl font-light text-foreground mb-4">
                   Technical Architecture
@@ -176,7 +176,7 @@ export default function About() {
               </CardContent>
             </Card>
             
-            <Card className="rounded-3xl shadow-subtle border-0">
+            <Card className="rounded-3xl shadow-subtle border-0 bg-card dark:bg-gray-900">
               <CardContent className="p-10">
                 <h3 className="text-2xl font-light text-foreground mb-4">
                   Content Processing

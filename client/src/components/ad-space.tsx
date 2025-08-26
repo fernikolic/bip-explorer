@@ -1,5 +1,5 @@
 interface AdSpaceProps {
-  size: 'banner' | 'rectangle' | 'skyscraper' | 'billboard' | 'mobile-banner';
+  size: 'banner' | 'rectangle' | 'skyscraper' | 'billboard' | 'mobile-banner' | 'leaderboard' | 'large-rectangle' | 'wide-skyscraper';
   className?: string;
 }
 
@@ -7,34 +7,43 @@ export default function AdSpace({ size, className = '' }: AdSpaceProps) {
   const getAdDimensions = () => {
     switch (size) {
       case 'banner':
-        return 'w-full h-[90px]'; // Full width banner on all screens
+        return 'w-full h-[160px]'; // Much larger full width banner
       case 'rectangle':
-        return 'w-full max-w-[300px] h-[250px] lg:w-full lg:max-w-none lg:h-[200px]'; // Responsive rectangle
+        return 'w-full h-[400px]'; // Full width large rectangle
       case 'skyscraper':
-        return 'w-[160px] h-[600px]'; // 160x600 Wide Skyscraper
+        return 'w-[300px] h-[600px]'; // Wider skyscraper 
       case 'billboard':
-        return 'w-full h-[200px] lg:h-[250px]'; // Full width billboard
+        return 'w-full h-[300px] lg:h-[400px]'; // Much larger billboard
       case 'mobile-banner':
-        return 'w-full h-[50px] max-w-[320px] md:max-w-[300px] lg:hidden'; // Mobile only banner
+        return 'w-full h-[120px] lg:hidden'; // Larger mobile banner
+      case 'leaderboard':
+        return 'w-full h-[120px]'; // Full width leaderboard
+      case 'large-rectangle':
+        return 'w-full h-[400px]'; // Full width large rectangle
+      case 'wide-skyscraper':
+        return 'w-full max-w-[400px] h-[600px]'; // Even wider skyscraper
       default:
-        return 'w-[300px] h-[250px]';
+        return 'w-full h-[400px]';
     }
   };
 
   return (
-    <div className={`${className} flex items-center justify-center`}>
+    <div className={`${className} w-full flex items-center justify-center`}>
       <div 
-        className={`${getAdDimensions()} bg-muted border border-border rounded-xl flex items-center justify-center text-muted-foreground text-sm font-light transition-apple hover:bg-muted/80`}
+        className={`${getAdDimensions()} bg-muted/50 border border-border rounded-2xl flex items-center justify-center text-muted-foreground shadow-sm transition-all duration-200 hover:bg-muted/70 hover:shadow-md`}
         data-testid={`ad-space-${size}`}
       >
         <div className="text-center">
-          <div className="text-xs uppercase tracking-wide mb-1">Advertisement</div>
-          <div className="text-xs opacity-60">
-            {size === 'banner' && 'Full Width Banner'}
-            {size === 'rectangle' && 'Responsive Ad'}
-            {size === 'skyscraper' && '160×600'}
-            {size === 'billboard' && 'Full Width Billboard'}
-            {size === 'mobile-banner' && 'Mobile Banner'}
+          <div className="text-sm uppercase tracking-wide mb-2 font-medium">Advertisement</div>
+          <div className="text-sm opacity-60">
+            {size === 'banner' && 'Full Width Banner • 160px'}
+            {size === 'rectangle' && 'Full Width Rectangle • 400px'}
+            {size === 'skyscraper' && 'Skyscraper • 300×600'}
+            {size === 'billboard' && 'Billboard • 300-400px'}
+            {size === 'mobile-banner' && 'Mobile Banner • 120px'}
+            {size === 'leaderboard' && 'Leaderboard • Full Width'}
+            {size === 'large-rectangle' && 'Large Rectangle • 400px'}
+            {size === 'wide-skyscraper' && 'Wide Skyscraper • 400×600'}
           </div>
         </div>
       </div>

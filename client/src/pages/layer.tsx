@@ -132,7 +132,7 @@ export default function LayerPage() {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
-              <Card key={i} className="p-6">
+              <Card key={i} className="p-6 bg-card dark:bg-gray-900">
                 <Skeleton className="h-6 w-16 mb-4" />
                 <Skeleton className="h-6 w-full mb-2" />
                 <Skeleton className="h-4 w-3/4 mb-4" />

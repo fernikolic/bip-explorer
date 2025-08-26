@@ -77,7 +77,7 @@ export default function AuthorProfile() {
 
         {isLoading ? (
           <div className="space-y-6">
-            <Card>
+            <Card className="bg-card dark:bg-gray-900">
               <CardHeader>
                 <div className="flex items-center gap-4">
                   <Skeleton className="w-16 h-16 rounded-full" />
@@ -90,7 +90,7 @@ export default function AuthorProfile() {
             </Card>
             <div className="space-y-4">
               {[...Array(3)].map((_, i) => (
-                <div key={i} className="bg-card rounded-lg border border-gray-200 p-6">
+                <div key={i} className="bg-card dark:bg-gray-900 rounded-lg border border-gray-200 p-6">
                   <div className="flex gap-4">
                     <Skeleton className="w-16 h-16 rounded-lg" />
                     <div className="flex-1 space-y-2">
@@ -106,7 +106,7 @@ export default function AuthorProfile() {
         ) : (
           <div className="space-y-6">
             {/* Author Header */}
-            <Card>
+            <Card className="bg-card dark:bg-gray-900">
               <CardHeader>
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 bg-bitcoin-100 rounded-full flex items-center justify-center">

@@ -97,7 +97,7 @@ export default function Search() {
 
       <main className="max-w-6xl mx-auto px-6 lg:px-8 py-16">
         {/* Mobile Banner Ad */}
-        <div className="flex justify-center mb-8 lg:hidden">
+        <div className="mb-8 lg:hidden">
           <AdSpace size="mobile-banner" />
         </div>
 
@@ -116,9 +116,9 @@ export default function Search() {
               </p>
             </div>
             
-            {/* Rectangle Ad for desktop */}
-            <div className="hidden lg:block">
-              <AdSpace size="rectangle" />
+            {/* Large Rectangle Ad for desktop */}
+            <div className="hidden lg:block lg:flex-shrink-0 lg:w-full lg:max-w-sm">
+              <AdSpace size="large-rectangle" />
             </div>
           </div>
 
@@ -142,10 +142,10 @@ export default function Search() {
               {displayedBips.map((bip, index) => (
                 <div key={bip.number}>
                   <BipCard bip={bip} />
-                  {/* Insert banner ad after every 8th BIP */}
+                  {/* Insert leaderboard ad after every 8th BIP */}
                   {(index + 1) % 8 === 0 && (
-                    <div className="flex justify-center my-12">
-                      <AdSpace size="banner" />
+                    <div className="my-12">
+                      <AdSpace size="leaderboard" />
                     </div>
                   )}
                 </div>

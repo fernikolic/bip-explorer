@@ -89,9 +89,9 @@ export default function CategoryPage() {
         {/* Category Header */}
         {categoryDef ? (
           <div className="relative overflow-hidden mb-8">
-            <div className="absolute inset-0 bg-gradient-to-br from-bitcoin-50/80 via-white to-bitcoin-50/60 dark:from-bitcoin-950/40 dark:via-background dark:to-bitcoin-950/20 rounded-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 dark:from-black dark:via-gray-950 dark:to-black rounded-3xl" />
             
-            <div className="relative bg-white/80 dark:bg-background/80 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-bitcoin-500/5">
+            <div className="relative bg-white dark:bg-black backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-bitcoin-500/5">
               <div className="flex items-start gap-6">
                 <div className={`w-20 h-20 bg-gradient-to-br ${categoryDef.color} rounded-2xl flex items-center justify-center shadow-2xl shadow-bitcoin-500/20`}>
                   <Tag className="w-10 h-10 text-white" />
@@ -134,7 +134,7 @@ export default function CategoryPage() {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
-              <Card key={i} className="p-6">
+              <Card key={i} className="p-6 bg-card dark:bg-gray-900">
                 <Skeleton className="h-6 w-16 mb-4" />
                 <Skeleton className="h-6 w-full mb-2" />
                 <Skeleton className="h-4 w-3/4 mb-4" />
@@ -160,7 +160,7 @@ export default function CategoryPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categoryBips.map((bip) => (
               <Link key={bip.number} href={`/bip/${bip.number}`}>
-                <Card className="group h-full hover:shadow-lg hover:shadow-bitcoin-500/10 transition-all duration-200 hover:-translate-y-1 cursor-pointer">
+                <Card className="group h-full hover:shadow-lg hover:shadow-bitcoin-500/10 transition-all duration-200 hover:-translate-y-1 cursor-pointer bg-card dark:bg-gray-900">
                   <CardContent className="p-6">
                     {/* BIP Number Badge */}
                     <div className="flex items-center justify-between mb-4">

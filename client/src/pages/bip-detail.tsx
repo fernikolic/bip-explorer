@@ -126,7 +126,7 @@ export default function BipDetail() {
               <Skeleton className="h-4 w-full mb-2" />
               <Skeleton className="h-4 w-2/3" />
             </div>
-            <Card>
+            <Card className="bg-card dark:bg-gray-900">
               <CardHeader>
                 <Skeleton className="h-6 w-32" />
               </CardHeader>
@@ -352,9 +352,9 @@ export default function BipDetail() {
               </div>
             </div>
 
-            {/* Banner Ad */}
-            <div className="flex justify-center my-8">
-              <AdSpace size="banner" />
+            {/* Leaderboard Ad */}
+            <div className="my-8">
+              <AdSpace size="leaderboard" />
             </div>
 
             {/* Modern Abstract */}
@@ -388,9 +388,9 @@ export default function BipDetail() {
               </div>
             </div>
 
-            {/* Rectangle Ad */}
-            <div className="flex justify-center my-8">
-              <AdSpace size="rectangle" />
+            {/* Large Rectangle Ad */}
+            <div className="my-8">
+              <AdSpace size="large-rectangle" />
             </div>
 
             {/* Modern Specification */}
@@ -430,9 +430,9 @@ export default function BipDetail() {
               </div>
             </div>
 
-            {/* Bottom Banner Ad */}
-            <div className="flex justify-center mt-8">
-              <AdSpace size="banner" />
+            {/* Bottom Leaderboard Ad */}
+            <div className="mt-8">
+              <AdSpace size="leaderboard" />
             </div>
           </div>
         ) : null}
