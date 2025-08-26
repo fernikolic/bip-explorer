@@ -144,7 +144,7 @@ export default function BipDetail() {
               {/* Background gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-bitcoin-50/80 via-white to-bitcoin-50/60 dark:from-bitcoin-950/40 dark:via-background dark:to-bitcoin-950/20" />
               
-              <div className="relative bg-white/80 dark:bg-background/80 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-bitcoin-500/5">
+              <div className="relative bg-white/80 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-bitcoin-500/5">
                 <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
                   <div className="flex-1">
                     {/* BIP Number and Title */}
@@ -223,7 +223,7 @@ export default function BipDetail() {
                   {/* Authors Card */}
                   <div className="group relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-slate-50 dark:from-gray-950/30 dark:to-slate-950/30 rounded-2xl" />
-                    <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl border border-gray-200/50 dark:border-gray-700/50 p-5 hover:shadow-lg hover:shadow-gray-500/10 transition-all duration-200">
+                    <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl border border-gray-200/50 dark:border-gray-700/50 p-5 hover:shadow-lg hover:shadow-gray-500/10 transition-all duration-200">
                       <div className="flex items-start gap-4">
                         <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-gray-600 to-slate-700 rounded-xl flex items-center justify-center shadow-lg">
                           <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -256,7 +256,7 @@ export default function BipDetail() {
                   {/* Created Date Card */}
                   <div className="group relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-gray-50 dark:from-slate-950/30 dark:to-gray-950/30 rounded-2xl" />
-                    <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl border border-slate-200/50 dark:border-slate-700/50 p-5 hover:shadow-lg hover:shadow-slate-500/10 transition-all duration-200">
+                    <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl border border-slate-200/50 dark:border-slate-700/50 p-5 hover:shadow-lg hover:shadow-slate-500/10 transition-all duration-200">
                       <div className="flex items-start gap-4">
                         <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-slate-600 to-gray-700 rounded-xl flex items-center justify-center shadow-lg">
                           <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -284,7 +284,7 @@ export default function BipDetail() {
                     <Link href={`/layer/${encodeURIComponent(bip.layer)}`}>
                       <div className="group relative overflow-hidden cursor-pointer">
                         <div className="absolute inset-0 bg-gradient-to-br from-zinc-50 to-stone-50 dark:from-zinc-950/30 dark:to-stone-950/30 rounded-2xl" />
-                        <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl border border-zinc-200/50 dark:border-zinc-700/50 p-5 hover:shadow-lg hover:shadow-zinc-500/10 transition-all duration-200 hover:-translate-y-0.5">
+                        <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl border border-zinc-200/50 dark:border-zinc-700/50 p-5 hover:shadow-lg hover:shadow-zinc-500/10 transition-all duration-200 hover:-translate-y-0.5">
                           <div className="flex items-start gap-4">
                             <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-zinc-600 to-stone-700 rounded-xl flex items-center justify-center shadow-lg">
                               <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -312,7 +312,7 @@ export default function BipDetail() {
             <div className="relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-bitcoin-50/60 via-orange-50/40 to-yellow-50/60 dark:from-bitcoin-950/20 dark:via-orange-950/10 dark:to-yellow-950/20 rounded-3xl" />
               
-              <div className="relative bg-white/90 dark:bg-background/90 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-bitcoin-500/5">
+              <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-bitcoin-500/5">
                 <div className="flex items-start gap-4 mb-6">
                   <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-bitcoin-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-xl shadow-bitcoin-500/20">
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -361,7 +361,7 @@ export default function BipDetail() {
             <div className="relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-slate-50/80 via-gray-50/60 to-zinc-50/80 dark:from-slate-950/30 dark:via-gray-950/20 dark:to-zinc-950/30 rounded-3xl" />
               
-              <div className="relative bg-white/90 dark:bg-background/90 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-slate-500/5">
+              <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-slate-500/5">
                 <div className="flex items-start gap-4 mb-6">
                   <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-slate-500 to-zinc-600 rounded-2xl flex items-center justify-center shadow-xl shadow-slate-500/20">
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -397,7 +397,7 @@ export default function BipDetail() {
             <div className="relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-gray-50/80 via-slate-50/60 to-gray-50/80 dark:from-gray-950/30 dark:via-slate-950/20 dark:to-gray-950/30 rounded-3xl" />
               
-              <div className="relative bg-white/90 dark:bg-background/90 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-gray-500/5">
+              <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-gray-500/5">
                 <div className="flex items-start gap-4 mb-6">
                   <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-gray-600 to-slate-700 rounded-2xl flex items-center justify-center shadow-xl shadow-gray-500/20">
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
