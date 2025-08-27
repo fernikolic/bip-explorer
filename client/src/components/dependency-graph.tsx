@@ -147,151 +147,157 @@ export default function DependencyGraph({
   } : null;
 
   const renderGraph = useCallback(() => {
-    if (!filteredData || !svgRef.current) return;
+    if (!filteredData || !svgRef.current || !filteredData.nodes.length) return;
 
-    const svg = d3.select(svgRef.current);
-    const width = svgRef.current.clientWidth || 800;
-    const containerHeight = svgRef.current.clientHeight || 600;
+    // Wait for DOM to be ready
+    requestAnimationFrame(() => {
+      const svgElement = svgRef.current;
+      if (!svgElement) return;
 
-    // Clear previous graph
-    svg.selectAll("*").remove();
+      const svg = d3.select(svgElement);
+      const rect = svgElement.getBoundingClientRect();
+      const width = rect.width || 800;
+      const containerHeight = rect.height || 600;
 
-    // Create container group for zooming/panning
-    const container = svg.append("g");
+      // Clear previous graph
+      svg.selectAll("*").remove();
 
-    // Setup zoom behavior
-    const zoomBehavior = d3.zoom<SVGSVGElement, unknown>()
-      .scaleExtent([0.1, 4])
-      .on("zoom", (event) => {
-        container.attr("transform", event.transform);
-      });
+      // Create container group for zooming/panning
+      const container = svg.append("g");
 
-    svg.call(zoomBehavior);
-    setZoom(zoomBehavior);
+      // Setup zoom behavior
+      const zoomBehavior = d3.zoom<SVGSVGElement, unknown>()
+        .scaleExtent([0.1, 4])
+        .on("zoom", (event) => {
+          container.attr("transform", event.transform);
+        });
 
-    // Prepare nodes and links for simulation
-    const nodes: D3SimulationNode[] = filteredData.nodes.map(node => ({
-      ...node,
-      x: Math.random() * width,
-      y: Math.random() * containerHeight
-    }));
+      svg.call(zoomBehavior);
+      setZoom(zoomBehavior);
 
-    const links: D3SimulationLink[] = filteredData.edges.map(edge => ({
-      ...edge,
-      source: edge.source,
-      target: edge.target
-    }));
+      // Prepare nodes and links for simulation
+      const nodes: D3SimulationNode[] = filteredData.nodes.map(node => ({
+        ...node,
+        x: Math.random() * width,
+        y: Math.random() * containerHeight
+      }));
 
-    // Create force simulation
-    const simulation = d3.forceSimulation<D3SimulationNode>(nodes)
-      .force("link", d3.forceLink<D3SimulationNode, D3SimulationLink>(links).id(d => d.id).distance(100))
-      .force("charge", d3.forceManyBody().strength(-300))
-      .force("center", d3.forceCenter(width / 2, containerHeight / 2))
-      .force("collision", d3.forceCollide().radius(d => getNodeSize(d, filteredData.edges) + 5));
+      const links: D3SimulationLink[] = filteredData.edges.map(edge => ({
+        ...edge,
+        source: edge.source,
+        target: edge.target
+      }));
 
-    simulationRef.current = simulation;
+      // Create force simulation
+      const simulation = d3.forceSimulation<D3SimulationNode>(nodes)
+        .force("link", d3.forceLink<D3SimulationNode, D3SimulationLink>(links).id(d => d.id).distance(100))
+        .force("charge", d3.forceManyBody().strength(-300))
+        .force("center", d3.forceCenter(width / 2, containerHeight / 2))
+        .force("collision", d3.forceCollide().radius(d => getNodeSize(d, filteredData.edges) + 5));
 
-    // Create links
-    const link = container.append("g")
-      .selectAll("line")
-      .data(links)
-      .join("line")
-      .attr("stroke", d => d.type === 'replaces' ? '#ef4444' : '#3b82f6')
-      .attr("stroke-opacity", 0.6)
-      .attr("stroke-width", 2);
+      simulationRef.current = simulation;
 
-    // Create nodes
-    const node = container.append("g")
-      .selectAll("circle")
-      .data(nodes)
-      .join("circle")
-      .attr("r", d => getNodeSize(d, filteredData.edges))
-      .attr("fill", d => getStatusColor(d.status))
-      .attr("stroke", "#fff")
-      .attr("stroke-width", 2)
-      .style("cursor", "pointer")
-      .call(d3.drag<SVGCircleElement, D3SimulationNode>()
-        .on("start", (event, d) => {
-          if (!event.active) simulation.alphaTarget(0.3).restart();
-          d.fx = d.x;
-          d.fy = d.y;
-        })
-        .on("drag", (event, d) => {
-          d.fx = event.x;
-          d.fy = event.y;
-        })
-        .on("end", (event, d) => {
-          if (!event.active) simulation.alphaTarget(0);
-          d.fx = null;
-          d.fy = null;
-        }))
-      .on("click", (event, d) => {
-        setSelectedNode(d);
-      });
+      // Create links
+      const link = container.append("g")
+        .selectAll("line")
+        .data(links)
+        .join("line")
+        .attr("stroke", d => d.type === 'replaces' ? '#ef4444' : '#3b82f6')
+        .attr("stroke-opacity", 0.6)
+        .attr("stroke-width", 2);
 
-    // Add hover effects
-    node
-      .on("mouseover", function(event, d) {
-        d3.select(this)
-          .attr("stroke-width", 3)
-          .attr("r", getNodeSize(d, filteredData.edges) + 2);
-      })
-      .on("mouseout", function(event, d) {
-        d3.select(this)
-          .attr("stroke-width", 2)
-          .attr("r", getNodeSize(d, filteredData.edges));
-      });
+      // Create nodes
+      const node = container.append("g")
+        .selectAll("circle")
+        .data(nodes)
+        .join("circle")
+        .attr("r", d => getNodeSize(d, filteredData.edges))
+        .attr("fill", d => getStatusColor(d.status))
+        .attr("stroke", "#fff")
+        .attr("stroke-width", 2)
+        .style("cursor", "pointer")
+        .call(d3.drag<SVGCircleElement, D3SimulationNode>()
+          .on("start", (event, d) => {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+          })
+          .on("drag", (event, d) => {
+            d.fx = event.x;
+            d.fy = event.y;
+          })
+          .on("end", (event, d) => {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+          }))
+        .on("click", (event, d) => {
+          setSelectedNode(d);
+        });
 
-    // Add labels for important nodes
-    const label = container.append("g")
-      .selectAll("text")
-      .data(nodes.filter(d => getNodeSize(d, filteredData.edges) > 12))
-      .join("text")
-      .text(d => `BIP ${d.bipNumber}`)
-      .attr("font-size", "10px")
-      .attr("font-family", "sans-serif")
-      .attr("fill", "#374151")
-      .attr("text-anchor", "middle")
-      .attr("dy", "0.3em")
-      .style("pointer-events", "none");
-
-    // Update positions on simulation tick
-    simulation.on("tick", () => {
-      link
-        .attr("x1", d => (d.source as D3SimulationNode).x!)
-        .attr("y1", d => (d.source as D3SimulationNode).y!)
-        .attr("x2", d => (d.target as D3SimulationNode).x!)
-        .attr("y2", d => (d.target as D3SimulationNode).y!);
-
+      // Add hover effects
       node
-        .attr("cx", d => d.x!)
-        .attr("cy", d => d.y!);
+        .on("mouseover", function(event, d) {
+          d3.select(this)
+            .attr("stroke-width", 3)
+            .attr("r", getNodeSize(d, filteredData.edges) + 2);
+        })
+        .on("mouseout", function(event, d) {
+          d3.select(this)
+            .attr("stroke-width", 2)
+            .attr("r", getNodeSize(d, filteredData.edges));
+        });
 
-      label
-        .attr("x", d => d.x!)
-        .attr("y", d => d.y!);
-    });
+      // Add labels for important nodes
+      const label = container.append("g")
+        .selectAll("text")
+        .data(nodes.filter(d => getNodeSize(d, filteredData.edges) > 12))
+        .join("text")
+        .text(d => `BIP ${d.bipNumber}`)
+        .attr("font-size", "10px")
+        .attr("font-family", "sans-serif")
+        .attr("fill", "#374151")
+        .attr("text-anchor", "middle")
+        .attr("dy", "0.3em")
+        .style("pointer-events", "none");
 
-    // Focus on specific BIP if provided
-    if (focusedBip) {
-      const focusedNode = nodes.find(n => n.bipNumber === focusedBip);
-      if (focusedNode) {
-        // Highlight focused node and its connections
-        node.attr("opacity", d => 
-          d.bipNumber === focusedBip || 
-          links.some(l => 
-            ((l.source as D3SimulationNode).id === d.id && (l.target as D3SimulationNode).bipNumber === focusedBip) ||
-            ((l.target as D3SimulationNode).id === d.id && (l.source as D3SimulationNode).bipNumber === focusedBip)
-          ) ? 1 : 0.3
-        );
+      // Update positions on simulation tick
+      simulation.on("tick", () => {
+        link
+          .attr("x1", d => (d.source as D3SimulationNode).x!)
+          .attr("y1", d => (d.source as D3SimulationNode).y!)
+          .attr("x2", d => (d.target as D3SimulationNode).x!)
+          .attr("y2", d => (d.target as D3SimulationNode).y!);
 
-        link.attr("opacity", d => 
-          (d.source as D3SimulationNode).bipNumber === focusedBip || 
-          (d.target as D3SimulationNode).bipNumber === focusedBip ? 1 : 0.1
-        );
+        node
+          .attr("cx", d => d.x!)
+          .attr("cy", d => d.y!);
+
+        label
+          .attr("x", d => d.x!)
+          .attr("y", d => d.y!);
+      });
+
+      // Focus on specific BIP if provided
+      if (focusedBip) {
+        const focusedNode = nodes.find(n => n.bipNumber === focusedBip);
+        if (focusedNode) {
+          // Highlight focused node and its connections
+          node.attr("opacity", d => 
+            d.bipNumber === focusedBip || 
+            links.some(l => 
+              ((l.source as D3SimulationNode).id === d.id && (l.target as D3SimulationNode).bipNumber === focusedBip) ||
+              ((l.target as D3SimulationNode).id === d.id && (l.source as D3SimulationNode).bipNumber === focusedBip)
+            ) ? 1 : 0.3
+          );
+
+          link.attr("opacity", d => 
+            (d.source as D3SimulationNode).bipNumber === focusedBip || 
+            (d.target as D3SimulationNode).bipNumber === focusedBip ? 1 : 0.1
+          );
+        }
       }
-    }
-
+    });
   }, [filteredData, height, focusedBip]);
 
   useEffect(() => {
