@@ -24,37 +24,23 @@ interface SEOData {
 
 export const useSEO = (seoData: SEOData) => {
   useEffect(() => {
-    try {
-      // Ensure we're in browser environment
-      if (typeof window === 'undefined' || typeof document === 'undefined') return;
-      
-      // Set page title
-      if (document.title !== undefined) {
-        document.title = seoData.title;
-      }
+    // Set page title
+    document.title = seoData.title;
 
-      // Helper function to set or update meta tag
-      const setMetaTag = (name: string, content: string, property = false) => {
-        try {
-          if (typeof document === 'undefined' || !document.querySelector || !document.createElement) return;
-          
-          const attribute = property ? 'property' : 'name';
-          let element = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement | null;
-          
-          if (element && typeof element.content === 'string') {
-            element.content = content;
-          } else if (document.createElement && document.head) {
-            element = document.createElement('meta');
-            if (element && element.setAttribute && typeof element.content === 'string') {
-              element.setAttribute(attribute, name);
-              element.content = content;
-              document.head.appendChild(element);
-            }
-          }
-        } catch (error) {
-          console.warn('Error setting meta tag:', name, error);
-        }
-      };
+    // Helper function to set or update meta tag
+    const setMetaTag = (name: string, content: string, property = false) => {
+      const attribute = property ? 'property' : 'name';
+      let element = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement;
+      
+      if (element) {
+        element.content = content;
+      } else {
+        element = document.createElement('meta');
+        element.setAttribute(attribute, name);
+        element.content = content;
+        document.head.appendChild(element);
+      }
+    };
 
     // Set meta description
     setMetaTag('description', seoData.description);
@@ -70,15 +56,15 @@ export const useSEO = (seoData: SEOData) => {
     }
 
     // Set canonical URL if provided, otherwise use current URL
-    const canonicalUrl = seoData.canonicalUrl || (typeof window !== 'undefined' ? window.location.href.split('?')[0].split('#')[0] : '');
-    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
-    if (canonical && canonical.href !== undefined) {
+    const canonicalUrl = seoData.canonicalUrl || window.location.href.split('?')[0].split('#')[0];
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (canonical) {
       canonical.href = canonicalUrl;
     } else {
       canonical = document.createElement('link');
       canonical.rel = 'canonical';
       canonical.href = canonicalUrl;
-      document.head?.appendChild(canonical);
+      document.head.appendChild(canonical);
     }
 
     // Open Graph tags
@@ -135,15 +121,15 @@ export const useSEO = (seoData: SEOData) => {
 
     // Structured Data (JSON-LD)
     if (seoData.structuredData) {
-      let jsonLd = document.querySelector('script[type="application/ld+json"][data-structured-data]') as HTMLScriptElement | null;
-      if (jsonLd && jsonLd.textContent !== undefined) {
+      let jsonLd = document.querySelector('script[type="application/ld+json"][data-structured-data]');
+      if (jsonLd) {
         jsonLd.textContent = JSON.stringify(seoData.structuredData);
       } else {
         jsonLd = document.createElement('script');
-        jsonLd.type = 'application/ld+json';
-        jsonLd.setAttribute('data-structured-data', 'true');
+        (jsonLd as HTMLScriptElement).type = 'application/ld+json';
+        (jsonLd as HTMLScriptElement).setAttribute('data-structured-data', 'true');
         jsonLd.textContent = JSON.stringify(seoData.structuredData);
-        document.head?.appendChild(jsonLd);
+        document.head.appendChild(jsonLd);
       }
     }
 
@@ -155,18 +141,16 @@ export const useSEO = (seoData: SEOData) => {
         'itemListElement': seoData.breadcrumbs
       };
 
-      let breadcrumbJsonLd = document.querySelector('script[type="application/ld+json"][data-breadcrumbs]') as HTMLScriptElement | null;
-      if (breadcrumbJsonLd && breadcrumbJsonLd.textContent !== undefined) {
+      let breadcrumbJsonLd = document.querySelector('script[type="application/ld+json"][data-breadcrumbs]');
+      if (breadcrumbJsonLd) {
         breadcrumbJsonLd.textContent = JSON.stringify(breadcrumbData);
       } else {
         breadcrumbJsonLd = document.createElement('script');
-        breadcrumbJsonLd.type = 'application/ld+json';
-        breadcrumbJsonLd.setAttribute('data-breadcrumbs', 'true');
+        (breadcrumbJsonLd as HTMLScriptElement).type = 'application/ld+json';
+        (breadcrumbJsonLd as HTMLScriptElement).setAttribute('data-breadcrumbs', 'true');
         breadcrumbJsonLd.textContent = JSON.stringify(breadcrumbData);
-        document.head?.appendChild(breadcrumbJsonLd);
+        document.head.appendChild(breadcrumbJsonLd);
       }
-    } catch (error) {
-      console.warn('SEO hook error:', error);
     }
   }, [seoData]);
 };
