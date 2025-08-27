@@ -1,7 +1,7 @@
 import Navigation from "../components/navigation";
 import Footer from "../components/footer";
 import AdSpace from "../components/ad-space";
-import DependencyGraph from "../components/dependency-graph";
+import SimpleDependencyGraph from "../components/simple-dependency-graph";
 import { useSEO } from "../hooks/use-seo";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Network, GitBranch, ArrowRight } from "lucide-react";
@@ -89,7 +89,7 @@ export default function Dependencies() {
 
         {/* Main Dependency Graph */}
         <div className="mb-8">
-          <DependencyGraph 
+          <SimpleDependencyGraph 
             height={700} 
             showControls={true} 
           />
