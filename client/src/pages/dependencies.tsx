@@ -7,21 +7,21 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../co
 import { Network, GitBranch, ArrowRight } from "lucide-react";
 
 export default function Dependencies() {
-  // SEO implementation
-  useSEO({
-    title: 'BIP Dependencies & Relationships - Bitcoin Improvement Proposal Network',
-    description: 'Explore the relationships between Bitcoin Improvement Proposals through an interactive dependency graph showing how BIPs reference, replace, and build upon each other.',
-    keywords: 'Bitcoin BIP dependencies, BIP relationships, Bitcoin proposal network, BIP references, Bitcoin development graph',
-    canonicalUrl: 'https://bip-explorer.pages.dev/dependencies',
-    ogType: 'website',
-    structuredData: {
-      '@context': 'https://schema.org',
-      '@type': 'WebPage',
-      'name': 'BIP Dependencies & Relationships',
-      'description': 'Interactive visualization of relationships between Bitcoin Improvement Proposals',
-      'url': 'https://bip-explorer.pages.dev/dependencies'
-    }
-  });
+  // Temporarily disable SEO to isolate error
+  // useSEO({
+  //   title: 'BIP Dependencies & Relationships - Bitcoin Improvement Proposal Network',
+  //   description: 'Explore the relationships between Bitcoin Improvement Proposals through an interactive dependency graph showing how BIPs reference, replace, and build upon each other.',
+  //   keywords: 'Bitcoin BIP dependencies, BIP relationships, Bitcoin proposal network, BIP references, Bitcoin development graph',
+  //   canonicalUrl: 'https://bip-explorer.pages.dev/dependencies',
+  //   ogType: 'website',
+  //   structuredData: {
+  //     '@context': 'https://schema.org',
+  //     '@type': 'WebPage',
+  //     'name': 'BIP Dependencies & Relationships',
+  //     'description': 'Interactive visualization of relationships between Bitcoin Improvement Proposals',
+  //     'url': 'https://bip-explorer.pages.dev/dependencies'
+  //   }
+  // });
 
   return (
     <div className="min-h-screen bg-background">
