@@ -16,6 +16,7 @@ import About from "./pages/about";
 import CategoriesPage from "./pages/categories";
 import CategoryPage from "./pages/category";
 import LayerPage from "./pages/layer";
+import Dependencies from "./pages/dependencies";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -42,6 +43,7 @@ function Router() {
         <Route path="/categories" component={CategoriesPage} />
         <Route path="/category/:category" component={CategoryPage} />
         <Route path="/layer/:layer" component={LayerPage} />
+        <Route path="/dependencies" component={Dependencies} />
         <Route path="/bip/:number" component={BipDetail} />
         <Route path="/author/:author" component={AuthorProfile} />
         <Route component={NotFound} />

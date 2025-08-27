@@ -61,6 +61,15 @@ export default function Navigation() {
                   Authors
                 </span>
               </Link>
+              <Link href="/dependencies" data-testid="link-dependencies">
+                <span className={`font-medium transition-apple cursor-pointer px-4 py-2 rounded-lg ${
+                  isActive('/dependencies') 
+                    ? 'text-bitcoin-400 bg-bitcoin-900/30' 
+                    : 'text-gray-300 hover:text-bitcoin-400 hover:bg-white/10'
+                }`}>
+                  Dependencies
+                </span>
+              </Link>
               <Link href="/about" data-testid="link-about">
                 <span className={`font-medium transition-apple cursor-pointer px-4 py-2 rounded-lg ${
                   isActive('/about') 
@@ -122,6 +131,14 @@ export default function Navigation() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Authors
+              </span>
+            </Link>
+            <Link href="/dependencies" data-testid="link-mobile-dependencies">
+              <span 
+                className="block text-gray-300 hover:text-bitcoin-400 hover:bg-white/10 px-4 py-3 rounded-xl transition-apple font-medium cursor-pointer"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Dependencies
               </span>
             </Link>
             <Link href="/about" data-testid="link-mobile-about">

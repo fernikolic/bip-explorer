@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import Navigation from "../components/navigation";
 import Footer from "../components/footer";
 import AdSpace from "../components/ad-space";
+import DependencyGraph from "../components/dependency-graph";
 import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
@@ -428,6 +429,15 @@ export default function BipDetail() {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* BIP Dependency Graph */}
+            <div className="my-8">
+              <DependencyGraph 
+                focusedBip={bip.number} 
+                height={500} 
+                showControls={true} 
+              />
             </div>
 
             {/* Bottom Leaderboard Ad */}
