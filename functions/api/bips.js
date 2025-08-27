@@ -161,9 +161,6 @@ function parseBipContent(content, number, file) {
   let created = '2009-01-01';
   let abstract = '';
   let layer = '';
-  let comments = '';
-  let replaces = [];
-  let replacedBy = [];
   
   // Parse metadata from the header
   for (let i = 0; i < Math.min(30, lines.length); i++) {
@@ -188,14 +185,6 @@ function parseBipContent(content, number, file) {
       created = line.replace(/^\s*Created:\s*/i, '').trim();
     } else if (line.match(/^\s*Layer:\s*/i)) {
       layer = line.replace(/^\s*Layer:\s*/i, '').trim();
-    } else if (line.match(/^\s*Comments-URI:\s*/i)) {
-      comments = line.replace(/^\s*Comments-URI:\s*/i, '').trim();
-    } else if (line.match(/^\s*Replaces:\s*/i)) {
-      const replacesStr = line.replace(/^\s*Replaces:\s*/i, '').trim();
-      replaces = replacesStr.split(/,\s*/).map(n => parseInt(n)).filter(n => !isNaN(n));
-    } else if (line.match(/^\s*Replaced-By:\s*/i)) {
-      const replacedByStr = line.replace(/^\s*Replaced-By:\s*/i, '').trim();
-      replacedBy = replacedByStr.split(/,\s*/).map(n => parseInt(n)).filter(n => !isNaN(n));
     }
   }
   
@@ -232,9 +221,7 @@ function parseBipContent(content, number, file) {
     filename: file.name,
     githubUrl: file.html_url,
     layer: layer || 'Consensus',
-    comments: comments || '',
-    replaces: replaces.length > 0 ? replaces : undefined,
-    replacedBy: replacedBy.length > 0 ? replacedBy : undefined,
+    comments: '',
     categories: finalCategories
   };
 }
