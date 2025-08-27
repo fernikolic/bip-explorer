@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
@@ -8,6 +8,7 @@ import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
 import { Link } from "wouter";
 import { Network, RotateCcw, ZoomIn, ZoomOut, Info } from "lucide-react";
+import * as d3 from "d3";
 
 interface GraphNode {
   id: string;
@@ -18,12 +19,35 @@ interface GraphNode {
   layer: string;
   categories: string[];
   authors: string[];
+  x?: number;
+  y?: number;
+  fx?: number | null;
+  fy?: number | null;
 }
 
 interface GraphEdge {
   id: string;
-  source: string;
-  target: string;
+  source: string | GraphNode;
+  target: string | GraphNode;
+  type: 'replaces' | 'references';
+  label: string;
+}
+
+interface D3SimulationNode extends d3.SimulationNodeDatum {
+  id: string;
+  bipNumber: number;
+  title: string;
+  status: string;
+  type: string;
+  layer: string;
+  categories: string[];
+  authors: string[];
+}
+
+interface D3SimulationLink extends d3.SimulationLinkDatum<D3SimulationNode> {
+  id: string;
+  source: string | D3SimulationNode;
+  target: string | D3SimulationNode;
   type: 'replaces' | 'references';
   label: string;
 }
@@ -58,11 +82,24 @@ export default function DependencyGraph({
   const [filterBy, setFilterBy] = useState<string>("all");
   const [showReferences, setShowReferences] = useState(true);
   const [showReplaces, setShowReplaces] = useState(true);
+  const [zoom, setZoom] = useState<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const simulationRef = useRef<d3.Simulation<D3SimulationNode, D3SimulationLink> | null>(null);
 
   useEffect(() => {
     fetchDependencyData();
   }, []);
+
+  useEffect(() => {
+    if (data && filteredData) {
+      renderGraph();
+    }
+    return () => {
+      if (simulationRef.current) {
+        simulationRef.current.stop();
+      }
+    };
+  }, [data, filteredData, height]);
 
   const fetchDependencyData = async () => {
     try {
@@ -119,6 +156,154 @@ export default function DependencyGraph({
       return true;
     })
   } : null;
+
+  const renderGraph = useCallback(() => {
+    if (!filteredData || !svgRef.current) return;
+
+    const svg = d3.select(svgRef.current);
+    const width = svgRef.current.clientWidth || 800;
+    const height = svgRef.current.clientHeight || 600;
+
+    // Clear previous graph
+    svg.selectAll("*").remove();
+
+    // Create container group for zooming/panning
+    const container = svg.append("g");
+
+    // Setup zoom behavior
+    const zoomBehavior = d3.zoom<SVGSVGElement, unknown>()
+      .scaleExtent([0.1, 4])
+      .on("zoom", (event) => {
+        container.attr("transform", event.transform);
+      });
+
+    svg.call(zoomBehavior);
+    setZoom(zoomBehavior);
+
+    // Prepare nodes and links for simulation
+    const nodes: D3SimulationNode[] = filteredData.nodes.map(node => ({
+      ...node,
+      x: Math.random() * width,
+      y: Math.random() * height
+    }));
+
+    const links: D3SimulationLink[] = filteredData.edges.map(edge => ({
+      ...edge,
+      source: edge.source,
+      target: edge.target
+    }));
+
+    // Create force simulation
+    const simulation = d3.forceSimulation<D3SimulationNode>(nodes)
+      .force("link", d3.forceLink<D3SimulationNode, D3SimulationLink>(links).id(d => d.id).distance(100))
+      .force("charge", d3.forceManyBody().strength(-300))
+      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("collision", d3.forceCollide().radius(d => getNodeSize(d) + 5));
+
+    simulationRef.current = simulation;
+
+    // Create links
+    const link = container.append("g")
+      .selectAll("line")
+      .data(links)
+      .join("line")
+      .attr("stroke", d => d.type === 'replaces' ? '#ef4444' : '#3b82f6')
+      .attr("stroke-opacity", 0.6)
+      .attr("stroke-width", 2);
+
+    // Create nodes
+    const node = container.append("g")
+      .selectAll("circle")
+      .data(nodes)
+      .join("circle")
+      .attr("r", d => getNodeSize(d))
+      .attr("fill", d => getStatusColor(d.status))
+      .attr("stroke", "#fff")
+      .attr("stroke-width", 2)
+      .style("cursor", "pointer")
+      .call(d3.drag<SVGCircleElement, D3SimulationNode>()
+        .on("start", (event, d) => {
+          if (!event.active) simulation.alphaTarget(0.3).restart();
+          d.fx = d.x;
+          d.fy = d.y;
+        })
+        .on("drag", (event, d) => {
+          d.fx = event.x;
+          d.fy = event.y;
+        })
+        .on("end", (event, d) => {
+          if (!event.active) simulation.alphaTarget(0);
+          d.fx = null;
+          d.fy = null;
+        }))
+      .on("click", (event, d) => {
+        setSelectedNode(d);
+      });
+
+    // Add hover effects
+    node
+      .on("mouseover", function(event, d) {
+        d3.select(this)
+          .attr("stroke-width", 3)
+          .attr("r", getNodeSize(d) + 2);
+      })
+      .on("mouseout", function(event, d) {
+        d3.select(this)
+          .attr("stroke-width", 2)
+          .attr("r", getNodeSize(d));
+      });
+
+    // Add labels for important nodes
+    const label = container.append("g")
+      .selectAll("text")
+      .data(nodes.filter(d => getNodeSize(d) > 12)) // Only show labels for highly connected nodes
+      .join("text")
+      .text(d => `BIP ${d.bipNumber}`)
+      .attr("font-size", "10px")
+      .attr("font-family", "sans-serif")
+      .attr("fill", "#374151")
+      .attr("text-anchor", "middle")
+      .attr("dy", "0.3em")
+      .style("pointer-events", "none");
+
+    // Update positions on simulation tick
+    simulation.on("tick", () => {
+      link
+        .attr("x1", d => (d.source as D3SimulationNode).x!)
+        .attr("y1", d => (d.source as D3SimulationNode).y!)
+        .attr("x2", d => (d.target as D3SimulationNode).x!)
+        .attr("y2", d => (d.target as D3SimulationNode).y!);
+
+      node
+        .attr("cx", d => d.x!)
+        .attr("cy", d => d.y!);
+
+      label
+        .attr("x", d => d.x!)
+        .attr("y", d => d.y!);
+    });
+
+    // Focus on specific BIP if provided
+    if (focusedBip) {
+      const focusedNode = nodes.find(n => n.bipNumber === focusedBip);
+      if (focusedNode) {
+        // Highlight focused node and its connections
+        node.attr("opacity", d => 
+          d.bipNumber === focusedBip || 
+          links.some(l => 
+            ((l.source as D3SimulationNode).id === d.id && (l.target as D3SimulationNode).bipNumber === focusedBip) ||
+            ((l.target as D3SimulationNode).id === d.id && (l.source as D3SimulationNode).bipNumber === focusedBip)
+          ) ? 1 : 0.3
+        );
+
+        link.attr("opacity", d => 
+          (d.source as D3SimulationNode).bipNumber === focusedBip || 
+          (d.target as D3SimulationNode).bipNumber === focusedBip ? 1 : 0.1
+        );
+      }
+    }
+
+  }, [filteredData, height, focusedBip, getNodeSize, getStatusColor]);
 
   if (loading) {
     return (
@@ -230,32 +415,45 @@ export default function DependencyGraph({
           </div>
         )}
         
-        {/* Graph Placeholder - Will be implemented with D3.js */}
+        {/* Interactive D3.js Graph */}
         <div 
           className="w-full border border-border rounded-lg bg-background relative overflow-hidden"
           style={{ height: `${height}px` }}
         >
-          <div className="absolute inset-0 flex items-center justify-center bg-muted/10">
-            <div className="text-center space-y-4">
-              <Network className="h-16 w-16 text-muted-foreground mx-auto" />
-              <div>
-                <h3 className="text-lg font-semibold">Graph Visualization</h3>
-                <p className="text-muted-foreground text-sm">
-                  Interactive dependency graph will be rendered here
-                </p>
-                <p className="text-xs text-muted-foreground mt-2">
-                  {filteredData.nodes.length} nodes, {filteredData.edges.length} edges
-                </p>
-              </div>
+          {showControls && zoom && (
+            <div className="absolute top-2 right-2 z-10 flex gap-1">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => zoom.scaleBy(d3.select(svgRef.current), 1.2)}
+                className="p-2"
+              >
+                <ZoomIn className="h-4 w-4" />
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => zoom.scaleBy(d3.select(svgRef.current), 0.8)}
+                className="p-2"
+              >
+                <ZoomOut className="h-4 w-4" />
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => zoom.transform(d3.select(svgRef.current), d3.zoomIdentity)}
+                className="p-2"
+              >
+                <RotateCcw className="h-4 w-4" />
+              </Button>
             </div>
-          </div>
+          )}
           
-          {/* SVG will be mounted here */}
           <svg 
             ref={svgRef}
             width="100%" 
             height="100%"
-            className="absolute inset-0"
+            className="w-full h-full"
           />
         </div>
 
