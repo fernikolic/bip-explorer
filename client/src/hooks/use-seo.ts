@@ -24,25 +24,37 @@ interface SEOData {
 
 export const useSEO = (seoData: SEOData) => {
   useEffect(() => {
-    // Set page title
-    document.title = seoData.title;
-
-    // Helper function to set or update meta tag
-    const setMetaTag = (name: string, content: string, property = false) => {
-      if (typeof document === 'undefined') return; // SSR safety
+    try {
+      // Ensure we're in browser environment
+      if (typeof window === 'undefined' || typeof document === 'undefined') return;
       
-      const attribute = property ? 'property' : 'name';
-      let element = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement | null;
-      
-      if (element && element.content !== undefined) {
-        element.content = content;
-      } else {
-        element = document.createElement('meta');
-        element.setAttribute(attribute, name);
-        element.content = content;
-        document.head?.appendChild(element);
+      // Set page title
+      if (document.title !== undefined) {
+        document.title = seoData.title;
       }
-    };
+
+      // Helper function to set or update meta tag
+      const setMetaTag = (name: string, content: string, property = false) => {
+        try {
+          if (typeof document === 'undefined' || !document.querySelector || !document.createElement) return;
+          
+          const attribute = property ? 'property' : 'name';
+          let element = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement | null;
+          
+          if (element && typeof element.content === 'string') {
+            element.content = content;
+          } else if (document.createElement && document.head) {
+            element = document.createElement('meta');
+            if (element && element.setAttribute && typeof element.content === 'string') {
+              element.setAttribute(attribute, name);
+              element.content = content;
+              document.head.appendChild(element);
+            }
+          }
+        } catch (error) {
+          console.warn('Error setting meta tag:', name, error);
+        }
+      };
 
     // Set meta description
     setMetaTag('description', seoData.description);
@@ -153,6 +165,8 @@ export const useSEO = (seoData: SEOData) => {
         breadcrumbJsonLd.textContent = JSON.stringify(breadcrumbData);
         document.head?.appendChild(breadcrumbJsonLd);
       }
+    } catch (error) {
+      console.warn('SEO hook error:', error);
     }
   }, [seoData]);
 };

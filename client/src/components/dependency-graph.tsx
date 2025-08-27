@@ -113,6 +113,7 @@ export default function DependencyGraph({
   const fetchDependencyData = async () => {
     try {
       setLoading(true);
+      setError(null);
       const response = await fetch('/api/dependencies');
       if (!response.ok) {
         throw new Error('Failed to fetch dependency data');
@@ -120,7 +121,8 @@ export default function DependencyGraph({
       const result = await response.json();
       setData(result);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error');
+      console.error('Dependency data fetch error:', err);
+      setError(err instanceof Error ? err.message : 'Unknown error occurred');
     } finally {
       setLoading(false);
     }
@@ -147,16 +149,18 @@ export default function DependencyGraph({
   } : null;
 
   const renderGraph = useCallback(() => {
-    if (!filteredData || !filteredData.nodes.length) return;
-    
-    // Multiple safety checks for SVG element
-    const svgElement = svgRef.current;
-    if (!svgElement || !svgElement.getBoundingClientRect) return;
-    
-    // Wait for DOM to be ready
-    requestAnimationFrame(() => {
-      const currentSvg = svgRef.current;
-      if (!currentSvg || !currentSvg.getBoundingClientRect) return;
+    try {
+      if (!filteredData || !filteredData.nodes.length) return;
+      
+      // Multiple safety checks for SVG element
+      const svgElement = svgRef.current;
+      if (!svgElement || !svgElement.getBoundingClientRect) return;
+      
+      // Wait for DOM to be ready
+      requestAnimationFrame(() => {
+        try {
+          const currentSvg = svgRef.current;
+          if (!currentSvg || !currentSvg.getBoundingClientRect) return;
 
       const svg = d3.select(currentSvg);
       const rect = currentSvg.getBoundingClientRect();
@@ -300,25 +304,43 @@ export default function DependencyGraph({
             (d.target as D3SimulationNode).bipNumber === focusedBip ? 1 : 0.1
           );
         }
-      }
-    });
+          }
+        } catch (error) {
+          console.error('Error in D3 graph rendering:', error);
+        }
+      });
+    } catch (error) {
+      console.error('Error in renderGraph:', error);
+    }
   }, [filteredData, height, focusedBip]);
 
   useEffect(() => {
-    // Add delay to ensure DOM is fully mounted
-    const timeout = setTimeout(() => {
-      if (data && filteredData && svgRef.current) {
-        renderGraph();
-      }
-    }, 100);
+    try {
+      // Add delay to ensure DOM is fully mounted
+      const timeout = setTimeout(() => {
+        try {
+          if (data && filteredData && svgRef.current) {
+            renderGraph();
+          }
+        } catch (error) {
+          console.error('Error in useEffect renderGraph call:', error);
+        }
+      }, 100);
 
-    return () => {
-      clearTimeout(timeout);
-      if (simulationRef.current) {
-        simulationRef.current.stop();
-      }
-    };
-  }, [data, filteredData]);
+      return () => {
+        clearTimeout(timeout);
+        try {
+          if (simulationRef.current) {
+            simulationRef.current.stop();
+          }
+        } catch (error) {
+          console.error('Error stopping simulation:', error);
+        }
+      };
+    } catch (error) {
+      console.error('Error in useEffect:', error);
+    }
+  }, [data, filteredData, renderGraph]);
 
   if (loading) {
     return (
