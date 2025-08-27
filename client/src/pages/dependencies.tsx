@@ -7,21 +7,21 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../co
 import { Network, GitBranch, ArrowRight } from "lucide-react";
 
 export default function Dependencies() {
-  // Temporarily disable SEO to isolate error
-  // useSEO({
-  //   title: 'BIP Dependencies & Relationships - Bitcoin Improvement Proposal Network',
-  //   description: 'Explore the relationships between Bitcoin Improvement Proposals through an interactive dependency graph showing how BIPs reference, replace, and build upon each other.',
-  //   keywords: 'Bitcoin BIP dependencies, BIP relationships, Bitcoin proposal network, BIP references, Bitcoin development graph',
-  //   canonicalUrl: 'https://bip-explorer.pages.dev/dependencies',
-  //   ogType: 'website',
-  //   structuredData: {
-  //     '@context': 'https://schema.org',
-  //     '@type': 'WebPage',
-  //     'name': 'BIP Dependencies & Relationships',
-  //     'description': 'Interactive visualization of relationships between Bitcoin Improvement Proposals',
-  //     'url': 'https://bip-explorer.pages.dev/dependencies'
-  //   }
-  // });
+  // SEO implementation
+  useSEO({
+    title: 'BIP Dependencies & Relationships - Bitcoin Improvement Proposal Network',
+    description: 'Explore the relationships between Bitcoin Improvement Proposals through an interactive dependency graph showing how BIPs reference, replace, and build upon each other.',
+    keywords: 'Bitcoin BIP dependencies, BIP relationships, Bitcoin proposal network, BIP references, Bitcoin development graph',
+    canonicalUrl: 'https://bip-explorer.pages.dev/dependencies',
+    ogType: 'website',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      'name': 'BIP Dependencies & Relationships',
+      'description': 'Interactive visualization of relationships between Bitcoin Improvement Proposals',
+      'url': 'https://bip-explorer.pages.dev/dependencies'
+    }
+  });
 
   return (
     <div className="min-h-screen bg-background">
@@ -87,24 +87,12 @@ export default function Dependencies() {
           </Card>
         </div>
 
-        {/* Main Dependency Graph - Temporarily disabled to isolate error */}
+        {/* Main Dependency Graph */}
         <div className="mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Network className="h-5 w-5" />
-                BIP Dependency Graph
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="h-96 flex items-center justify-center border rounded-lg bg-muted/10">
-                <div className="text-center">
-                  <Network className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                  <p className="text-muted-foreground">Graph temporarily disabled for debugging</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <DependencyGraph 
+            height={700} 
+            showControls={true} 
+          />
         </div>
 
         {/* Large Rectangle Ad */}

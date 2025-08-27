@@ -147,15 +147,19 @@ export default function DependencyGraph({
   } : null;
 
   const renderGraph = useCallback(() => {
-    if (!filteredData || !svgRef.current || !filteredData.nodes.length) return;
-
+    if (!filteredData || !filteredData.nodes.length) return;
+    
+    // Multiple safety checks for SVG element
+    const svgElement = svgRef.current;
+    if (!svgElement || !svgElement.getBoundingClientRect) return;
+    
     // Wait for DOM to be ready
     requestAnimationFrame(() => {
-      const svgElement = svgRef.current;
-      if (!svgElement) return;
+      const currentSvg = svgRef.current;
+      if (!currentSvg || !currentSvg.getBoundingClientRect) return;
 
-      const svg = d3.select(svgElement);
-      const rect = svgElement.getBoundingClientRect();
+      const svg = d3.select(currentSvg);
+      const rect = currentSvg.getBoundingClientRect();
       const width = rect.width || 800;
       const containerHeight = rect.height || 600;
 
@@ -301,15 +305,20 @@ export default function DependencyGraph({
   }, [filteredData, height, focusedBip]);
 
   useEffect(() => {
-    if (data && filteredData) {
-      renderGraph();
-    }
+    // Add delay to ensure DOM is fully mounted
+    const timeout = setTimeout(() => {
+      if (data && filteredData && svgRef.current) {
+        renderGraph();
+      }
+    }, 100);
+
     return () => {
+      clearTimeout(timeout);
       if (simulationRef.current) {
         simulationRef.current.stop();
       }
     };
-  }, [renderGraph, data, filteredData]);
+  }, [data, filteredData]);
 
   if (loading) {
     return (
