@@ -70,6 +70,30 @@ interface DependencyGraphProps {
   showControls?: boolean;
 }
 
+// Helper functions moved outside component to avoid circular dependencies
+const getStatusColor = (status: string) => {
+  switch (status.toLowerCase()) {
+    case 'final': return '#22c55e'; // green
+    case 'active': return '#3b82f6'; // blue  
+    case 'proposed': return '#f59e0b'; // amber
+    case 'draft': return '#6b7280'; // gray
+    case 'deferred': return '#8b5cf6'; // purple
+    case 'rejected': return '#ef4444'; // red
+    case 'withdrawn': return '#9ca3af'; // gray-400
+    case 'replaced': return '#f97316'; // orange
+    case 'obsolete': return '#6b7280'; // gray
+    default: return '#6b7280'; // gray
+  }
+};
+
+const getNodeSize = (node: GraphNode, edges: GraphEdge[]) => {
+  // Size nodes based on how many connections they have
+  const connections = edges.filter(e => 
+    e.source === node.id || e.target === node.id
+  ).length;
+  return Math.max(8, Math.min(20, 8 + connections * 2));
+};
+
 export default function DependencyGraph({ 
   focusedBip, 
   height = 600, 
@@ -85,21 +109,6 @@ export default function DependencyGraph({
   const [zoom, setZoom] = useState<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const simulationRef = useRef<d3.Simulation<D3SimulationNode, D3SimulationLink> | null>(null);
-
-  useEffect(() => {
-    fetchDependencyData();
-  }, []);
-
-  useEffect(() => {
-    if (data && filteredData) {
-      renderGraph();
-    }
-    return () => {
-      if (simulationRef.current) {
-        simulationRef.current.stop();
-      }
-    };
-  }, [data, filteredData, height]);
 
   const fetchDependencyData = async () => {
     try {
@@ -117,29 +126,9 @@ export default function DependencyGraph({
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case 'final': return '#22c55e'; // green
-      case 'active': return '#3b82f6'; // blue  
-      case 'proposed': return '#f59e0b'; // amber
-      case 'draft': return '#6b7280'; // gray
-      case 'deferred': return '#8b5cf6'; // purple
-      case 'rejected': return '#ef4444'; // red
-      case 'withdrawn': return '#9ca3af'; // gray-400
-      case 'replaced': return '#f97316'; // orange
-      case 'obsolete': return '#6b7280'; // gray
-      default: return '#6b7280'; // gray
-    }
-  };
-
-  const getNodeSize = (node: GraphNode) => {
-    // Size nodes based on how many connections they have
-    if (!data) return 8;
-    const connections = data.edges.filter(e => 
-      e.source === node.id || e.target === node.id
-    ).length;
-    return Math.max(8, Math.min(20, 8 + connections * 2));
-  };
+  useEffect(() => {
+    fetchDependencyData();
+  }, []);
 
   const filteredData = data ? {
     ...data,
@@ -162,7 +151,7 @@ export default function DependencyGraph({
 
     const svg = d3.select(svgRef.current);
     const width = svgRef.current.clientWidth || 800;
-    const height = svgRef.current.clientHeight || 600;
+    const containerHeight = svgRef.current.clientHeight || 600;
 
     // Clear previous graph
     svg.selectAll("*").remove();
@@ -184,7 +173,7 @@ export default function DependencyGraph({
     const nodes: D3SimulationNode[] = filteredData.nodes.map(node => ({
       ...node,
       x: Math.random() * width,
-      y: Math.random() * height
+      y: Math.random() * containerHeight
     }));
 
     const links: D3SimulationLink[] = filteredData.edges.map(edge => ({
@@ -197,8 +186,8 @@ export default function DependencyGraph({
     const simulation = d3.forceSimulation<D3SimulationNode>(nodes)
       .force("link", d3.forceLink<D3SimulationNode, D3SimulationLink>(links).id(d => d.id).distance(100))
       .force("charge", d3.forceManyBody().strength(-300))
-      .force("center", d3.forceCenter(width / 2, height / 2))
-      .force("collision", d3.forceCollide().radius(d => getNodeSize(d) + 5));
+      .force("center", d3.forceCenter(width / 2, containerHeight / 2))
+      .force("collision", d3.forceCollide().radius(d => getNodeSize(d, filteredData.edges) + 5));
 
     simulationRef.current = simulation;
 
@@ -216,7 +205,7 @@ export default function DependencyGraph({
       .selectAll("circle")
       .data(nodes)
       .join("circle")
-      .attr("r", d => getNodeSize(d))
+      .attr("r", d => getNodeSize(d, filteredData.edges))
       .attr("fill", d => getStatusColor(d.status))
       .attr("stroke", "#fff")
       .attr("stroke-width", 2)
@@ -245,18 +234,18 @@ export default function DependencyGraph({
       .on("mouseover", function(event, d) {
         d3.select(this)
           .attr("stroke-width", 3)
-          .attr("r", getNodeSize(d) + 2);
+          .attr("r", getNodeSize(d, filteredData.edges) + 2);
       })
       .on("mouseout", function(event, d) {
         d3.select(this)
           .attr("stroke-width", 2)
-          .attr("r", getNodeSize(d));
+          .attr("r", getNodeSize(d, filteredData.edges));
       });
 
     // Add labels for important nodes
     const label = container.append("g")
       .selectAll("text")
-      .data(nodes.filter(d => getNodeSize(d) > 12)) // Only show labels for highly connected nodes
+      .data(nodes.filter(d => getNodeSize(d, filteredData.edges) > 12))
       .join("text")
       .text(d => `BIP ${d.bipNumber}`)
       .attr("font-size", "10px")
@@ -303,7 +292,18 @@ export default function DependencyGraph({
       }
     }
 
-  }, [filteredData, height, focusedBip, getNodeSize, getStatusColor]);
+  }, [filteredData, height, focusedBip]);
+
+  useEffect(() => {
+    if (data && filteredData) {
+      renderGraph();
+    }
+    return () => {
+      if (simulationRef.current) {
+        simulationRef.current.stop();
+      }
+    };
+  }, [renderGraph, data, filteredData]);
 
   if (loading) {
     return (
