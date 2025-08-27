@@ -87,12 +87,27 @@ export default function Dependencies() {
           </Card>
         </div>
 
-        {/* Main Dependency Graph */}
+        {/* Main Dependency Graph - Basic test */}
         <div className="mb-8">
-          <SimpleDependencyGraph 
-            height={700} 
-            showControls={true} 
-          />
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Network className="h-5 w-5" />
+                BIP Dependency Graph
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="h-96 flex items-center justify-center border rounded-lg">
+                <div className="text-center">
+                  <Network className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold">BIP Dependency Visualization</h3>
+                  <p className="text-muted-foreground">
+                    Interactive graph showing relationships between Bitcoin Improvement Proposals
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Large Rectangle Ad */}
