@@ -33,7 +33,7 @@ export default function LayerPage() {
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case 'final': return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300';
-      case 'active': return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300';
+      case 'active': return 'bg-blue-100 text-blue-800 dark:bg-gray-900/30 dark:text-gray-300';
       case 'draft': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300';
       case 'deferred': return 'bg-gray-100 text-gray-800 dark:bg-gray-800/30 dark:text-gray-300';
       case 'rejected': return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300';
@@ -44,7 +44,7 @@ export default function LayerPage() {
   const getTypeColor = (type: string) => {
     switch (type.toLowerCase()) {
       case 'standards track': return 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300';
-      case 'informational': return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300';
+      case 'informational': return 'bg-blue-100 text-blue-800 dark:bg-gray-900/30 dark:text-gray-300';
       case 'process': return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300';
       default: return 'bg-gray-100 text-gray-800 dark:bg-gray-800/30 dark:text-gray-300';
     }
@@ -97,7 +97,7 @@ export default function LayerPage() {
 
         {/* Layer Header */}
         <div className="relative overflow-hidden mb-8">
-          <div className="absolute inset-0 bg-gradient-to-br from-bitcoin-50/80 via-white to-bitcoin-50/60 dark:from-bitcoin-950/40 dark:via-background dark:to-bitcoin-950/20 rounded-3xl" />
+          <div className="absolute inset-0 bg-gradient-to-br from-bitcoin-50/80 via-white to-bitcoin-50/60 dark:bg-black rounded-3xl" />
           
           <div className="relative bg-white/80 dark:bg-background/80 backdrop-blur-xl rounded-3xl border border-border/50 p-8 shadow-xl shadow-bitcoin-500/5">
             <div className="flex items-start gap-6">
@@ -132,7 +132,7 @@ export default function LayerPage() {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
-              <Card key={i} className="p-6 bg-card dark:bg-gray-900">
+              <Card key={i} className="p-6 bg-card dark:bg-black">
                 <Skeleton className="h-6 w-16 mb-4" />
                 <Skeleton className="h-6 w-full mb-2" />
                 <Skeleton className="h-4 w-3/4 mb-4" />
@@ -158,7 +158,7 @@ export default function LayerPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {layerBips.map((bip) => (
               <Link key={bip.number} href={`/bip/${bip.number}`}>
-                <Card className="group h-full hover:shadow-lg hover:shadow-bitcoin-500/10 transition-all duration-200 hover:-translate-y-1 cursor-pointer bg-white dark:bg-gray-900">
+                <Card className="group h-full hover:shadow-lg hover:shadow-bitcoin-500/10 transition-all duration-200 hover:-translate-y-1 cursor-pointer bg-white dark:bg-black">
                   <CardContent className="p-6">
                     {/* BIP Number Badge */}
                     <div className="flex items-center justify-between mb-4">

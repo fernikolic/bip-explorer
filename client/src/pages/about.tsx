@@ -90,7 +90,7 @@ export default function About() {
           </h2>
           <div className="grid gap-8 lg:grid-cols-2">
             {features.map((feature, index) => (
-              <Card key={index} className="rounded-2xl shadow-subtle hover:shadow-moderate border border-gray-100 transition-apple hover-lift bg-card dark:bg-gray-900">
+              <Card key={index} className="rounded-2xl shadow-subtle hover:shadow-moderate border border-gray-100 transition-apple hover-lift bg-card dark:bg-black">
                 <CardContent className="p-8">
                   <div className="flex items-start gap-6">
                     <div className="flex-shrink-0">
@@ -113,7 +113,7 @@ export default function About() {
 
         {/* What are BIPs Section */}
         <section className="mb-20">
-          <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-3xl p-8 lg:p-12">
+          <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:bg-black rounded-3xl p-8 lg:p-12">
             <h2 className="text-4xl font-light text-foreground mb-6 text-center tracking-tight">
               What are Bitcoin Improvement Proposals?
             </h2>
@@ -161,7 +161,7 @@ export default function About() {
         {/* Technical Details */}
         <section className="mb-20">
           <div className="grid gap-8 lg:grid-cols-2">
-            <Card className="rounded-3xl shadow-subtle border-0 bg-card dark:bg-gray-900">
+            <Card className="rounded-3xl shadow-subtle border-0 bg-card dark:bg-black">
               <CardContent className="p-10">
                 <h3 className="text-2xl font-light text-foreground mb-4">
                   Technical Architecture
@@ -176,7 +176,7 @@ export default function About() {
               </CardContent>
             </Card>
             
-            <Card className="rounded-3xl shadow-subtle border-0 bg-card dark:bg-gray-900">
+            <Card className="rounded-3xl shadow-subtle border-0 bg-card dark:bg-black">
               <CardContent className="p-10">
                 <h3 className="text-2xl font-light text-foreground mb-4">
                   Content Processing

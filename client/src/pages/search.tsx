@@ -65,7 +65,7 @@ export default function Search() {
       <Navigation />
       
       {/* Hero Section with Advanced Search */}
-      <section className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 py-16 lg:py-20">
+      <section className="bg-gradient-to-br from-gray-50 to-gray-100 dark:bg-black py-16 lg:py-20">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <h1 className="text-5xl lg:text-6xl font-light text-foreground mb-6 tracking-tight">
@@ -78,7 +78,7 @@ export default function Search() {
           
           {/* Advanced Search and Filters */}
           <div className="max-w-5xl mx-auto">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-elevated border border-border/50">
+            <div className="bg-white dark:bg-black rounded-2xl p-6 shadow-elevated border border-border/50">
               <SearchFilters
                 searchTerm={searchTerm}
                 onSearchChange={setSearchTerm}

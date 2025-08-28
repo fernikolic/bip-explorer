@@ -81,7 +81,7 @@ export default function Authors() {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 py-16 lg:py-20">
+      <section className="bg-gradient-to-br from-gray-50 to-gray-100 dark:bg-black py-16 lg:py-20">
         <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center">
           <h1 className="text-5xl lg:text-6xl font-light text-foreground mb-6 tracking-tight">
             BIP Authors & Contributors

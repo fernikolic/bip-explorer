@@ -22,7 +22,7 @@ export default function Hero({
   onSortChange,
 }: HeroProps) {
   return (
-    <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white py-24 lg:py-32 overflow-hidden">
+    <section className="relative bg-black dark:bg-black text-white py-24 lg:py-32 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-r from-bitcoin-500/10 to-bitcoin-600/10" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-bitcoin-500/5 via-transparent to-transparent" />
