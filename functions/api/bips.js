@@ -57,9 +57,8 @@ export async function onRequest(context) {
     const bipFiles = files.filter(file => file.name.endsWith('.mediawiki'));
     const bips = [];
     
-    // Process up to 188 BIPs to match localhost exactly
-    const maxBips = Math.min(bipFiles.length, 188);
-    const filesToProcess = bipFiles.slice(0, maxBips);
+    // Process all available BIP files
+    const filesToProcess = bipFiles;
     
     // Process in batches of 10 to avoid overwhelming the API
     const batchSize = 10;

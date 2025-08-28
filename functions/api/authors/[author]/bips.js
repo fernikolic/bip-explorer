@@ -20,8 +20,8 @@ export async function onRequest(context) {
     
     const authorBips = [];
     
-    // Process first 50 BIPs to find ones by this author
-    for (const file of bipFiles.slice(0, 50)) {
+    // Process all BIP files to find ones by this author
+    for (const file of bipFiles) {
       const match = file.name.match(/bip-(\d+)\.mediawiki/);
       if (!match) continue;
       
