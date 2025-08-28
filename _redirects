@@ -1,0 +1,15 @@
+# Block access to source directories and sensitive files
+/node_modules/* /404 404
+/src/* /404 404
+/.git/* /404 404
+/.env /404 404
+/package.json /404 404
+/package-lock.json /404 404
+/tsconfig.json /404 404
+/vite.config.* /404 404
+/wrangler.toml /404 404
+/*.map /404 404
+/_vite/* /404 404
+
+# SPA fallback - must be last
+/*    /index.html   200
