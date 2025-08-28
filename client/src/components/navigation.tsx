@@ -12,7 +12,7 @@ export default function Navigation() {
   const isActive = (path: string) => location === path;
 
   return (
-    <nav className="bg-gradient-to-br from-gray-900 via-gray-800 to-black backdrop-blur-2xl shadow-lg border-b border-gray-700/20 sticky top-0 z-50">
+    <nav className="bg-black dark:bg-black backdrop-blur-2xl shadow-lg border-b border-gray-700/20 dark:border-gray-800/20 sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center space-x-8">
@@ -98,7 +98,7 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black backdrop-blur-2xl border-t border-gray-700/20">
+        <div className="lg:hidden bg-black dark:bg-black backdrop-blur-2xl border-t border-gray-700/20 dark:border-gray-800/20">
           <div className="px-6 py-6 space-y-4">
             <Link href="/" data-testid="link-mobile-browse">
               <span 
