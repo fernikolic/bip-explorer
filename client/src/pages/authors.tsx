@@ -40,6 +40,9 @@ export default function Authors() {
     
     bips.forEach(bip => {
       bip.authors.forEach(authorName => {
+        // Skip "Unknown" authors as they are fallback entries from failed content fetches
+        if (authorName === 'Unknown') return;
+        
         if (!authorMap.has(authorName)) {
           authorMap.set(authorName, {
             name: authorName,
