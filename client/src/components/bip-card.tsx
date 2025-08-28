@@ -29,7 +29,7 @@ export default function BipCard({ bip }: BipCardProps) {
   };
 
   return (
-    <div className="w-full bg-card dark:bg-gray-900 rounded-3xl shadow-subtle hover:shadow-prominent border border-border transition-apple hover-lift overflow-hidden" data-testid={`card-bip-${bip.number}`}>
+    <div className="w-full bg-card dark:bg-black rounded-3xl shadow-subtle hover:shadow-prominent border border-border transition-apple hover-lift overflow-hidden" data-testid={`card-bip-${bip.number}`}>
       <div className="p-8 lg:p-10">
         <div className="flex flex-col lg:flex-row lg:items-start gap-8">
           <div className="flex-shrink-0">

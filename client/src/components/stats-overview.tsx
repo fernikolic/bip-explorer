@@ -51,7 +51,7 @@ export default function StatsOverview() {
         
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {[...Array(4)].map((_, i) => (
-            <Card key={i} className="p-10 rounded-3xl shadow-subtle hover:shadow-prominent border border-border bg-card dark:bg-gray-900 transition-apple">
+            <Card key={i} className="p-10 rounded-3xl shadow-subtle hover:shadow-prominent border border-border bg-card dark:bg-black transition-apple">
               <CardContent className="p-0 text-center">
                 <Skeleton className="h-12 w-20 mb-4 mx-auto" />
                 <Skeleton className="h-4 w-28 mx-auto" />
@@ -85,7 +85,7 @@ export default function StatsOverview() {
       </div>
       
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-      <Card className="p-10 rounded-3xl shadow-subtle hover:shadow-prominent border border-border bg-card dark:bg-gray-900 transition-apple hover-lift" data-testid="card-total-bips">
+      <Card className="p-10 rounded-3xl shadow-subtle hover:shadow-prominent border border-border bg-card dark:bg-black transition-apple hover-lift" data-testid="card-total-bips">
         <CardContent className="p-0 text-center">
           <div className="text-5xl font-light text-foreground mb-4 tracking-tight" data-testid="text-total-bips">
             {stats.totalBips}
@@ -94,7 +94,7 @@ export default function StatsOverview() {
         </CardContent>
       </Card>
       
-      <Card className="p-10 rounded-3xl shadow-subtle hover:shadow-prominent border border-border bg-card dark:bg-gray-900 transition-apple hover-lift" data-testid="card-final-bips">
+      <Card className="p-10 rounded-3xl shadow-subtle hover:shadow-prominent border border-border bg-card dark:bg-black transition-apple hover-lift" data-testid="card-final-bips">
         <CardContent className="p-0 text-center">
           <div className="text-5xl font-light text-foreground mb-4 tracking-tight" data-testid="text-final-bips">
             {stats.finalBips}
@@ -103,7 +103,7 @@ export default function StatsOverview() {
         </CardContent>
       </Card>
       
-      <Card className="p-10 rounded-3xl shadow-subtle hover:shadow-prominent border border-border bg-card dark:bg-gray-900 transition-apple hover-lift" data-testid="card-active-bips">
+      <Card className="p-10 rounded-3xl shadow-subtle hover:shadow-prominent border border-border bg-card dark:bg-black transition-apple hover-lift" data-testid="card-active-bips">
         <CardContent className="p-0 text-center">
           <div className="text-5xl font-light text-foreground mb-4 tracking-tight" data-testid="text-active-bips">
             {stats.activeBips}
@@ -112,7 +112,7 @@ export default function StatsOverview() {
         </CardContent>
       </Card>
       
-      <Card className="p-10 rounded-3xl shadow-subtle hover:shadow-prominent border border-border bg-card dark:bg-gray-900 transition-apple hover-lift" data-testid="card-contributors">
+      <Card className="p-10 rounded-3xl shadow-subtle hover:shadow-prominent border border-border bg-card dark:bg-black transition-apple hover-lift" data-testid="card-contributors">
         <CardContent className="p-0 text-center">
           <div className="text-5xl font-light text-foreground mb-4 tracking-tight" data-testid="text-contributors">
             {stats.contributors}

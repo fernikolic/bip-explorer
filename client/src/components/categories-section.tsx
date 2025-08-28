@@ -20,7 +20,7 @@ export default function CategoriesSection() {
             <Skeleton className="h-6 w-48 mb-4" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[...Array(4)].map((_, i) => (
-                <Card key={i} className="p-6 bg-card dark:bg-gray-900">
+                <Card key={i} className="p-6 bg-card dark:bg-black">
                   <div className="flex items-center justify-between">
                     <div className="space-y-2">
                       <Skeleton className="h-5 w-32" />
@@ -35,7 +35,7 @@ export default function CategoriesSection() {
           </div>
           <div>
             <Skeleton className="h-6 w-32 mb-4" />
-            <Card className="p-4 bg-card dark:bg-gray-900">
+            <Card className="p-4 bg-card dark:bg-black">
               <div className="space-y-4">
                 {[...Array(3)].map((_, i) => (
                   <div key={i} className="flex items-start space-x-3">
@@ -59,7 +59,7 @@ export default function CategoriesSection() {
         <div className="lg:col-span-2">
           <h3 className="text-lg font-semibold text-foreground mb-4">Browse by Category</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Card className="p-6 border border-border hover:shadow-md transition-shadow cursor-pointer bg-card dark:bg-gray-900" data-testid="card-standards-track">
+            <Card className="p-6 border border-border hover:shadow-md transition-shadow cursor-pointer bg-card dark:bg-black" data-testid="card-standards-track">
               <CardContent className="p-0">
                 <div>
                   <h4 className="font-semibold text-foreground">Standards Track</h4>
@@ -71,7 +71,7 @@ export default function CategoriesSection() {
               </CardContent>
             </Card>
             
-            <Card className="p-6 border border-border hover:shadow-md transition-shadow cursor-pointer bg-card dark:bg-gray-900" data-testid="card-informational">
+            <Card className="p-6 border border-border hover:shadow-md transition-shadow cursor-pointer bg-card dark:bg-black" data-testid="card-informational">
               <CardContent className="p-0">
                 <div>
                   <h4 className="font-semibold text-foreground">Informational</h4>
@@ -83,7 +83,7 @@ export default function CategoriesSection() {
               </CardContent>
             </Card>
             
-            <Card className="p-6 border border-border hover:shadow-md transition-shadow cursor-pointer bg-card dark:bg-gray-900" data-testid="card-process">
+            <Card className="p-6 border border-border hover:shadow-md transition-shadow cursor-pointer bg-card dark:bg-black" data-testid="card-process">
               <CardContent className="p-0">
                 <div>
                   <h4 className="font-semibold text-foreground">Process</h4>
@@ -95,7 +95,7 @@ export default function CategoriesSection() {
               </CardContent>
             </Card>
             
-            <Card className="p-6 border border-border hover:shadow-md transition-shadow cursor-pointer bg-card dark:bg-gray-900" data-testid="card-final-status">
+            <Card className="p-6 border border-border hover:shadow-md transition-shadow cursor-pointer bg-card dark:bg-black" data-testid="card-final-status">
               <CardContent className="p-0">
                 <div>
                   <h4 className="font-semibold text-foreground">Final Status</h4>
@@ -111,7 +111,7 @@ export default function CategoriesSection() {
         
         <div>
           <h3 className="text-lg font-semibold text-foreground mb-4">Recent Updates</h3>
-          <Card className="border border-border p-4 bg-card dark:bg-gray-900">
+          <Card className="border border-border p-4 bg-card dark:bg-black">
             <CardContent className="p-0">
               <div className="space-y-4">
                 <div className="flex items-start space-x-3" data-testid="update-recent-1">
@@ -137,7 +137,7 @@ export default function CategoriesSection() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-3" data-testid="update-recent-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mt-2"></div>
                   <div>
                     <p className="text-sm font-medium text-foreground">BIP 324 Final</p>
                     <p className="text-xs text-muted-foreground">v2 transport encryption</p>
