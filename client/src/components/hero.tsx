@@ -22,33 +22,33 @@ export default function Hero({
   onSortChange,
 }: HeroProps) {
   return (
-    <section className="relative bg-black dark:bg-black text-white py-24 lg:py-32 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:bg-black text-gray-900 dark:text-white py-24 lg:py-32 overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-r from-bitcoin-500/10 to-bitcoin-600/10" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-bitcoin-500/5 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-bitcoin-500/5 to-bitcoin-600/5 dark:from-bitcoin-500/10 dark:to-bitcoin-600/10" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-bitcoin-500/3 via-transparent to-transparent dark:from-bitcoin-500/5" />
       
       <div className="relative max-w-6xl mx-auto px-6 lg:px-8">
         <div className="text-center">
-          <div className="mb-6 inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-sm font-medium text-white/90">
+          <div className="mb-6 inline-flex items-center px-4 py-2 rounded-full bg-bitcoin-50 dark:bg-white/10 backdrop-blur-sm border border-bitcoin-200 dark:border-white/20 text-sm font-medium text-bitcoin-700 dark:text-white/90">
             ⚡ Latest Bitcoin Protocol Specifications
           </div>
           
           <h1 className="text-6xl lg:text-8xl font-extralight mb-8 leading-none tracking-tight">
             Bitcoin Improvement
             <br />
-            <span className="font-light text-white">
+            <span className="font-light text-gray-900 dark:text-white">
               Proposals
             </span>
           </h1>
           
-          <p className="text-xl lg:text-2xl text-white/70 font-light mb-12 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl lg:text-2xl text-gray-600 dark:text-white/70 font-light mb-12 max-w-4xl mx-auto leading-relaxed">
             The definitive resource for understanding how Bitcoin evolves. 
             Explore technical specifications with intelligent summaries designed for professionals.
           </p>
           
           {/* Advanced Search and Filters */}
           <div className="max-w-5xl mx-auto">
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-elevated">
+            <div className="bg-white dark:bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-elevated">
               <SearchFilters
                 searchTerm={searchTerm}
                 onSearchChange={onSearchChange}
