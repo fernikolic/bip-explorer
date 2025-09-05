@@ -33,9 +33,9 @@ export default function AdSpace({ size, className = '' }: AdSpaceProps) {
         className={`${getAdDimensions()} bg-muted/50 border border-border rounded-2xl flex items-center justify-center text-muted-foreground shadow-sm transition-all duration-200 hover:bg-muted/70 hover:shadow-md`}
         data-testid={`ad-space-${size}`}
       >
-        <div className="text-center">
+        <div className="text-center px-4">
           <div className="text-sm uppercase tracking-wide mb-2 font-medium">Advertisement</div>
-          <div className="text-sm opacity-60">
+          <div className="text-sm opacity-60 mb-2">
             {size === 'banner' && 'Full Width Banner • 160px'}
             {size === 'rectangle' && 'Full Width Rectangle • 400px'}
             {size === 'skyscraper' && 'Skyscraper • 300×600'}
@@ -44,6 +44,17 @@ export default function AdSpace({ size, className = '' }: AdSpaceProps) {
             {size === 'leaderboard' && 'Leaderboard • Full Width'}
             {size === 'large-rectangle' && 'Large Rectangle • 400px'}
             {size === 'wide-skyscraper' && 'Wide Skyscraper • 400×600'}
+          </div>
+          <div className="text-xs opacity-75">
+            Want to buy ad space? Send a DM to{' '}
+            <a 
+              href="https://x.com/BIPExplorer" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="underline hover:opacity-100 transition-opacity"
+            >
+              @BIPExplorer
+            </a>
           </div>
         </div>
       </div>
