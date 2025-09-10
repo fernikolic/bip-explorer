@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import Navigation from "../components/navigation";
 import Footer from "../components/footer";
 import AdSpace from "../components/ad-space";
+import BipTimeline from "../components/bip-timeline";
 import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
@@ -392,6 +393,9 @@ export default function BipDetail() {
             <div className="my-8">
               <AdSpace size="large-rectangle" />
             </div>
+
+            {/* Timeline & Version History */}
+            <BipTimeline bipNumber={bip.number} />
 
             {/* Modern Specification */}
             <div className="relative overflow-hidden">

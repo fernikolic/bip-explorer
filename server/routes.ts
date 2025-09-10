@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { Bip, bipSchema } from "@shared/schema";
 import { generateELI5 } from "./openai";
+import { githubTimelineService } from "./github-timeline";
 // Inline BIP categorization to avoid import issues in serverless deployment
 function getBipCategories(bipNumber: number): string[] {
   // Comprehensive BIP categorization mapping
@@ -459,6 +460,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Error fetching stats:', error);
       res.status(500).json({ message: 'Failed to fetch statistics' });
+    }
+  });
+
+  // Get timeline/version history for a specific BIP
+  app.get("/api/bips/:number/timeline", async (req, res) => {
+    try {
+      const number = parseInt(req.params.number, 10);
+      if (isNaN(number)) {
+        return res.status(400).json({ message: 'Invalid BIP number' });
+      }
+      
+      const timeline = await githubTimelineService.fetchCommitHistory(number);
+      res.json(timeline);
+    } catch (error) {
+      console.error('Error fetching BIP timeline:', error);
+      res.status(500).json({ message: 'Failed to fetch BIP timeline' });
     }
   });
 
