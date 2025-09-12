@@ -34,7 +34,4 @@ Allow: /*.svg
 Allow: /*.ico
 
 # Sitemap location
-Sitemap: https://bip-explorer.pages.dev/sitemap.xml
-
-# Reasonable crawl delay to prevent server overload
-Crawl-delay: 1
+Sitemap: https://bipexplorer.com/sitemap.xml

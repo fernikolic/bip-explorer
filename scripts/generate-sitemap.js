@@ -48,7 +48,7 @@ const commonAuthors = [
 const layers = ['Consensus', 'Peer Services', 'API/RPC', 'Applications'];
 
 function generateSitemap() {
-  const baseUrl = 'https://bip-explorer.pages.dev';
+  const baseUrl = 'https://bipexplorer.com';
   const now = new Date();
   const today = now.toISOString().split('T')[0];
   
