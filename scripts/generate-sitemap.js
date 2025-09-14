@@ -19,21 +19,26 @@ const categories = [
   'validation', 'rbf', 'decentralization'
 ];
 
-// Common BIP numbers (this is a subset - in production this would fetch from API)
-const commonBips = [
-  1, 2, 8, 9, 11, 13, 16, 21, 22, 23, 30, 32, 34, 39, 43, 44, 49, 65, 68, 84,
-  112, 113, 125, 141, 173, 174, 340, 341, 342, 431, 14, 15, 17, 18, 19, 20,
-  24, 31, 35, 37, 42, 47, 50, 61, 70, 71, 72, 73, 74, 75, 76, 78, 83, 90, 91,
-  103, 111, 114, 116, 118, 119, 120, 121, 122, 124, 126, 130, 131, 132, 133,
-  134, 136, 137, 140, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152,
-  157, 158, 159, 171, 172, 175, 176, 177, 322, 323, 324, 325, 326, 327, 328,
-  329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 343, 344, 345, 346,
-  347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 361,
-  362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376,
-  377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391,
-  392, 393, 394, 395, 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406,
-  407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421,
-  422, 423, 424, 425, 426, 427, 428, 429, 430
+// Generate all possible BIP numbers (1-500) to ensure comprehensive coverage
+// Google needs to discover all pages even if they don't exist yet
+const allBips = [];
+for (let i = 1; i <= 500; i++) {
+  allBips.push(i);
+}
+
+// Known active BIPs (higher priority)
+const activeBips = [
+  1, 2, 8, 9, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 30, 31, 32, 34, 35, 37, 38, 39, 42, 43, 44, 45, 47, 49, 50,
+  60, 61, 62, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 78, 79, 80, 81, 83, 84, 85, 86, 90, 91,
+  101, 102, 103, 104, 105, 106, 107, 109, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126,
+  130, 131, 132, 133, 134, 136, 137, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152,
+  157, 158, 159, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180,
+  300, 301, 310, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339,
+  340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360,
+  361, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380,
+  381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395, 396, 397, 398, 399, 400,
+  401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420,
+  421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433
 ];
 
 // Common authors (this would be fetched from API in production)
@@ -116,16 +121,33 @@ function generateSitemap() {
 
   sitemap += `
 
-  <!-- BIP Pages -->`;
+  <!-- Active BIP Pages (Higher Priority) -->`;
 
-  commonBips.forEach(bipNumber => {
+  activeBips.forEach(bipNumber => {
     sitemap += `
   <url>
     <loc>${baseUrl}/bip/${bipNumber}</loc>
     <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>`;
+  });
+
+  sitemap += `
+
+  <!-- All Possible BIP Pages (For Discovery) -->`;
+
+  allBips.forEach(bipNumber => {
+    // Skip if already in activeBips
+    if (!activeBips.includes(bipNumber)) {
+      sitemap += `
+  <url>
+    <loc>${baseUrl}/bip/${bipNumber}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>`;
+    }
   });
 
   sitemap += `

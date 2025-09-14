@@ -4,7 +4,8 @@
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
-  Content-Security-Policy: default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://replit.com https://fonts.googleapis.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https: data: blob:; connect-src 'self' https://api.github.com https://github.com;
+  Content-Security-Policy: default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://replit.com https://fonts.googleapis.com https://cdn.jsdelivr.net https://pagead2.googlesyndication.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https: data: blob:; connect-src 'self' https://api.github.com https://github.com;
+  X-Robots-Tag: all
 
 /api/*
   Access-Control-Allow-Origin: *
@@ -12,7 +13,35 @@
   Access-Control-Allow-Headers: Content-Type, Authorization
   Cache-Control: no-cache, no-store, must-revalidate
 
+/
+  Link: </sitemap.xml>; rel="sitemap"
+  Cache-Control: public, max-age=3600
+
+/bip/*
+  X-Robots-Tag: all
+  Cache-Control: public, max-age=86400
+
+/author/*
+  X-Robots-Tag: all
+  Cache-Control: public, max-age=86400
+
+/category/*
+  X-Robots-Tag: all
+  Cache-Control: public, max-age=86400
+
+/layer/*
+  X-Robots-Tag: all
+  Cache-Control: public, max-age=86400
+
+/search
+  X-Robots-Tag: all
+  Cache-Control: public, max-age=3600
+
 /sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/sitemap-*.xml
   Content-Type: application/xml; charset=utf-8
   Cache-Control: public, max-age=3600
 

@@ -1,15 +1,37 @@
-# Block access to source directories and sensitive files
-/node_modules/* /404 404
-/src/* /404 404
-/.git/* /404 404
-/.env /404 404
-/package.json /404 404
-/package-lock.json /404 404
-/tsconfig.json /404 404
-/vite.config.* /404 404
-/wrangler.toml /404 404
-/*.map /404 404
-/_vite/* /404 404
+# Handle sitemap files (highest priority)
+/sitemap.xml /sitemap.xml 200!
+/sitemap-*.xml /sitemap-:splat.xml 200!
+/robots.txt /robots.txt 200!
+/ads.txt /ads.txt 200!
 
-# SPA fallback - must be last
+# API routes
+/api/* https://bipexplorer.com/api/:splat 200
+
+# SPA routing - explicit routes first
+/ /index.html 200
+/search /index.html 200
+/authors /index.html 200
+/categories /index.html 200
+/about /index.html 200
+
+# Dynamic routes with proper SPA handling
+/bip/* /index.html 200
+/author/* /index.html 200
+/category/* /index.html 200
+/layer/* /index.html 200
+
+# Block sensitive files and directories (return 404 instead of 403 to avoid indexing issues)
+/node_modules/* /404.html 404
+/src/* /404.html 404
+/.git/* /404.html 404
+/.env /404.html 404
+/package.json /404.html 404
+/package-lock.json /404.html 404
+/tsconfig.json /404.html 404
+/vite.config.* /404.html 404
+/wrangler.toml /404.html 404
+/*.map /404.html 404
+/_vite/* /404.html 404
+
+# Default SPA fallback - must be last
 /*    /index.html   200

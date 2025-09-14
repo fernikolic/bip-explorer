@@ -1,37 +1,74 @@
+# BIP Explorer Robots Configuration
 User-agent: *
 Allow: /
+Crawl-delay: 1
 
-# Explicitly allow important pages
+# Core pages - High priority
+Allow: /
 Allow: /search
-Allow: /authors  
+Allow: /authors
 Allow: /about
 Allow: /categories
 
-# Dynamic content pages
+# Dynamic content - Important for indexing
 Allow: /bip/*
 Allow: /author/*
 Allow: /category/*
 Allow: /layer/*
 
-# Block unnecessary paths
+# API endpoints (for structured data)
+Allow: /api/bips
+Allow: /api/authors
+Allow: /api/stats
+Allow: /api/bip/*
+
+# Static assets
+Allow: /assets/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /images/
+Allow: /favicon.ico
+Allow: /og-image.png
+
+# Block development files
 Disallow: /node_modules/
 Disallow: /src/
 Disallow: /_vite/
-Disallow: /api/refresh
-Disallow: *.json$
-Disallow: *.map$
+Disallow: /.git/
+Disallow: /server/
+Disallow: /scripts/
 
-# Allow static assets
-Allow: /assets/
-Allow: /*.css
-Allow: /*.js
-Allow: /*.png
-Allow: /*.jpg
-Allow: /*.jpeg
-Allow: /*.gif
-Allow: /*.webp
-Allow: /*.svg
-Allow: /*.ico
+# Block temporary and config files
+Disallow: /*.map$
+Disallow: /*.log$
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /tsconfig.json
+Disallow: /vite.config.*
+Disallow: /wrangler.toml
+Disallow: /.env
+
+# Block internal API endpoints
+Disallow: /api/refresh
+Disallow: /api/generate-eli5
 
 # Sitemap location
 Sitemap: https://bipexplorer.com/sitemap.xml
+
+# Googlebot specific rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Allow Google AdsBot
+User-agent: AdsBot-Google
+Allow: /
+
+# Allow Google Image Bot
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.webp$
+Allow: /*.svg$

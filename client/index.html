@@ -123,28 +123,31 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "@id": "https://bip-explorer.pages.dev/#website",
-      "url": "https://bip-explorer.pages.dev/",
+      "@id": "https://bipexplorer.com/#website",
+      "url": "https://bipexplorer.com/",
       "name": "BIP Explorer - Bitcoin Improvement Proposals Directory",
       "description": "Comprehensive directory of Bitcoin Improvement Proposals (BIPs) with authentic GitHub data, advanced search, and intelligent explanations for technical Bitcoin concepts.",
       "publisher": {
         "@type": "Organization",
-        "@id": "https://bip-explorer.pages.dev/#organization",
+        "@id": "https://bipexplorer.com/#organization",
         "name": "BIP Explorer",
-        "url": "https://bip-explorer.pages.dev/",
+        "url": "https://bipexplorer.com/",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://bip-explorer.pages.dev/BIP_Explorer_Social_1200x630.png",
+          "url": "https://bipexplorer.com/og-image.png",
           "width": 1200,
           "height": 630
-        }
+        },
+        "sameAs": [
+          "https://github.com/bitcoin/bips"
+        ]
       },
       "potentialAction": [
         {
           "@type": "SearchAction",
           "target": {
             "@type": "EntryPoint",
-            "urlTemplate": "https://bip-explorer.pages.dev/search?q={search_term_string}"
+            "urlTemplate": "https://bipexplorer.com/search?q={search_term_string}"
           },
           "query-input": "required name=search_term_string"
         }
