@@ -55,6 +55,20 @@ interface GitHubCommit {
 
 const GITHUB_API_BASE = "https://api.github.com/repos/bitcoin/bips";
 
+// GitHub API headers with authentication if token is available
+function getGitHubHeaders() {
+  const headers: Record<string, string> = {
+    'Accept': 'application/vnd.github.v3+json',
+    'User-Agent': 'BIPExplorer/1.0'
+  };
+
+  if (process.env.GITHUB_TOKEN) {
+    headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
+  }
+
+  return headers;
+}
+
 export class GitHubTimelineService {
   private cache = new Map<number, BipTimeline>();
   private cacheTimestamp = new Map<number, number>();
@@ -87,10 +101,7 @@ export class GitHubTimelineService {
           const response = await fetch(
             `${GITHUB_API_BASE}/commits?path=${filename}&per_page=100`,
             {
-              headers: {
-                'Accept': 'application/vnd.github.v3+json',
-                'User-Agent': 'BIPExplorer/1.0'
-              }
+              headers: getGitHubHeaders()
             }
           );
 
@@ -155,10 +166,7 @@ export class GitHubTimelineService {
         const response = await fetch(
           `${GITHUB_API_BASE}/commits/${commit.sha}`,
           {
-            headers: {
-              'Accept': 'application/vnd.github.v3+json',
-              'User-Agent': 'BIPExplorer/1.0'
-            }
+            headers: getGitHubHeaders()
           }
         );
 

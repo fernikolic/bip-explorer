@@ -118,6 +118,20 @@ function generateSimpleELI5(bipNumber: number, title: string, abstract: string):
 const GITHUB_API_BASE = "https://api.github.com/repos/bitcoin/bips";
 const CACHE_DURATION = 1000 * 60 * 15; // 15 minutes
 
+// GitHub API headers with authentication if token is available
+function getGitHubHeaders() {
+  const headers: Record<string, string> = {
+    'Accept': 'application/vnd.github.v3+json',
+    'User-Agent': 'BIP-Explorer'
+  };
+
+  if (process.env.GITHUB_TOKEN) {
+    headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
+  }
+
+  return headers;
+}
+
 interface GitHubFile {
   name: string;
   download_url: string;
@@ -127,7 +141,9 @@ interface GitHubFile {
 async function fetchBipsFromGitHub(): Promise<Bip[]> {
   try {
     // Get list of BIP files
-    const response = await fetch(`${GITHUB_API_BASE}/contents`);
+    const response = await fetch(`${GITHUB_API_BASE}/contents`, {
+      headers: getGitHubHeaders()
+    });
     if (!response.ok) {
       throw new Error(`GitHub API error: ${response.status}`);
     }
@@ -145,7 +161,9 @@ async function fetchBipsFromGitHub(): Promise<Bip[]> {
       const batch = bipFiles.slice(i, i + 5);
       const batchPromises = batch.map(async (file) => {
         try {
-          const contentResponse = await fetch(file.download_url);
+          const contentResponse = await fetch(file.download_url, {
+            headers: getGitHubHeaders()
+          });
           if (!contentResponse.ok) return null;
           
           const content = await contentResponse.text();
